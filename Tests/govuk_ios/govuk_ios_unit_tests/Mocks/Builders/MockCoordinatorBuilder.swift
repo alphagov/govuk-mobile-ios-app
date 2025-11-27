@@ -253,12 +253,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         return _stubbedSafariCoordinator ?? MockBaseCoordinator()
     }
 
-    var _stubbedEditTopicsCoordinator: MockBaseCoordinator?
-    override func editTopics(navigationController: UINavigationController,
-                             didDismissAction: @escaping () -> Void) -> BaseCoordinator {
-        return _stubbedEditTopicsCoordinator ?? MockBaseCoordinator()
-    }
-
     var _stubbedEditLocalAuthorityCoordinator: MockBaseCoordinator?
     override func editLocalAuthority(navigationController: UINavigationController,
                                      dismissAction: @escaping () -> Void) -> BaseCoordinator {
@@ -268,11 +262,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _stubbedRecentActivityCoordinator: MockBaseCoordinator?
     override func recentActivity(navigationController: UINavigationController) -> BaseCoordinator {
         return _stubbedRecentActivityCoordinator ?? MockBaseCoordinator()
-    }
-
-    var _stubbedAllTopicsCoordinator: MockBaseCoordinator?
-    override func allTopics(navigationController: UINavigationController) -> BaseCoordinator {
-        return _stubbedAllTopicsCoordinator ?? MockBaseCoordinator()
     }
 
     var _receivedChatOffboardingCompletion: (() -> Void)?

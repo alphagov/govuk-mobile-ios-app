@@ -12,40 +12,14 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
     var body: some View {
         VStack {
             if let errorViewModel = viewModel.errorViewModel {
-                ScrollView {
-                    VStack {
-                        titleView
-                        AppErrorView(viewModel: errorViewModel)
-                            .padding(.top, 12)
-                        Spacer()
-                    }
-                }
+                showErrorView(with: errorViewModel)
+            } else if viewModel.isLoaded {
+                showLoadedContent()
             } else {
-                ScrollView {
-                    VStack(spacing: 0) {
-                        titleView
-                        topicDetails
-                    }
-                }
-                .background(
-                    Gradient(stops: [
-                        .init(
-                            color: viewModel.isLoaded ?
-                            Color(UIColor.govUK.fills.surfaceHomeHeaderBackground) : .clear,
-                            location: 0),
-                        .init(
-                            color: viewModel.isLoaded ?
-                            Color(UIColor.govUK.fills.surfaceHomeHeaderBackground) : .clear,
-                            location: 0.33),
-                        .init(
-                            color: .clear,
-                            location: 0.33),
-                        .init(
-                            color: .clear,
-                            location: 1)])
-                )
+                showLoadingView()
             }
         }
+        .background(Color(UIColor.govUK.fills.surfaceBackground))
         .onAppear {
             viewModel.trackScreen(screen: self)
             // isLoaded == true on back navigation, otherwise e-commerce
@@ -61,44 +35,120 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         }
     }
 
-    private var titleView: some View {
-        HStack {
-            Text(viewModel.title)
-                .font(.govUK.largeTitleBold)
-                .multilineTextAlignment(.leading)
-                .accessibility(addTraits: .isHeader)
-                .foregroundColor(Color(UIColor.govUK.text.header))
-            Spacer()
+    private func showErrorView(with errorViewModel: AppErrorViewModel) -> some View {
+        GeometryReader { geometry in
+            ScrollView {
+                VStack {
+                    titleView
+                    Spacer()
+                    AppErrorView(viewModel: errorViewModel)
+                    Spacer()
+                }
+                .background(Color(UIColor.govUK.fills.surfaceBackground))
+                .frame(minHeight: geometry.size.height)
+            }
+            .background(gradient)
         }
-        .padding(.leading, 16)
-        .padding(.bottom, 12)
-        .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
+    }
+
+    private func showLoadedContent() -> some View {
+        ScrollView {
+            VStack(spacing: 0) {
+                titleView
+                topicDetails
+                subtopics
+            }
+        }
+        .background(gradient)
+    }
+
+    private func showLoadingView() -> some View {
+        VStack(spacing: 0) {
+            titleView
+            ZStack {
+                Color(UIColor.govUK.fills.surfaceBackground)
+                ProgressView()
+                    .accessibilityLabel(String.topics.localized("loading"))
+            }
+        }
+    }
+
+    private var titleView: some View {
+        VStack(spacing: 0) {
+            HStack {
+                Text(viewModel.title)
+                    .font(.govUK.largeTitleBold)
+                    .multilineTextAlignment(.leading)
+                    .accessibility(addTraits: .isHeader)
+                    .foregroundColor(Color(UIColor.govUK.text.header))
+                Spacer()
+            }
+            .padding(.leading, 16)
+            .padding(.bottom, viewModel.description == nil ? 8 : 0)
+            .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
+            if let description = viewModel.description {
+                descriptionView(description: description)
+            }
+        }
     }
 
     private var topicDetails: some View {
-        VStack {
-            if let description = viewModel.description {
-                descripitonView(description: description)
-                    .padding(.top, 2)
-            }
             GroupedList(
                 content: viewModel.sections,
                 backgroundColor: UIColor.govUK.fills.surfaceBackground
             )
             .padding(.top, 16)
-        }
-        .background(Color(UIColor.govUK.fills.surfaceBackground))
+            .background(Color(UIColor.govUK.fills.surfaceBackground))
     }
 
-    private func descripitonView(description: String) -> some View {
+    private var subtopics: some View {
+        VStack(spacing: 8) {
+            HStack {
+                Text(LocalizedStringResource("topicDetailSubtopicsHeader", table: "Topics"))
+                    .font(.govUK.title3Semibold)
+                    .foregroundStyle(Color(UIColor.govUK.text.primary))
+                    .accessibilityAddTraits(.isHeader)
+                Spacer()
+            }
+            .padding(.vertical, 8)
+            ForEach(viewModel.subtopicCards) { cardModel in
+                ListCardView(viewModel: cardModel)
+            }
+        }
+        .padding()
+        .background(Color(UIColor.govUK.fills.surfaceBackground))
+        .opacity(viewModel.subtopicCards.isEmpty ? 0 : 1)
+    }
+
+    private func descriptionView(description: String) -> some View {
         HStack {
             Text(description)
-                .font(.govUK.body)
+                .font(.govUK.title3)
+                .foregroundColor(Color(UIColor.govUK.text.header))
                 .multilineTextAlignment(.leading)
-                .padding(.top, 16)
-                .padding(.horizontal, 18)
             Spacer()
         }
+        .padding(.horizontal, 18)
+        .padding(.top, 8)
+        .padding(.bottom, 16)
+        .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
+    }
+
+    private var gradient: Gradient {
+        Gradient(stops: [
+            .init(
+                color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                location: 0),
+            .init(
+                color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                location: 0.33),
+            .init(
+                color: .clear,
+                location: 0.33),
+            .init(
+                color: .clear,
+                location: 1)
+        ])
     }
 }
 

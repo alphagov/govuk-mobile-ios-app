@@ -14,17 +14,12 @@ public struct GroupedList: View {
         if content.count >= 1 {
             ZStack {
                 Color(backgroundColor ?? .clear)
-                VStack {
+                VStack(spacing: 16) {
                     ForEach(content, id: \.rows.first?.id) { section in
-                        if section.heading?.icon != nil {
-                            GroupedListSectionIconView(
-                                section: section
-                            )
-                        } else {
-                            GroupedListSectionView(
-                                section: section
-                            )
-                        }
+                        GroupedListSectionView(
+                            section: section,
+                            style: section.heading?.icon != nil ? .icon : .titled
+                        )
                     }
                 }
                 .frame(idealWidth: UIScreen.main.bounds.width)

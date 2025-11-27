@@ -23,8 +23,9 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
                             content: viewModel.listContent,
                             backgroundColor: UIColor.govUK.fills.surfaceBackground
                         )
-                        .padding(.top, 8)
-                    }.alert(isPresented: $viewModel.displayNotificationSettingsAlert) {
+                        .padding(.top, 24)
+                    }
+                    .alert(isPresented: $viewModel.displayNotificationSettingsAlert) {
                         Alert(title: Text(viewModel.notificationSettingsAlertTitle),
                               message: Text(viewModel.notificationSettingsAlertBody),
                               primaryButton: .default(

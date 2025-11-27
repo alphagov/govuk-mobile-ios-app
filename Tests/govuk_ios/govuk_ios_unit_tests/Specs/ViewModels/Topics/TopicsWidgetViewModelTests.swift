@@ -1,4 +1,5 @@
 import Testing
+import Combine
 import Foundation
 import Factory
 
@@ -12,45 +13,57 @@ struct TopicsWidgetViewModelTests {
     let mockAnalyticsService = MockAnalyticsService()
 
     @Test
-    func fetchTopics_downloadSuccess_returnsExpectedData() {
+    @MainActor
+    func fetchTopics_downloadSuccess_returnsExpectedData() async {
+        var cancellables = Set<AnyCancellable>()
+        let mockTopicService = MockTopicsService()
         mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
-
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
+            dismissEditAction: { }
         )
-        var didHandleError = false
-        sut.handleError = { _ in
-            didHandleError = true
+        let result = await withCheckedContinuation { continuation in
+            sut.$fetchTopicsError
+                .receive(on: DispatchQueue.main)
+                .dropFirst()
+                .sink(
+                    receiveValue: { error in
+                        continuation.resume(returning: error)
+                        cancellables.removeAll()
+                    }
+                ).store(in: &cancellables)
+            sut.fetchTopics()
         }
-
-        sut.fetchTopics()
-        #expect(didHandleError == false)
+        #expect(result == false)
     }
-    @Test
-    func fetchTopics_downloadFailure_returnsExpectedResult() {
-        mockTopicService._stubbedFetchRemoteListResult = .failure(.decodingError)
 
+    @Test
+    @MainActor
+    func fetchTopics_downloadFailure_returnsExpectedResult() async  {
+        var cancellables = Set<AnyCancellable>()
+        let mockTopicService = MockTopicsService()
+        mockTopicService._stubbedFetchRemoteListResult = .failure(.decodingError)
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
+            dismissEditAction: { }
         )
-        var didHandleError = false
-        var topicsError: TopicsServiceError?
-        sut.handleError = { error in
-            didHandleError = true
-            topicsError = error
+        let result = await withCheckedContinuation { continuation in
+            sut.$fetchTopicsError
+                .receive(on: DispatchQueue.main)
+                .dropFirst()
+                .sink(
+                    receiveValue: { error in
+                        continuation.resume(returning: error)
+                        cancellables.removeAll()
+                    }
+                ).store(in: &cancellables)
+            sut.fetchTopics()
         }
-
-        sut.fetchTopics()
-        #expect(didHandleError == true)
-        #expect(topicsError == .decodingError)
+        #expect(result == true)
     }
 
     @Test
@@ -63,8 +76,7 @@ struct TopicsWidgetViewModelTests {
             topicAction: { _ in
                 expectedValue = true
             },
-            editAction: { },
-            allTopicsAction: { }
+            dismissEditAction: { }
         )
 
         sut.topicAction(Topic(context: coreData.viewContext))
@@ -72,46 +84,39 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
-    func didTapEdit_invokesExpectedAction() {
-        var expectedValue = false
-        let sut = TopicsWidgetViewModel(
-            topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            topicAction: { _ in },
-            editAction: {
-                expectedValue = true
-            },
-            allTopicsAction: { }
-        )
+    func fetchAllTopics_returnsCorrectCount() async {
+        var cancellables = Set<AnyCancellable>()
+        let result = await withCheckedContinuation { continuation in
 
-        sut.editAction()
-        #expect(expectedValue == true)
+            let allOne = Topic.arrange(context: coreData.backgroundContext)
+            let allTwo = Topic.arrange(context: coreData.backgroundContext)
+
+            mockTopicService._stubbedFetchAllTopics = [allOne, allTwo]
+
+            let sut = TopicsWidgetViewModel(
+                topicsService: mockTopicService,
+                analyticsService: mockAnalyticsService,
+                topicAction: { _ in },
+                dismissEditAction: { }
+            )
+            sut.$allTopics
+                .dropFirst()
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    continuation.resume(returning: value)
+                    cancellables.removeAll()
+                }.store(in: &cancellables)
+            sut.updateAllTopics()
+        }
+        #expect(result.count == 2)
     }
 
     @Test
-    func didTapSeeAllTopics_invokesExpectedAction() {
-        var expectedValue = false
-        let sut = TopicsWidgetViewModel(
-            topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: {
-                expectedValue = true
-            }
-        )
-
-        sut.allTopicsAction()
-        #expect(expectedValue == true)
-    }
-
-    @Test
-    func displayedTopics_topicsHaveBeenEdited_returnsFavourites() {
+    func isThereFavouritedTopics_returnsCorrectValue() {
+        let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
+        let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
         mockTopicService._stubbedHasCustomisedTopics = true
 
-        let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
-        let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
-
         let allOne = Topic.arrange(context: coreData.backgroundContext)
         let allTwo = Topic.arrange(context: coreData.backgroundContext)
 
@@ -122,51 +127,89 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
+            dismissEditAction: { }
         )
-
-        let result = sut.displayedTopics
-        #expect(result.count == 2)
-        #expect(result.first == favouriteOne)
-        #expect(result.last == favouriteTwo)
+        #expect(sut.hasFavouritedTopics == true)
     }
 
     @Test
-    func displayedTopics_topicsHaveNotBeenEdited_returnsAllTopcis() {
-        mockTopicService._stubbedHasCustomisedTopics = false
+    func setTopicsScreen_setTheCorrectSegmentedScreen() async {
+        var cancellables = Set<AnyCancellable>()
+        let result = await withCheckedContinuation { continuation in
+            let allOne = Topic.arrange(context: coreData.backgroundContext)
+            let allTwo = Topic.arrange(context: coreData.backgroundContext)
 
+            mockTopicService._stubbedFetchAllTopics = [allOne, allTwo]
+
+            let sut = TopicsWidgetViewModel(
+                topicsService: mockTopicService,
+                analyticsService: mockAnalyticsService,
+                topicAction: { _ in },
+                dismissEditAction: { }
+            )
+            sut.$topicsScreen
+                .dropFirst()
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    continuation.resume(returning: value)
+                    cancellables.removeAll()
+                }.store(in: &cancellables)
+            sut.setTopicsScreen()
+        }
+        #expect(result == .all)
+    }
+
+    @Test
+    func topicsToBeDisplayed_topicsHaveBeenEdited_returnsFavourites() async {
+        var cancellables = Set<AnyCancellable>()
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
         let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
+        let result = await withCheckedContinuation { continuation in
+            mockTopicService._stubbedHasCustomisedTopics = true
 
-        let allOne = Topic.arrange(context: coreData.backgroundContext)
-        let allTwo = Topic.arrange(context: coreData.backgroundContext)
+            let allOne = Topic.arrange(context: coreData.backgroundContext)
+            let allTwo = Topic.arrange(context: coreData.backgroundContext)
 
-        mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
-        mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne, favouriteTwo]
+            mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
+            mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne, favouriteTwo]
 
+            let sut = TopicsWidgetViewModel(
+                topicsService: mockTopicService,
+                analyticsService: mockAnalyticsService,
+                topicAction: { _ in },
+                dismissEditAction: { }
+            )
+            sut.$favouriteTopics
+                .dropFirst()
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    continuation.resume(returning: value)
+                    cancellables.removeAll()
+                }.store(in: &cancellables)
+            sut.updateFavouriteTopics()
+        }
+        #expect(result.count == 2)
+        #expect(result.first ==  favouriteOne)
+        #expect(result.last ==  favouriteTwo)
+    }
+
+    @Test
+    func widgetTitle_returnsExpectedResult() {
+        mockTopicService._stubbedHasCustomisedTopics = false
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
-            analyticsService: MockAnalyticsService(),
+            analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
+            dismissEditAction: { }
         )
-
-        let result = sut.displayedTopics
-        #expect(result.count == 4)
-        #expect(result == mockTopicService._stubbedFetchAllTopics)
-        #expect(result.first == allOne)
-        #expect(result.last == favouriteTwo)
+        #expect(sut.widgetTitle == "Topics")
     }
 
     @Test
     @MainActor
-    func allTopicsButtonHidden_isDisplayingAllTopics_returnsTrue() {
-        mockTopicService._stubbedHasCustomisedTopics = false
-
-        let allOne = Topic.arrange(context: coreData.viewContext)
-        let allTwo = Topic.arrange(context: coreData.viewContext)
+    func setTopics_allTopics_createsExpectedEcommerceEvent() throws {
+        let allOne = Topic.arrange(context: coreData.backgroundContext)
+        let allTwo = Topic.arrange(context: coreData.backgroundContext)
 
         mockTopicService._stubbedFetchAllTopics = [allOne, allTwo]
 
@@ -174,160 +217,103 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
+            dismissEditAction: { }
         )
 
-        #expect(sut.allTopicsButtonHidden)
+        sut.initialLoadComplete = true
+        sut.refreshTopics()
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.name == "view_item_list")
+        let eventParams = try #require(mockAnalyticsService._trackedEvents.first?.params)
+        #expect((eventParams["item_list_name"] as? String) == "All topics")
+        #expect((eventParams["item_list_id"] as? String) == "All topics")
+        #expect((eventParams["results"] as? Int) == 2)
     }
 
     @Test
     @MainActor
-    func allTopicsButtonHidden_isDisplayingFavourites_allTopicsFavourited_returnsTrue() {
-        mockTopicService._stubbedHasCustomisedTopics = true
+    func setTopics_favouriteTopics_createsExpectedEcommerceEvent() throws {
+        let favoriteOne = Topic.arrange(
+            context: coreData.backgroundContext,
+            isFavourite: true
+        )
+        let favoriteTwo = Topic.arrange(
+            context: coreData.backgroundContext,
+            isFavourite: true
+        )
 
-        let favouriteOne = Topic.arrange(context: coreData.viewContext)
-        let favouriteTwo = Topic.arrange(context: coreData.viewContext)
-
-        mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
-        mockTopicService._stubbedFetchAllTopics = [favouriteOne, favouriteTwo]
+        mockTopicService._stubbedFetchFavouriteTopics = [favoriteOne, favoriteTwo]
 
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
+            dismissEditAction: { }
         )
 
-        #expect(sut.allTopicsButtonHidden)
+        sut.topicsScreen = .all
+        sut.initialLoadComplete = true
+        sut.refreshTopics()
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.name == "view_item_list")
+        let eventParams = try #require(mockAnalyticsService._trackedEvents.first?.params)
+        #expect((eventParams["item_list_name"] as? String) == "Your topics")
+        #expect((eventParams["results"] as? Int) == 2)
     }
 
     @Test
-    func allTopicsButtonHidden_isDisplayingFavourites_someTopicsFavourited_returnsFalse() {
-        mockTopicService._stubbedHasCustomisedTopics = true
+    @MainActor
+    func selectingTopic_createsExpectedEcommerceEvent() throws {
 
-        let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
-        let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
+        let favoriteOne = Topic.arrange(
+            context: coreData.backgroundContext,
+            ref: "Care",
+            title: "Care",
+            isFavourite: true
+        )
+        let favoriteTwo = Topic.arrange(
+            context: coreData.backgroundContext,
+            isFavourite: true
+        )
 
+        mockTopicService._stubbedFetchFavouriteTopics = [favoriteOne, favoriteTwo]
+
+        let sut = TopicsWidgetViewModel(
+            topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
+            topicAction: { _ in},
+            dismissEditAction: { }
+        )
+
+        sut.refreshTopics()
+        sut.trackECommerceSelection("Care")
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.name == "select_item")
+        let eventParams = try #require(mockAnalyticsService._trackedEvents.first?.params)
+        #expect((eventParams["item_list_name"] as? String) == "Your topics")
+        #expect((eventParams["results"] as? Int) == 2)
+    }
+
+    @Test
+    @MainActor
+    func dismissEdit_prevenntsNextEcommerceEventFire() throws {
         let allOne = Topic.arrange(context: coreData.backgroundContext)
         let allTwo = Topic.arrange(context: coreData.backgroundContext)
 
-        mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
-        mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne, favouriteTwo]
+        mockTopicService._stubbedFetchFavouriteTopics = [allOne, allTwo]
 
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
-            topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
-        )
-
-        #expect(sut.allTopicsButtonHidden == false)
-    }
-
-    @Test
-    func widgetTitle_customisedTopics_returnsExpectedResult() {
-        mockTopicService._stubbedHasCustomisedTopics = true
-        let sut = TopicsWidgetViewModel(
-            topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
-        )
-
-        #expect(sut.widgetTitle == "Your topics")
-    }
-
-    @Test
-    func widgetTitle_notCustomisedTopics_returnsExpectedResult() {
-        mockTopicService._stubbedHasCustomisedTopics = false
-        let sut = TopicsWidgetViewModel(
-            topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
-        )
-
-        #expect(sut.widgetTitle == "Topics")
-    }
-
-    @Test
-    func trackEcommerce_createsExpectedEvent() throws {
-        mockTopicService._stubbedHasCustomisedTopics = true
-
-        let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
-        let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
-
-        let allOne = Topic.arrange(context: coreData.backgroundContext)
-        let allTwo = Topic.arrange(context: coreData.backgroundContext)
-
-        mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
-        mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne, favouriteTwo]
-
-        let sut = TopicsWidgetViewModel(
-            topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
+            topicAction: { _ in},
+            dismissEditAction: { }
         )
 
         sut.initialLoadComplete = true
-
-        let trackedTopic = try #require(sut.displayedTopics.first?.title)
-        sut.trackECommerce()
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(mockAnalyticsService._trackedEvents.first?.name == "view_item_list")
-        let parameters = try #require(mockAnalyticsService._trackedEvents.first?.params as? [String: Any])
-        #expect(parameters["item_list_id"] as? String == "Homepage")
-        #expect(parameters["item_list_name"] as? String == "Homepage")
-        #expect(parameters["results"] as? Int == 2)
-        let items = try #require((parameters["items"] as? [[String: String]]))
-        #expect(items.count == 2)
-        let item = try #require(items.first)
-        #expect(item["item_name"] == trackedTopic)
-        #expect(item["index"] == "1")
-        #expect(items.last?["index"] == "2")
+        sut.didDismissEdit()
+        sut.refreshTopics()
+        sut.topicsScreen = .all
+        sut.topicsScreen = .favorite
+        #expect(mockAnalyticsService._trackedEvents.count == 0)
     }
-
-    @Test
-    func trackEcommerceSelection_createsExpectedEvent() throws {
-        mockTopicService._stubbedHasCustomisedTopics = true
-
-        let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
-        let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
-
-        let allOne = Topic.arrange(context: coreData.backgroundContext)
-        let allTwo = Topic.arrange(context: coreData.backgroundContext)
-
-        mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
-        mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne, favouriteTwo]
-
-        let sut = TopicsWidgetViewModel(
-            topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
-        )
-
-        let trackedTopic = try #require(sut.displayedTopics.first?.title)
-        sut.trackECommerceSelection(trackedTopic)
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(mockAnalyticsService._trackedEvents.first?.name == "select_item")
-        let parameters = try #require(mockAnalyticsService._trackedEvents.first?.params as? [String: Any])
-        #expect(parameters["item_list_id"] as? String == "Homepage")
-        #expect(parameters["item_list_name"] as? String == "Homepage")
-        #expect(parameters["results"] as? Int == 2)
-        let items = try #require((parameters["items"] as? [[String: String]]))
-        #expect(items.count == 1)
-        let item = try #require(items.first)
-        #expect(item["item_name"] == trackedTopic)
-        #expect(item["index"] == "1")
-    }
-
 }

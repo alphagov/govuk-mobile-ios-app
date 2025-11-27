@@ -1,92 +1,40 @@
 import Testing
 
 @testable import govuk_ios
-@testable import GOVKit
 
 struct EditTopicsViewModelTests {
-
     let coreData = CoreDataRepository.arrangeAndLoad
     let mockTopicService = MockTopicsService()
     let mockAnalyticsService = MockAnalyticsService()
 
     @Test
-    func dismissAction_callsDismiss() throws {
-        var dismissActionCalled = false
-        let sut = EditTopicsViewModel(
-            topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            dismissAction: {
-                dismissActionCalled = true
-            }
-        )
-
-        sut.dismissAction()
-        #expect(dismissActionCalled)
-    }
-
-    @Test
-    func init_withTopics_createsSectionsCorrectly() throws {
+    func init_withTopics_createsTopicCardsCorrectly() {
         mockTopicService._stubbedFetchAllTopics = createTopics()
         let sut = EditTopicsViewModel(
             topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            dismissAction: { }
+            analyticsService: mockAnalyticsService
         )
 
-        try #require(sut.sections.count == 1)
-        try #require(sut.sections[0].rows.count == 3)
-        let row = try #require(sut.sections[0].rows[0] as? ToggleRow)
-        #expect(row.title == "title0")
-        row.action(true)
-        #expect(mockTopicService._saveCalled)
+        #expect(sut.topicSelectionCards.count == 3)
+        #expect((sut.topicSelectionCards[0] as Any) is TopicSelectionCardViewModel)
     }
 
     @Test
-    @MainActor
-    func undoChanges_removesTemporaryFavourites() throws {
-        let context = coreData.viewContext
-        let topics = [
-            Topic.arrange(context: context, isFavourite: false),
-            Topic.arrange(context: context, isFavourite: false),
-            Topic.arrange(context: context, isFavourite: false)
-        ]
-        mockTopicService._stubbedFetchAllTopics = topics
-        mockTopicService._stubbedHasCustomisedTopics = false
+    func tapAction_savesTopic() {
+        mockTopicService._stubbedFetchAllTopics = createTopics()
         let sut = EditTopicsViewModel(
             topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            dismissAction: { }
-        )
-        try #require(topics.first?.isFavourite == true)
-
-        sut.undoChanges()
-
-        #expect(topics.first?.isFavourite == false)
-    }
-
-    @Test
-    @MainActor
-    func dealloc_removesTemporaryFavourites() throws {
-        let context = coreData.viewContext
-        let topics = [
-            Topic.arrange(context: context, isFavourite: false),
-            Topic.arrange(context: context, isFavourite: false),
-            Topic.arrange(context: context, isFavourite: false)
-        ]
-        mockTopicService._stubbedFetchAllTopics = topics
-        mockTopicService._stubbedHasCustomisedTopics = false
-        var sut: EditTopicsViewModel? = EditTopicsViewModel(
-            topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            dismissAction: { }
+            analyticsService: mockAnalyticsService
         )
 
-        try #require(topics.first?.isFavourite == true)
-        try #require(sut?.sections.count == 1)
-
-        sut = nil
-
-        #expect(topics.first?.isFavourite == false)
+        let topicCard = sut.topicSelectionCards[0]
+        topicCard.tapAction(true)
+        #expect(mockTopicService._saveCalled)
+        let trackedEvent = mockAnalyticsService._trackedEvents.first
+        #expect(trackedEvent?.params?["text"] as? String == topicCard.title)
+        #expect(trackedEvent?.params?["type"] as? String == "Button")
+        #expect(trackedEvent?.params?["section"] as? String == "Edit topics")
+        #expect(trackedEvent?.params?["action"] as? String == "add")
     }
 }
 

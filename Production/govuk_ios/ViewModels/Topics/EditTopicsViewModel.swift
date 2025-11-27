@@ -1,72 +1,50 @@
 import Foundation
 import CoreData
 import GOVKit
+import SwiftUI
 
-final class EditTopicsViewModel: ObservableObject {
-    @Published private(set) var sections: [GroupedListSection] = []
-    private var managedObjectContext: NSManagedObjectContext?
+final class EditTopicsViewModel {
+    @Published private(set) var topicSelectionCards: [TopicSelectionCardViewModel] = []
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
-    let dismissAction: () -> Void
 
     init(topicsService: TopicsServiceInterface,
-         analyticsService: AnalyticsServiceInterface,
-         dismissAction: @escaping () -> Void) {
-        self.dismissAction = dismissAction
+         analyticsService: AnalyticsServiceInterface) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         let topics = topicsService.fetchAll()
-        self.managedObjectContext = topics.first?.managedObjectContext
-        loadSections(
+        loadTopicCards(
             topics: topics
         )
-    }
-
-    func undoChanges() {
-        managedObjectContext?.rollback()
-    }
-
-    private func loadSections(topics: [Topic]) {
-        let rows = topics.compactMap { [weak self, topicsService] topic in
-            topic.isFavourite = topicsService.hasCustomisedTopics ? topic.isFavourite : true
-            return self?.topicRow(topic: topic)
-        }
-        self.sections = [
-            GroupedListSection(
-                heading: nil,
-                rows: rows,
-                footer: nil
-            )
-        ]
-    }
-
-    private func topicRow(topic: Topic) -> ToggleRow {
-        ToggleRow(
-            id: topic.ref,
-            title: topic.title,
-            isOn: topic.isFavourite,
-            action: { [weak self] value in
-                topic.isFavourite = value
-                self?.topicsService.save()
-                self?.topicsService.setHasCustomisedTopics()
-                self?.trackSelection(topic: topic)
-            }
-        )
-    }
-
-    private func trackSelection(topic: Topic) {
-        let event = AppEvent.toggleTopic(
-            title: topic.title,
-            isFavourite: topic.isFavourite
-        )
-        analyticsService.track(event: event)
     }
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
     }
 
-    deinit {
-        undoChanges()
+    private func loadTopicCards(topics: [Topic]) {
+        topicSelectionCards = topics.map { topic in
+            topicSelectionCard(topic: topic)
+        }
+    }
+
+    private func topicSelectionCard(topic: Topic) -> TopicSelectionCardViewModel {
+        TopicSelectionCardViewModel(
+            topic: topic,
+            tapAction: { [weak self] value in
+                topic.isFavourite = value
+                self?.topicsService.save()
+                self?.trackSelection(topic: topic)
+            }
+        )
+    }
+
+    private func trackSelection(topic: Topic) {
+        let event = AppEvent.topicSelection(
+            title: topic.title,
+            section: "Edit topics",
+            isFavourite: topic.isFavourite
+        )
+        analyticsService.track(event: event)
     }
 }

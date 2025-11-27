@@ -14,6 +14,30 @@
         "url": "govuk://gov.uk/web?url=https://www.gov.uk/alerts"
       }
     },
+    "emergencyBanners" : [
+        {
+            "id": "national_emergency_one",
+            "title": "National Emergency",
+            "body": "Level One Emergency.",
+            "link": {
+                "title": "More Information",
+                "url": "https://www.gov.uk/"
+            },
+            "type": "national-emergency",
+            "allowsDismissal": true
+        },
+        {
+            "id": "bridges_one",
+            "title": "Notable Death",
+            "body": "1900 - 1999",
+            "link": {
+                "title": "More Information",
+                "url": "https://www.gov.uk/"
+            },
+            "type": "notable-death",
+            "allowsDismissal": false
+        }
+    ],
     "chatBanner": {
         "id": "govuk_chat_banner_09_2025",
         "title": "Get quick answers from GOV.UK Chat",

@@ -46,8 +46,7 @@ class StoredLocalAuthorityWidgetViewModel {
     func cardModels() -> [StoredLocalAuthorityCardModel] {
         localAuthorities.reduce(into: []) { partialResult, localAuthority in
             let localAuthorityDescription = localAuthorities.count > 1 ?
-            returnCardDescription(authority: localAuthority) :
-            unitaryCardDescription(authorityName: localAuthority.name)
+            returnCardDescription(authority: localAuthority) : nil
             let card = StoredLocalAuthorityCardModel(
                 name: localAuthority.name,
                 homepageUrl: localAuthority.homepageUrl,
@@ -61,11 +60,6 @@ class StoredLocalAuthorityWidgetViewModel {
         authority.parent != nil ?
         localAuthorityTwoTierChildDescription :
         localAuthorityTwoTierParentDescription
-    }
-
-    private func unitaryCardDescription(authorityName: String) -> String {
-        let format = String.localAuthority.localized("localAuthorityUnitaryCard")
-        return String.localizedStringWithFormat(format, authorityName)
     }
 
     private func trackNavigationEvent(_ title: String,

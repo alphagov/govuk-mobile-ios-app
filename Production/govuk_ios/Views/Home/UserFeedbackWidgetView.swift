@@ -10,10 +10,13 @@ struct UserFeedbackWidgetView: View {
             Text(viewModel.body)
                 .font(.govUK.body)
                 .multilineTextAlignment(.center)
-                .foregroundColor(Color(UIColor.govUK.text.primary))
-                .accessibilitySortPriority(100)
+                .foregroundColor(
+                    Color(UIColor.govUK.text.primary)
+                )
             linkButton(title: viewModel.linkTitle)
         }
+        .padding(.top)
+        .padding(.bottom, 28)
     }
 
     @ViewBuilder
@@ -25,13 +28,16 @@ struct UserFeedbackWidgetView: View {
                 Text(title)
                     .font(.govUK.body)
                     .multilineTextAlignment(.center)
-                    .foregroundColor(Color(UIColor.govUK.text.link))
+                    .foregroundColor(
+                        Color(uiColor: UIColor.govUK.text.buttonSecondary)
+                    )
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 18)
+                    .padding(.top, 18)
             }
         )
         .accessibilityAddTraits(.isLink)
-        .accessibilityHint(String.common.localized("openWebLinkHint"))
-        .accessibilitySortPriority(50)
+        .accessibilityHint(
+            String.common.localized("openWebLinkHint")
+        )
     }
 }

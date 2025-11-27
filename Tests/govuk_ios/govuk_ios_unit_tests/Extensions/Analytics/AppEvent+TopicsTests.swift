@@ -10,18 +10,19 @@ struct AppEvent_TopicsTests {
         true,
         false
     ])
-    func toggleTopic_returnsExpectedResult(isFavourite: Bool) {
+    func topicSelection_returnsExpectedResult(isFavourite: Bool) {
         let expectedTitle = UUID().uuidString
-        let expectedValue = isFavourite ? "On" : "Off"
-        let result = AppEvent.toggleTopic(
+        let expectedValue = isFavourite ? "add" : "remove"
+        let result = AppEvent.topicSelection(
             title: expectedTitle,
+            section: "Edit topics",
             isFavourite: isFavourite
         )
         #expect(result.name == "Function")
         #expect(result.params?.count == 4)
         #expect(result.params?["text"] as? String == expectedTitle)
-        #expect(result.params?["type"] as? String == "Toggle")
-        #expect(result.params?["section"] as? String == "Topics")
+        #expect(result.params?["type"] as? String == "Button")
+        #expect(result.params?["section"] as? String == "Edit topics")
         #expect(result.params?["action"] as? String == expectedValue)
     }
 

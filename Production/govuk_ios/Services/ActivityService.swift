@@ -5,6 +5,7 @@ protocol ActivityServiceInterface {
     func fetch() -> NSFetchedResultsController<ActivityItem>
     func save(activity: ActivityItemCreateParams)
     func delete(objectIds: [NSManagedObjectID])
+    func returnContext() -> NSManagedObjectContext
 }
 
 struct ActivityService: ActivityServiceInterface {
@@ -20,6 +21,10 @@ struct ActivityService: ActivityServiceInterface {
 
     func save(activity: ActivityItemCreateParams) {
         repository.save(params: activity)
+    }
+
+    func returnContext() -> NSManagedObjectContext {
+        repository.returnContext()
     }
 
     func delete(objectIds: [NSManagedObjectID]) {

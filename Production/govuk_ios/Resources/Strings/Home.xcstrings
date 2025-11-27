@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+    "allTopicsPickerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All topics"
+          }
+        }
+      }
+    },
     "dismissAlertBannerAccessibilityLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -12,13 +23,24 @@
         }
       }
     },
+    "editTopicsAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit your topics"
+          }
+        }
+      }
+    },
     "feedbackWidgetTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Give feedback to help improve this app"
+            "value" : "Tell us what you think about the app"
           }
         }
       }
@@ -67,6 +89,17 @@
         }
       }
     },
+    "personalisedTopicsPickerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your topics"
+          }
+        }
+      }
+    },
     "recentActivityWidgetAccessibilityLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -100,13 +133,13 @@
         }
       }
     },
-    "topicsWidgetEditButtonTitle" : {
+    "topicsEmptyStateTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit your topics"
+            "value" : "Add your topics"
           }
         }
       }
@@ -118,17 +151,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Topics"
-          }
-        }
-      }
-    },
-    "topicsWidgetTitleCustomised" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your topics"
           }
         }
       }

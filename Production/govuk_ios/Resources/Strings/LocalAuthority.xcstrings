@@ -114,6 +114,17 @@
         }
       }
     },
+    "localAuthorityConfirmationTwoTierDescriptionThree" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can now access your local councils’ websites from the bottom of the app home page."
+          }
+        }
+      }
+    },
     "localAuthorityConfirmationTwoTierDescriptionTwo" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -121,17 +132,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your local councils are:"
-          }
-        }
-      }
-    },
-    "localAuthorityConfirmationTwoTierDescritionThree" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can now access your local councils’ websites from the bottom of the app home page."
           }
         }
       }
@@ -274,7 +274,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "How we use this information?"
+            "value" : "How we use this information"
           }
         }
       }
@@ -334,24 +334,13 @@
         }
       }
     },
-    "localAuthorityUnitaryCard" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find services for your area on the %@ website"
-          }
-        }
-      }
-    },
     "localAuthorityWidgetViewDescription" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enter your postcode to see services for your area"
+            "value" : "Add a link to your local council’s website"
           }
         }
       }

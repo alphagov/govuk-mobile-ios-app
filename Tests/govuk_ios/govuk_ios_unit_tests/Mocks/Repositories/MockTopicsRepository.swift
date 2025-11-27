@@ -3,7 +3,11 @@ import Foundation
 @testable import govuk_ios
 
 class MockTopicsRepository: TopicsRepositoryInterface {
-    
+    var _didCallRollback = false
+    func rollback() {
+        _didCallRollback = true
+    }
+
     var _didCallSaveTopicsList = false
     func save(topics: [TopicResponseItem]) {
         _didCallSaveTopicsList = true

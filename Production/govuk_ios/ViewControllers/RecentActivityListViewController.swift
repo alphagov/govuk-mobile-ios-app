@@ -74,15 +74,14 @@ final class RecentActivityListViewController: BaseViewController {
 
     private lazy var informationView: UIView = {
         let localController = HostingViewController(
-            rootView: AppErrorView()
+            rootView: NonTappableCardView(
+                text: String.recentActivity.localized(
+                    "emptyActivityStateTitle"
+                )
+            )
         )
         localController.view.translatesAutoresizingMaskIntoConstraints = false
         localController.view.backgroundColor = .clear
-        let localModel = AppErrorViewModel(
-            title: String.recentActivity.localized("recentActivityNoPagesTitle"),
-            body: String.recentActivity.localized("recentActivityNoPagesDescription")
-        )
-        localController.rootView.viewModel = localModel
         return localController.view
     }()
 
@@ -177,7 +176,7 @@ final class RecentActivityListViewController: BaseViewController {
             ),
             informationScrollView.topAnchor.constraint(
                 equalTo: titleView.bottomAnchor,
-                constant: 40
+                constant: 16
             ),
             informationScrollView.rightAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.rightAnchor
@@ -191,17 +190,14 @@ final class RecentActivityListViewController: BaseViewController {
             informationView.topAnchor.constraint(
                 equalTo: informationScrollView.topAnchor
             ),
-            informationView.rightAnchor.constraint(
-                equalTo: informationScrollView.rightAnchor
+            informationView.centerXAnchor.constraint(
+                equalTo: informationScrollView.centerXAnchor
             ),
             informationView.leftAnchor.constraint(
                 equalTo: informationScrollView.leftAnchor
             ),
             informationView.bottomAnchor.constraint(
                 equalTo: informationScrollView.bottomAnchor
-            ),
-            informationView.widthAnchor.constraint(
-                equalTo: informationScrollView.layoutMarginsGuide.widthAnchor
             )
         ])
     }
@@ -317,7 +313,8 @@ final class RecentActivityListViewController: BaseViewController {
                     title: item.title,
                     description: self?.lastVisitedString(activity: item),
                     top: indexPath.row == 0,
-                    bottom: item == section.items.last
+                    bottom: item == section.items.last,
+                    showIconImage: false
                 )
             }
             return cell

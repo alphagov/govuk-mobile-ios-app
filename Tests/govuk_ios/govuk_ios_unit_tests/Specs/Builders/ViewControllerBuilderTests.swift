@@ -29,19 +29,17 @@ struct ViewControllerBuilderTests {
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
+            dismissEditAction: { }
         )
         let dependencies = ViewControllerBuilder.HomeDependencies(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
+            userDefaultsService: MockUserDefaultsService(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            topicWidgetViewModel: viewModel,
-            localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService(),
-            chatService: MockChatService()
+            topicsWidgetViewModel: viewModel,
+            localAuthorityService: MockLocalAuthorityService()
         )
 
         let actions = ViewControllerBuilder.HomeActions(
@@ -111,7 +109,7 @@ struct ViewControllerBuilderTests {
     func topicDetail_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.topicDetail(
-            topic: MockDisplayableTopic(ref: "", title: ""),
+            topic: MockDisplayableTopic(ref: "", title: "", topicDescription: nil),
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
@@ -125,32 +123,7 @@ struct ViewControllerBuilderTests {
     }
 
     @Test
-    func editTopics_returnsExpectedResult() {
-        let subject = ViewControllerBuilder()
-        let result = subject.editTopics(
-            analyticsService: MockAnalyticsService(),
-            topicsService: MockTopicsService(),
-            dismissAction: { }
-        )
-
-        let rootView = (result as? HostingViewController<EditTopicsView>)?.rootView
-        #expect(rootView != nil)
-    }
-
-    @Test
-    func allTopics_returnsExpectedResult() {
-        let subject = ViewControllerBuilder()
-        let result = subject.allTopics(
-            analyticsService: MockAnalyticsService(),
-            topicAction: { _ in },
-            topicsService: MockTopicsService()
-        )
-
-        #expect(result is AllTopicsViewController)
-    }
-
-    @Test
-    func topicOnboarding_returnsExpectedResult() {
+    func topicsOnboardingView_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.topicOnboarding(
             topics: [],
@@ -159,7 +132,8 @@ struct ViewControllerBuilderTests {
             dismissAction: { }
         )
 
-        #expect(result is TopicOnboardingViewController)
+        let rootView = (result as? HostingViewController<TopicsOnboardingView>)?.rootView
+        #expect(rootView != nil)
     }
 
     @Test

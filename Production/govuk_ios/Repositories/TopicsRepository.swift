@@ -7,6 +7,7 @@ protocol TopicsRepositoryInterface {
     func fetchFavourites() -> [Topic]
     func fetchAll() -> [Topic]
     func save()
+    func rollback()
 }
 
 struct TopicsRepository: TopicsRepositoryInterface {
@@ -41,6 +42,10 @@ struct TopicsRepository: TopicsRepositoryInterface {
                 context: context
             )
         }
+    }
+
+    func rollback() {
+        coreData.viewContext.rollback()
     }
 
     func save() {

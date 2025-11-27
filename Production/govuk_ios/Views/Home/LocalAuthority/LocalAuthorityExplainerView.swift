@@ -10,38 +10,47 @@ struct LocalAuthorityExplainerView: View {
         self.viewModel = viewModel
     }
     var body: some View {
-        VStack {
-            ScrollView {
-                VStack {
-                    if verticalSizeClass != .compact {
-                        Image(decorative: "your_local_services")
-                            .scaledToFit()
-                            .frame(width: 290, height: 290)
+        ZStack {
+            Color(uiColor: .govUK.fills.surfaceModal)
+            VStack {
+                ScrollView {
+                    VStack {
+                        if verticalSizeClass != .compact {
+                            Image(decorative: "your_local_services")
+                                .scaledToFit()
+                                .frame(width: 290, height: 290)
+                        }
+                        Text(viewModel.explainerViewTitle)
+                            .foregroundColor(Color(UIColor.govUK.text.primary))
+                            .font(Font.govUK.largeTitleBold)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding([.horizontal], 16)
+                            .padding(.bottom, 4)
+                            .accessibilityAddTraits(.isHeader)
+                        Text(viewModel.explainerViewDescription)
+                            .font(Font.govUK.body)
+                            .foregroundColor(Color(UIColor.govUK.text.primary))
+                            .padding([.horizontal], 16)
+                            .multilineTextAlignment(.center)
+                        Spacer()
                     }
-                    Text(viewModel.explainerViewTitle)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .font(Font.govUK.largeTitleBold)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding([.horizontal], 16)
-                        .padding(.bottom, 4)
-                        .accessibilityAddTraits(.isHeader)
-                    Text(viewModel.explainerViewDescription)
-                        .font(Font.govUK.body)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .padding([.horizontal], 16)
-                        .multilineTextAlignment(.center)
-                    Spacer()
+                    .accessibilityElement(children: .contain)
                 }
-                .accessibilityElement(children: .contain)
+                PrimaryButtonView(
+                    viewModel: viewModel.primaryButtonViewModel
+                )
+                .padding(.bottom, 16)
+            }.toolbar {
+                cancelButton
             }
-            PrimaryButtonView(
-                viewModel: viewModel.primaryButtonViewModel
+            .toolbarBackground(
+                Color(uiColor: .govUK.fills.surfaceModal),
             )
-        }.toolbar {
-            cancelButton
-        }.onAppear {
-            viewModel.trackScreen(screen: self)
+            .toolbarBackground(.visible)
+            .onAppear {
+                viewModel.trackScreen(screen: self)
+            }
         }
     }
 
@@ -50,7 +59,7 @@ struct LocalAuthorityExplainerView: View {
             Button(viewModel.cancelButtonTitle) {
                 viewModel.dismissAction()
             }
-            .foregroundColor(Color(UIColor.govUK.text.link))
+            .foregroundColor(Color(UIColor.govUK.text.linkSecondary))
         }
     }
 }

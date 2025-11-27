@@ -68,7 +68,7 @@ class CoordinatorBuilder {
             searchService: container.searchService.resolve(),
             activityService: container.activityService.resolve(),
             localAuthorityService: container.localAuthorityService.resolve(),
-            userDefaultService: container.userDefaultsService.resolve(),
+            userDefaultsService: container.userDefaultsService.resolve(),
             chatService: container.chatService.resolve()
         )
     }
@@ -210,27 +210,6 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             topic: topic
-        )
-    }
-
-    func editTopics(navigationController: UINavigationController,
-                    didDismissAction: @escaping () -> Void) -> BaseCoordinator {
-        EditTopicsCoordinator(
-            navigationController: navigationController,
-            analyticsService: container.analyticsService.resolve(),
-            topicsService: container.topicsService.resolve(),
-            viewControllerBuilder: ViewControllerBuilder(),
-            dismissed: didDismissAction
-        )
-    }
-
-    func allTopics(navigationController: UINavigationController) -> BaseCoordinator {
-        AllTopicsCoordinator(
-            navigationController: navigationController,
-            analyticsService: container.analyticsService.resolve(),
-            viewControllerBuilder: ViewControllerBuilder(),
-            coordinatorBuilder: self,
-            topicsService: container.topicsService.resolve()
         )
     }
 

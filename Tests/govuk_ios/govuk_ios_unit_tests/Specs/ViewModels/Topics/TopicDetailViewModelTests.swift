@@ -28,19 +28,16 @@ struct TopicDetailViewModelTests {
             actions: .empty
         )
 
-        try #require(sut.sections.count == 3)
+        try #require(sut.sections.count == 2)
         #expect(sut.sections[0].heading?.title == "Popular pages in this topic")
-        #expect(sut.sections[0].heading?.icon == UIImage.topicPopularPagesIcon)
+        #expect(sut.sections[0].heading?.icon == nil)
 
-        #expect(sut.sections[1].heading?.title == "Step by step guides")
-        #expect(sut.sections[1].heading?.icon == UIImage.topicStepByStepIcon)
-
-        #expect(sut.sections[2].heading?.title == "Browse")
-        #expect(sut.sections[2].heading?.icon == UIImage.topicBrowseIcon)
+        #expect(sut.sections[1].heading?.title == "Step-by-step guides")
+        #expect(sut.sections[1].heading?.icon == nil)
 
         #expect(sut.sections[0].rows.first is LinkRow)
         #expect(sut.sections[1].rows.last is LinkRow)
-        #expect(sut.sections[2].rows.first is NavigationRow)
+        #expect(sut.subtopicCards.count == 7)
         #expect(sut.shouldShowDescription)
     }
     
@@ -61,24 +58,21 @@ struct TopicDetailViewModelTests {
             actions: .empty
         )
         
-        try #require(sut.sections.count == 3)
+        try #require(sut.sections.count == 2)
         #expect(sut.sections[0].heading?.title == "Popular pages in this topic")
-        #expect(sut.sections[0].heading?.icon == UIImage.topicPopularPagesIcon)
+        #expect(sut.sections[0].heading?.icon == nil)
 
-        #expect(sut.sections[1].heading?.title == "Step by step guides")
-        #expect(sut.sections[1].heading?.icon == UIImage.topicStepByStepIcon)
+        #expect(sut.sections[1].heading?.title == "Step-by-step guides")
+        #expect(sut.sections[1].heading?.icon == nil)
+        #expect(sut.sections[1].heading?.actionTitle == "See all")
 
-        #expect(sut.sections[2].heading?.title == "Browse")
-        #expect(sut.sections[2].heading?.icon == UIImage.topicBrowseIcon)
+        #expect(sut.subtopicCards.count == 7)
 
         #expect(sut.sections[0].rows.first is LinkRow)
         
-        #expect(sut.sections[1].rows.count == 4)
+        #expect(sut.sections[1].rows.count == 3)
         #expect(sut.sections[1].rows.first is LinkRow)
-        #expect(sut.sections[1].rows.last is NavigationRow)
-        #expect(sut.sections[1].rows.last?.title == "See all")
-        
-        #expect(sut.sections[2].rows.first is NavigationRow)
+        #expect(sut.sections[1].rows.last is LinkRow)
     }
     
     @Test
@@ -98,24 +92,22 @@ struct TopicDetailViewModelTests {
             actions: .empty
         )
         
-        try #require(sut.sections.count == 4)
+        try #require(sut.sections.count == 3)
         #expect(sut.sections[0].heading?.title == "Popular pages in this topic")
-        #expect(sut.sections[0].heading?.icon == UIImage.topicPopularPagesIcon)
+        #expect(sut.sections[0].heading?.icon == nil)
 
-        #expect(sut.sections[1].heading?.title == "Step by step guides")
-        #expect(sut.sections[1].heading?.icon == UIImage.topicStepByStepIcon)
+        #expect(sut.sections[1].heading?.title == "Step-by-step guides")
+        #expect(sut.sections[1].heading?.icon == nil)
 
         #expect(sut.sections[2].heading?.title == "Services and information")
-        #expect(sut.sections[2].heading?.icon == UIImage.topicServicesIcon)
+        #expect(sut.sections[2].heading?.icon == nil)
 
-        #expect(sut.sections[3].heading?.title == "Browse")
-        #expect(sut.sections[3].heading?.icon == UIImage.topicBrowseIcon)
+        #expect(sut.subtopicCards.count == 7)
 
         #expect(sut.sections[0].rows.first is LinkRow)
         #expect(sut.sections[1].rows.first is LinkRow)
         #expect(sut.sections[2].rows.last is LinkRow)
         #expect(sut.sections[2].rows.count == 3)
-        #expect(sut.sections[3].rows.first is NavigationRow)
     }
 
     @Test
@@ -123,7 +115,7 @@ struct TopicDetailViewModelTests {
         let expectedContent = TopicDetailResponse.arrange()
         mockTopicsService._stubbedFetchTopicDetailsResult = .success(expectedContent)
         let sut = TopicDetailViewModel(
-            topic: TopicDetailResponse.Subtopic(ref: "test", title: "test", description: "description"),
+            topic: TopicDetailResponse.Subtopic(ref: "test", title: "test", topicDescription: "description"),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
@@ -132,7 +124,7 @@ struct TopicDetailViewModelTests {
         )
 
         #expect(sut.sections[3].heading?.title == "Related")
-        #expect(sut.sections[3].heading?.icon == UIImage.topicRelatedIcon)
+        #expect(sut.sections[3].heading?.icon == nil)
         #expect(sut.sections[3].rows.count == expectedContent.subtopics.count)
     }
 
@@ -152,7 +144,7 @@ struct TopicDetailViewModelTests {
             openAction: { _ in }
         )
         let sut = TopicDetailViewModel(
-            topic: MockDisplayableTopic(ref: "", title: ""),
+            topic: MockDisplayableTopic(ref: "", title: "", topicDescription: nil),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
@@ -160,8 +152,8 @@ struct TopicDetailViewModelTests {
             actions: actions
         )
         
-        try #require(sut.sections.count == 4)
-        let subTopicRow = try #require(sut.sections[3].rows.first as? NavigationRow)
+        try #require(sut.sections.count == 3)
+        let subTopicRow = try #require(sut.subtopicCards.first)
         subTopicRow.action()
         #expect(didNavigate)
         #expect(mockAnalyticsService._trackedEvents.count == 2)
@@ -176,7 +168,7 @@ struct TopicDetailViewModelTests {
             )
         )
         let sut = TopicDetailViewModel(
-            topic: MockDisplayableTopic(ref: "", title: ""),
+            topic: MockDisplayableTopic(ref: "", title: "", topicDescription: nil),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
@@ -184,7 +176,7 @@ struct TopicDetailViewModelTests {
             actions: .empty
         )
         
-        try #require(sut.sections.count == 4)
+        try #require(sut.sections.count == 3)
         let contentRow = try #require(sut.sections[0].rows.first as? LinkRow)
         contentRow.action()
         #expect(mockAnalyticsService._trackedEvents.count == 2)
@@ -195,7 +187,7 @@ struct TopicDetailViewModelTests {
     func init_apiUnavailable_doesCreateCorrectErrorViewModel() throws {
         mockTopicsService._stubbedFetchTopicDetailsResult = .failure(.apiUnavailable)
         let sut = TopicDetailViewModel(
-            topic: MockDisplayableTopic(ref: "", title: ""),
+            topic: MockDisplayableTopic(ref: "", title: "", topicDescription: nil),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
@@ -204,7 +196,7 @@ struct TopicDetailViewModelTests {
         )
         let errorViewModel = try #require(sut.errorViewModel)
         #expect(errorViewModel.title == String.common.localized("genericErrorTitle"))
-        #expect(errorViewModel.body == String.common.localized("genericErrorBody"))
+        #expect(errorViewModel.body == String.topics.localized("topicFetchErrorSubtitle"))
         #expect(errorViewModel.buttonTitle == String.common.localized("genericErrorButtonTitle"))
         #expect(errorViewModel.buttonAccessibilityLabel
                 == String.common.localized("genericErrorButtonTitleAccessibilityLabel")
@@ -218,7 +210,7 @@ struct TopicDetailViewModelTests {
     func init_networkUnavailable_doesCreateCorrectErrorViewModel() throws {
         mockTopicsService._stubbedFetchTopicDetailsResult = .failure(.networkUnavailable)
         let sut = TopicDetailViewModel(
-            topic: MockDisplayableTopic(ref: "", title: ""),
+            topic: MockDisplayableTopic(ref: "", title: "", topicDescription: nil),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,

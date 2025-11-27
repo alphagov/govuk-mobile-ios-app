@@ -5,7 +5,7 @@ import CoreData
 @testable import govuk_ios
 
 @MainActor
-final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
+final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase { 
     func test_loadInNavigationController_light_rendersCorrectly() {
         let mockActivityService = MockActivityService()
         let coreData = CoreDataRepository.arrangeAndLoad

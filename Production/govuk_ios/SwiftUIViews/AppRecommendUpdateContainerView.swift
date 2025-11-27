@@ -13,11 +13,12 @@ struct AppRecommendUpdateContainerView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HeaderView(title: viewModel.title,
-                       subheading: viewModel.subheading)
-            .padding(.top, verticalSizeClass == .compact ? 30 : 46)
-            .padding(.horizontal, 16)
-            Spacer()
+            ScrollView {
+                HeaderView(title: viewModel.title,
+                           subheading: viewModel.subheading)
+                .padding(.top, verticalSizeClass == .compact ? 30 : 46)
+                .padding(.horizontal, 16)
+            }
             ButtonStackView(
                 primaryButtonViewModel: viewModel.updateButtonViewModel,
                 secondaryButtonViewModel: viewModel.skipButtonViewModel

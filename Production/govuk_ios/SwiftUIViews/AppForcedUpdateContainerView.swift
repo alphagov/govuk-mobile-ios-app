@@ -11,12 +11,13 @@ struct AppForcedUpdateContainerView: View {
     }
 
     var body: some View {
-        VStack {
-            HeaderView(title: viewModel.title,
-                       subheading: viewModel.subheading)
-            .padding(.top, verticalSizeClass == .compact ? 30 : 46)
-            .padding(.horizontal, 16)
-            Spacer()
+        VStack(spacing: 0) {
+            ScrollView {
+                HeaderView(title: viewModel.title,
+                           subheading: viewModel.subheading)
+                .padding(.top, verticalSizeClass == .compact ? 30 : 46)
+                .padding(.horizontal, 16)
+            }
             Divider()
                 .overlay(Color(UIColor.govUK.strokes.fixedContainer))
                 .ignoresSafeArea()

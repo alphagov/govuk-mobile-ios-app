@@ -11,7 +11,7 @@ struct LocalAuthenticationOnboardingView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             if verticalSizeClass == .regular {
                 Spacer(minLength: 32)
             }
@@ -37,7 +37,6 @@ struct LocalAuthenticationOnboardingView: View {
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 16)
                     }
-                    Spacer()
                 }
             }
             .accessibilityElement(children: .contain)

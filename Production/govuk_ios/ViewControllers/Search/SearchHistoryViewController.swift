@@ -1,10 +1,11 @@
 import UIKit
 import UIComponents
+import CoreData
 import GOVKit
 
 private typealias DataSource =
-    UITableViewDiffableDataSource<SearchHistorySection, SearchHistoryItem>
-private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchHistorySection, SearchHistoryItem>
+    UITableViewDiffableDataSource<SearchHistorySection, NSManagedObjectID>
+private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchHistorySection, NSManagedObjectID>
 
 final class SearchHistoryViewController: UIViewController {
     private let viewModel: SearchHistoryViewModelInterface
@@ -109,7 +110,7 @@ final class SearchHistoryViewController: UIViewController {
         let localDataSource = DataSource(
             tableView: tableView,
             cellProvider: { [weak self] in
-                self?.cellProviderAction(tableView: $0, indexPath: $1, item: $2)
+                self?.cellProviderAction(tableView: $0, indexPath: $1, itemId: $2)
             }
         )
         localDataSource.defaultRowAnimation = .fade
@@ -118,12 +119,14 @@ final class SearchHistoryViewController: UIViewController {
 
     private func cellProviderAction(tableView: UITableView,
                                     indexPath: IndexPath,
-                                    item: SearchHistoryItem) -> UITableViewCell {
+                                    itemId: NSManagedObjectID) -> UITableViewCell {
         let cell: SearchHistoryCell = tableView.dequeue(indexPath: indexPath)
-        cell.searchText = item.searchText
-        cell.deleteAction = { [weak self] in
-            self?.viewModel.delete(item)
-            self?.reloadSnapshot()
+        if let item = viewModel.historyItem(for: itemId) {
+            cell.searchText = item.searchText
+            cell.deleteAction = { [weak self] in
+                self?.viewModel.delete(item)
+                self?.reloadSnapshot()
+            }
         }
         return cell
     }
@@ -209,7 +212,11 @@ final class SearchHistoryViewController: UIViewController {
 extension SearchHistoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        selectionAction(viewModel.searchHistoryItems[indexPath.row].searchText)
+        let itemId = viewModel.searchHistoryItems[indexPath.row]
+        guard let item = viewModel.historyItem(for: itemId) else {
+            return
+        }
+        selectionAction(item.searchText)
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

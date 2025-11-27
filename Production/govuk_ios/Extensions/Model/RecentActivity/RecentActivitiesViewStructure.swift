@@ -1,9 +1,10 @@
 import Foundation
+import CoreData
 
  struct RecentActivitiesViewStructure: Equatable {
-     let todaysActivites: [ActivityItem]
-     let currentMonthActivities: [ActivityItem]
-     let recentMonthActivities: [MonthGroupKey: [ActivityItem]]
+     let todaysActivites: [NSManagedObjectID]
+     let currentMonthActivities: [NSManagedObjectID]
+     let recentMonthActivities: [MonthGroupKey: [NSManagedObjectID]]
 
      var sections: [RecentActivitySection] {
          let localSections = [

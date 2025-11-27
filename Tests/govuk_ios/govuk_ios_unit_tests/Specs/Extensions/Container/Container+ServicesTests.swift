@@ -5,7 +5,7 @@ import Factory
 
 @testable import govuk_ios
 
-@Suite
+@Suite(.serialized)
 struct Container_ServicesTests {
     @Test
     func analyticsService_returnsExpectedValue() async {
@@ -54,5 +54,13 @@ struct Container_ServicesTests {
         let container = Container()
         let client = container.crashlyticsClient.resolve()
         #expect(client is CrashlyticsClient)
+    }
+
+    @Test
+    @MainActor
+    func privacyService_returnsExpectedValue() async {
+        let container = Container()
+        let client = container.privacyService.resolve()
+        #expect(client != nil)
     }
 }

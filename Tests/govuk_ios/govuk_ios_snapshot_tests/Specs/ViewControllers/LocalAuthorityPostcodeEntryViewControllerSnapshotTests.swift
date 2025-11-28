@@ -37,8 +37,13 @@ final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTest
         )
         viewModel.postCode = ""
         viewModel.primaryButtonViewModel.action()
+        let viewController = HostingViewController(
+            rootView: view,
+            navigationBarHidden: true
+        )
+        viewController.view.backgroundColor = .govUK.fills.surfaceModal
         VerifySnapshotInNavigationController(
-            viewController: HostingViewController(rootView: view),
+            viewController: viewController,
             mode: .light,
             prefersLargeTitles: true
         )
@@ -58,8 +63,15 @@ final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTest
         )
         viewModel.postCode = ""
         viewModel.primaryButtonViewModel.action()
+
+        let viewController = HostingViewController(
+            rootView: view,
+            navigationBarHidden: true
+        )
+        viewController.view.backgroundColor = .govUK.fills.surfaceModal
+
         VerifySnapshotInNavigationController(
-            viewController: HostingViewController(rootView: view),
+            viewController: viewController,
             mode: .dark,
             prefersLargeTitles: true
         )
@@ -76,7 +88,12 @@ final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTest
         let view = LocalAuthorityPostcodeEntryView(
             viewModel: viewModel
         )
-        return HostingViewController(rootView: view)
+        let viewController = HostingViewController(
+            rootView: view,
+            navigationBarHidden: true
+        )
+        viewController.view.backgroundColor = .govUK.fills.surfaceModal
+        return viewController
     }
 }
 

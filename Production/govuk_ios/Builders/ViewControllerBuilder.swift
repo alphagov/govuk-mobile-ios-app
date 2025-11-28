@@ -94,19 +94,25 @@ class ViewControllerBuilder {
         )
     }
 
-    func localAuthorityExplainerView(analyticsService: AnalyticsServiceInterface,
-                                     navigateToPostCodeEntryViewAction: @escaping () -> Void,
-                                     dismissAction: @escaping () -> Void) -> UIViewController {
-        let viewModel = LocalAuthorityExplainerViewModel(
-            analyticsService: analyticsService,
-            navigateToPostcodeEntry: navigateToPostCodeEntryViewAction,
-            dismissAction: dismissAction
-        )
-        let view = LocalAuthorityExplainerView(
-            viewModel: viewModel
-        )
-        return HostingViewController(rootView: view)
-    }
+    func localAuthorityExplainerView(
+        analyticsService: AnalyticsServiceInterface,
+        navigateToPostCodeEntryViewAction: @escaping () -> Void,
+        dismissAction: @escaping () -> Void) -> UIViewController {
+            let viewModel = LocalAuthorityExplainerViewModel(
+                analyticsService: analyticsService,
+                navigateToPostcodeEntry: navigateToPostCodeEntryViewAction,
+                dismissAction: dismissAction
+            )
+            let view = LocalAuthorityExplainerView(
+                viewModel: viewModel
+            )
+            let viewController = HostingViewController(
+                rootView: view,
+                navigationBarHidden: true
+            )
+            viewController.view.backgroundColor = .govUK.fills.surfaceModal
+            return viewController
+        }
 
     func localAuthorityPostcodeEntryView(
         analyticsService: AnalyticsServiceInterface,
@@ -125,7 +131,12 @@ class ViewControllerBuilder {
         let view = LocalAuthorityPostcodeEntryView(
             viewModel: viewModel
         )
-        return HostingViewController(rootView: view)
+        let viewController  = HostingViewController(
+            rootView: view,
+            navigationBarHidden: true
+        )
+        viewController.view.backgroundColor = .govUK.fills.surfaceModal
+        return viewController
     }
 
     // swiftlint:disable:next function_parameter_count
@@ -150,10 +161,12 @@ class ViewControllerBuilder {
         let view = AmbiguousAuthoritySelectionView(
             viewModel: viewModel
         )
-        return HostingViewController(
+        let viewController = HostingViewController(
             rootView: view,
             navigationBarTintColor: .govUK.text.linkSecondary
         )
+        viewController.view.backgroundColor = .govUK.fills.surfaceModal
+        return viewController
     }
 
     func ambiguousAddressSelectionView(
@@ -173,10 +186,12 @@ class ViewControllerBuilder {
         let view = AmbiguousAddressSelectionView(
             viewModel: viewModel
         )
-        return HostingViewController(
+        let viewController = HostingViewController(
             rootView: view,
             navigationBarTintColor: .govUK.text.linkSecondary
         )
+        viewController.view.backgroundColor = .govUK.fills.surfaceModal
+        return viewController
     }
 
     func faceIdSettings(
@@ -333,6 +348,7 @@ class ViewControllerBuilder {
                 rootView: view,
                 navigationBarTintColor: .govUK.text.linkSecondary
             )
+            viewController.view.backgroundColor = .govUK.fills.surfaceModal
             return viewController
         }
 

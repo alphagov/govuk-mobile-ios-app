@@ -72,6 +72,10 @@ final class AmbiguousAddressViewControllerSnapshotTests: SnapshotTestCase {
         let view = AmbiguousAddressSelectionView(
             viewModel: viewModel
         )
-        return HostingViewController(rootView: view)
+        let viewController = HostingViewController(
+            rootView: view
+        )
+        viewController.view.backgroundColor = .govUK.fills.surfaceModal
+        return viewController
     }
 }

@@ -11,7 +11,7 @@ struct LocalAuthorityConfirmationView: View {
     var body: some View {
         ZStack {
             Color(uiColor: .govUK.fills.surfaceModal)
-            VStack {
+            VStack(spacing: 0) {
                 ScrollView {
                     if viewModel.localAuthorityItem.parent != nil {
                         twoTierView

@@ -46,7 +46,6 @@ struct AnalyticsConsentContainerView: View {
             .padding(.top, verticalSizeClass == .compact ? 30 : 46)
             .padding(.horizontal, 16)
             .accessibilityValue(" ")
-            Spacer()
             ButtonStackView(
                 primaryButtonViewModel: viewModel.allowButtonViewModel,
                 secondaryButtonViewModel: viewModel.dontAllowButtonViewModel

@@ -10,8 +10,8 @@ struct SignOutConfirmationView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
-            VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
+            ScrollView {
                 HeaderView(title: viewModel.title,
                            subheading: viewModel.subTitle)
                 BulletView(bulletText: viewModel.bulletStrings)
@@ -19,7 +19,6 @@ struct SignOutConfirmationView: View {
                 Text(viewModel.body)
             }
             .padding(.horizontal, 16)
-            Spacer()
             ButtonStackView(
                 primaryButtonViewModel: viewModel.signOutButtonViewModel,
                 primaryButtonConfiguration: .destructive,

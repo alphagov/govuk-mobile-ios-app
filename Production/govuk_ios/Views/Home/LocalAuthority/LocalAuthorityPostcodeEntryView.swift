@@ -14,7 +14,7 @@ struct LocalAuthorityPostcodeEntryView: View {
     var body: some View {
         ZStack {
             Color(uiColor: .govUK.fills.surfaceModal)
-            VStack {
+            VStack(spacing: 0) {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 15) {
                         Text(viewModel.postcodeEntryViewTitle)

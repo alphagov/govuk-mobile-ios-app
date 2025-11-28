@@ -12,7 +12,7 @@ struct LocalAuthorityExplainerView: View {
     var body: some View {
         ZStack {
             Color(uiColor: .govUK.fills.surfaceModal)
-            VStack {
+            VStack(spacing: 0) {
                 ScrollView {
                     VStack {
                         if verticalSizeClass != .compact {
@@ -33,7 +33,6 @@ struct LocalAuthorityExplainerView: View {
                             .foregroundColor(Color(UIColor.govUK.text.primary))
                             .padding([.horizontal], 16)
                             .multilineTextAlignment(.center)
-                        Spacer()
                     }
                     .accessibilityElement(children: .contain)
                 }

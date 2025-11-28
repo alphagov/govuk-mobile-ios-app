@@ -11,7 +11,7 @@ struct AppUnavailableContainerView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             ScrollView {
                 HeaderView(title: viewModel.title,
                            subheading: viewModel.subheading)
@@ -23,7 +23,6 @@ struct AppUnavailableContainerView: View {
                     .padding(.top, 32)
             }
             .padding(.top, 1)
-            Spacer()
             Divider()
                 .overlay(Color(UIColor.govUK.strokes.fixedContainer))
                 .ignoresSafeArea()

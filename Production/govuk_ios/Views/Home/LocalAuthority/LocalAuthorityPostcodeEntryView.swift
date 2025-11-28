@@ -7,6 +7,8 @@ struct LocalAuthorityPostcodeEntryView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @AccessibilityFocusState(for: .voiceOver)
     private var isErrorFocused: Bool
+    @AccessibilityFocusState(for: .voiceOver)
+    private var isTitleFocused: Bool
 
     init(viewModel: LocalAuthorityPostcodeEntryViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -36,6 +38,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                             .foregroundColor(Color(UIColor.govUK.text.primary))
                             .font(Font.govUK.title1Bold)
                             .accessibilityAddTraits(.isHeader)
+                            .accessibilityFocused($isTitleFocused)
                         Text(viewModel.postcodeEntryViewExampleText)
                             .font(Font.govUK.body)
                             .foregroundColor(Color(UIColor.govUK.text.secondary))
@@ -64,8 +67,12 @@ struct LocalAuthorityPostcodeEntryView: View {
                         Text(viewModel.postcodeEntryViewDescriptionBody)
                             .font(Font.govUK.body)
                         Spacer()
-                    }.padding()
-                }.onReceive(viewModel.$error) { error in
+                    }
+                    .padding()
+                }
+                .accessibilitySortPriority(1)
+                .accessibilityElement(children: .contain)
+                .onReceive(viewModel.$error) { error in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         if error != nil {
                             isErrorFocused = true
@@ -81,16 +88,8 @@ struct LocalAuthorityPostcodeEntryView: View {
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 viewModel.trackScreen(screen: self)
+                isTitleFocused = true
             }
-        }
-    }
-
-    private var cancelButton: some ToolbarContent {
-        ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
-            Button(viewModel.cancelButtonTitle) {
-                viewModel.dismissAction()
-            }
-            .foregroundColor(Color(UIColor.govUK.text.linkSecondary))
         }
     }
 }

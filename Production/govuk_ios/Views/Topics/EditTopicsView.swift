@@ -22,7 +22,7 @@ struct EditTopicsView: View {
         .toolbar {
             doneButton
         }
-        .toolbarBackground(.background, for: .navigationBar)
+        .toolbarBackground(Color(.govUK.fills.surfaceModal), for: .navigationBar)
         .onAppear {
             viewModel.trackScreen(screen: self)
         }

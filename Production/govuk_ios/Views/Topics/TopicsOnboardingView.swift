@@ -6,6 +6,8 @@ struct TopicsOnboardingView: View {
 
     init(viewModel: TopicsOnboardingViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        UILabel.appearance(whenContainedInInstancesOf:
+                            [UINavigationBar.self]).adjustsFontSizeToFitWidth = true
     }
 
     var body: some View {

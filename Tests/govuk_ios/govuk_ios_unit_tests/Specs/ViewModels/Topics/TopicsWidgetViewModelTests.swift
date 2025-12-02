@@ -154,7 +154,7 @@ struct TopicsWidgetViewModelTests {
                     continuation.resume(returning: value)
                     cancellables.removeAll()
                 }.store(in: &cancellables)
-            sut.setTopicsScreen()
+            sut.setTopicsScreenPriorToEdit()
         }
         #expect(result == .all)
     }

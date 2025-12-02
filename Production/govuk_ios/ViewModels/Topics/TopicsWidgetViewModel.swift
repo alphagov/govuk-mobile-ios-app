@@ -16,6 +16,7 @@ final class TopicsWidgetViewModel: ObservableObject {
     let topicAction: (Topic) -> Void
     private let dismissEditAction: () -> Void
     @Published var fetchTopicsError = false
+    private var topicsHasBeenEddited = false
     @Published var favouriteTopics: [Topic] = []
     @Published var allTopics: [Topic] = []
     @Published var topicsScreen: TopicSegment = .favorite {
@@ -26,6 +27,10 @@ final class TopicsWidgetViewModel: ObservableObject {
                 trackECommerce()
             }
         }
+    }
+
+    func setTopicView(view: TopicSegment) {
+        topicsScreen = view
     }
 
     @Published var initialLoadComplete = false
@@ -89,8 +94,11 @@ final class TopicsWidgetViewModel: ObservableObject {
         allTopics = topicsService.fetchAll()
     }
 
-    func setTopicsScreen() {
-        topicsScreen = hasFavouritedTopics ? .favorite : .all
+    func setTopicsScreenPriorToEdit() {
+        if !topicsHasBeenEddited {
+            topicsScreen = hasFavouritedTopics ? .favorite : .all
+            topicsHasBeenEddited = true
+        }
     }
 
     @MainActor
@@ -98,7 +106,7 @@ final class TopicsWidgetViewModel: ObservableObject {
         fetchTopics()
         updateFavouriteTopics()
         updateAllTopics()
-        setTopicsScreen()
+        setTopicsScreenPriorToEdit()
     }
 
     func openErrorURL() {

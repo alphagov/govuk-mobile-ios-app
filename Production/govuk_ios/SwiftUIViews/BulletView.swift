@@ -7,7 +7,7 @@ struct BulletView: View {
     private let itemSpacing: CGFloat
 
     init(bulletText: [String],
-         bulletSpacing: CGFloat = 20.0,
+         bulletSpacing: CGFloat = 16.0,
          itemSpacing: CGFloat = 8.0) {
         self.bulletText = bulletText
         self.bulletSpacing = bulletSpacing
@@ -15,23 +15,23 @@ struct BulletView: View {
     }
 
     var body: some View {
-        VStack(
-            alignment: .leading,
-            spacing: itemSpacing
+        VStack(spacing: itemSpacing
         ) {
             ForEach(bulletText, id: \.self) { text in
-                HStack(alignment: .firstTextBaseline,
-                       spacing: bulletSpacing) {
+                HStack(alignment: VerticalAlignment.top, spacing: bulletSpacing) {
                     Text("•")
-                        .font(Font.govUK.title1)
+                        .font(Font.govUK.body)
+                        .fontWeight(Font.Weight.heavy)
                     Text(text)
                         .multilineTextAlignment(.leading)
                         .font(Font.govUK.body)
+                    Spacer()
                 }
             }
             .foregroundStyle(Color(UIColor.govUK.text.primary))
-        }
-        .padding(.horizontal, 16.0)
+            .accessibilityElement(children: .combine)
+        }.padding(.trailing, 16)
+        .padding(.leading, 10)
     }
 }
 

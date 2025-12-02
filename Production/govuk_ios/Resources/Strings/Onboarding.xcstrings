@@ -23,13 +23,46 @@
         }
       }
     },
-    "analyticsConsentDescriptionBullets" : {
+    "analyticsConsentBulletOne" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "  •  the pages you visit within the app\n  •  how long you spend on each page\n  •  what you tap on while you're on each page\n  •  errors that happen"
+            "value" : "the pages you visit within the app"
+          }
+        }
+      }
+    },
+    "analyticsConsentBulletTwo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "how long you spend on each page"
+          }
+        }
+      }
+    },
+    "analyticsConsentBulletThree" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "what you tap on while you're on each page"
+          }
+        }
+      }
+    },
+    "analyticsConsentBulletFour" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "errors that happen"
           }
         }
       }

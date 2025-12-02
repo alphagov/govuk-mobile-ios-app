@@ -14,15 +14,8 @@ struct AnalyticsConsentContainerView: View {
         VStack(spacing: 0) {
             ScrollView {
                 HeaderView(title: viewModel.title,
-                           subheading: viewModel.descriptionTop)
-                Text(viewModel.descriptionBullets)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(Color(UIColor.govUK.text.primary))
-                    .font(Font.govUK.body)
-                    .multilineTextAlignment(.leading)
-                    .lineSpacing(8)
-                    .accessibilityLabel(Text(viewModel.descriptionBullets))
-                    .padding(.top, 16)
+                           subheading: viewModel.descriptionTop).padding(.bottom, 16)
+                BulletView(bulletText: viewModel.descriptionBullets)
                 Text(viewModel.descriptionBottom)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color(UIColor.govUK.text.primary))

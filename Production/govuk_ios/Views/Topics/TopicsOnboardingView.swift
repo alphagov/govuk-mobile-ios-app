@@ -11,12 +11,11 @@ struct TopicsOnboardingView: View {
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
-                Text(viewModel.subtitle)
-                    .multilineTextAlignment(.leading)
-                    .padding(.horizontal, 12)
-                    .padding(.top, 10)
+                HeaderView(title: viewModel.title,
+                           subheading: viewModel.subtitle)
+                .padding(16)
                 topicsList
-                    .padding([.top, .horizontal], 16)
+                    .padding([.bottom, .horizontal], 16)
             }
             ButtonStackView(
                 primaryButtonViewModel: viewModel.primaryButtonViewModel,
@@ -26,8 +25,6 @@ struct TopicsOnboardingView: View {
             .background(Color(UIColor.govUK.fills.surfaceFixedContainer))
         }
         .background(Color(UIColor.govUK.fills.surfaceFullscreen))
-        .navigationTitle(viewModel.title)
-        .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(
             Color(UIColor.govUK.fills.surfaceFullscreen),
             for: .navigationBar
@@ -35,6 +32,7 @@ struct TopicsOnboardingView: View {
         .onAppear {
             viewModel.trackScreen(screen: self)
         }
+        .navigationBarHidden(true)
     }
 
     private var topicsList: some View {

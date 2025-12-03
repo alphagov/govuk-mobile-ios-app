@@ -8,6 +8,7 @@ struct TopicsDetailCoordinatorTests {
     @MainActor
     @Test
     func start_setsTopicDetailView() throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockAnalyticsService = MockAnalyticsService()
         let mockTopicsService = MockTopicsService()
@@ -24,7 +25,7 @@ struct TopicsDetailCoordinatorTests {
             activityService: mockActivityService,
             coordinatorBuilder: MockCoordinatorBuilder.mock,
             viewControllerBuilder: mockViewControllerBuilder,
-            topic: Topic()
+            topic: Topic(context: coreData.viewContext)
         )
         
         subject.start()

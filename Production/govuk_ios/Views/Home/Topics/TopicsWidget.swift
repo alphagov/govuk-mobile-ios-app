@@ -57,17 +57,11 @@ struct TopicsWidget: View {
             selection: $viewModel.topicsScreen,
             label: Text(viewModel.widgetTitle)) {
                 Text(viewModel.personalisedTopicsPickerTitle)
-                    .onTapGesture {
-                        viewModel.setTopicView(view: .favorite)
-                    }
                     .foregroundColor(
                         Color(UIColor.govUK.text.primary)
                     )
                     .tag(TopicSegment.favorite)
                 Text(viewModel.allTopicsPickerTitle)
-                    .onTapGesture {
-                        viewModel.setTopicView(view: .all)
-                    }
                     .foregroundColor(
                         Color(UIColor.govUK.text.primary)
                     )

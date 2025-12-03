@@ -29,10 +29,6 @@ final class TopicsWidgetViewModel: ObservableObject {
         }
     }
 
-    func setTopicView(view: TopicSegment) {
-        topicsScreen = view
-    }
-
     @Published var initialLoadComplete = false
     private var isEditInProgress = false
 

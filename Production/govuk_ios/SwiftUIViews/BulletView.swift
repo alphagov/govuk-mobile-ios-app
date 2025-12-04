@@ -31,7 +31,6 @@ struct BulletView: View {
             .foregroundStyle(Color(UIColor.govUK.text.primary))
             .accessibilityElement(children: .combine)
         }
-        .padding(.trailing, 16)
         .padding(.leading, 10)
     }
 }

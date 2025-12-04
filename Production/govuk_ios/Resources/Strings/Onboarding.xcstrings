@@ -12,13 +12,13 @@
         }
       }
     },
-    "analyticsConsentDescriptionBottom" : {
+    "analyticsConsentBulletFour" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "We will not use this data to directly identify you.\n\nYou can stop sharing these statistics at any time by changing your app settings."
+            "value" : "how long you spend on each page"
           }
         }
       }
@@ -34,18 +34,18 @@
         }
       }
     },
-    "analyticsConsentBulletTwo" : {
+    "analyticsConsentBulletThree" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "how long you spend on each page"
+            "value" : "errors that happen"
           }
         }
       }
     },
-    "analyticsConsentBulletThree" : {
+    "analyticsConsentBulletTwo" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
@@ -56,13 +56,13 @@
         }
       }
     },
-    "analyticsConsentBulletFour" : {
+    "analyticsConsentDescriptionBottom" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "errors that happen"
+            "value" : "We will not use these statistics to directly identify you.\n\nYou can stop sharing these statistics at any time by changing your app settings."
           }
         }
       }
@@ -84,7 +84,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share statistics about how you use the GOV.UK app"
+            "value" : "Help improve the app by sharing statistics"
           }
         }
       }

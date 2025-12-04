@@ -15,8 +15,8 @@ struct AnalyticsConsentContainerView: View {
             ScrollView {
                 HeaderView(title: viewModel.title,
                            subheading: viewModel.descriptionTop)
-                .padding(.bottom, 16)
                 BulletView(bulletText: viewModel.descriptionBullets)
+                    .padding(.top, 12)
                 Text(viewModel.descriptionBottom)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -32,7 +32,7 @@ struct AnalyticsConsentContainerView: View {
                     .accessibilityLabel(Text(viewModel.privacyPolicyLinkAccessibilityTitle))
                     .accessibilityHint(Text(viewModel.privacyPolicyLinkHint))
                     .accessibilityAddTraits(.isLink)
-                    .padding(.top, 16)
+                    .padding(.top, 27)
                     .onTapGesture {
                         viewModel.openPrivacyPolicy()
                     }

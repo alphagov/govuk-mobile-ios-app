@@ -27,7 +27,7 @@ struct SignOutConfirmationView: View {
                 primaryButtonConfiguration: .destructive,
                 secondaryButtonViewModel: viewModel.cancelButtonViewModel
             )
-        }
+        }.background(Color(UIColor.govUK.fills.surfaceModal))
         .onAppear {
             viewModel.trackScreen(screen: self)
         }

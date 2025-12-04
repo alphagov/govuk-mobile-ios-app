@@ -59,7 +59,7 @@ struct NotificationsOnboardingView: View {
                         .accessibilityHint(Text(String.common.localized("openWebLinkHint")))
                         .accessibilityAddTraits(.isLink)
                     Image(systemName: "arrow.up.right")
-                        .foregroundColor(Color(UIColor.govUK.text.link))
+                        .foregroundColor(Color(UIColor.govUK.text.linkSecondary))
                 }
                 .accessibilityElement(children: .combine)
                 .frame(maxWidth: .infinity, alignment: .center)

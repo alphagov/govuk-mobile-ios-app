@@ -14,9 +14,12 @@ struct SignOutConfirmationView: View {
             ScrollView {
                 HeaderView(title: viewModel.title,
                            subheading: viewModel.subTitle)
+                .padding(.bottom, 12)
                 BulletView(bulletText: viewModel.bulletStrings)
-                    .padding(.bottom, 8)
+                    .padding(.bottom, 16)
                 Text(viewModel.body)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.horizontal, 16)
             ButtonStackView(

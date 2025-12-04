@@ -65,7 +65,7 @@ final class SearchHistoryViewController: UIViewController {
         var configuration = UIButton.Configuration.plain()
         configuration.contentInsets = .zero
         configuration.titleAlignment = .trailing
-        configuration.baseForegroundColor = UIColor.govUK.text.link
+        configuration.baseForegroundColor = UIColor.govUK.text.linkSecondary
         var title = AttributedString(
             String.search.localized("clearHistoryButtonTitle")
         )

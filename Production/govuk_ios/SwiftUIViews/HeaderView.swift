@@ -10,7 +10,7 @@ struct HeaderView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 16) {
             Text(title)
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -19,7 +19,6 @@ struct HeaderView: View {
                 .multilineTextAlignment(.leading)
                 .accessibilityAddTraits(.isHeader)
                 .accessibilityLabel(Text(title))
-                .padding(.bottom, 16)
             Text(subheading)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(Color(UIColor.govUK.text.primary))

@@ -26,13 +26,14 @@ struct AnalyticsConsentContainerView: View {
                     .padding(.top, 16)
                 Text(viewModel.privacyPolicyLinkTitle)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(Color(UIColor.govUK.text.link))
+                    .foregroundColor(Color(UIColor.govUK.text.linkSecondary))
                     .font(Font.govUK.body)
                     .multilineTextAlignment(.leading)
                     .accessibilityLabel(Text(viewModel.privacyPolicyLinkAccessibilityTitle))
                     .accessibilityHint(Text(viewModel.privacyPolicyLinkHint))
                     .accessibilityAddTraits(.isLink)
                     .padding(.top, 27)
+                    .padding(.bottom, 16)
                     .onTapGesture {
                         viewModel.openPrivacyPolicy()
                     }

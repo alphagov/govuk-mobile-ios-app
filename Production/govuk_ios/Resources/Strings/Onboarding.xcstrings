@@ -18,7 +18,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "how long you spend on each page"
+            "value" : "errors that happen"
           }
         }
       }
@@ -40,7 +40,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "errors that happen"
+            "value" : "what you tap on while you're on each page"
           }
         }
       }
@@ -51,7 +51,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "what you tap on while you're on each page"
+            "value" : "how long you spend on each page"
           }
         }
       }

@@ -18,9 +18,9 @@ struct AnalyticsConsentContainerViewModelTests {
         #expect(
             sut.descriptionBullets ==
             ["the pages you visit within the app",
+             "how long you spend on each page",
              "what you tap on while you're on each page",
-             "errors that happen",
-             "how long you spend on each page"]
+             "errors that happen"]
         )
         #expect(sut.descriptionBottom == "We will not use these statistics to directly identify you.\n\nYou can stop sharing these statistics at any time by changing your app settings.")
         #expect(sut.privacyPolicyLinkTitle == "Read more about this in the privacy notice ↗")

@@ -7,7 +7,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Allow statistics sharing"
+            "value" : "Share statistics"
           }
         }
       }
@@ -128,7 +128,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Don't allow statistics sharing"
+            "value" : "Not now"
           }
         }
       }

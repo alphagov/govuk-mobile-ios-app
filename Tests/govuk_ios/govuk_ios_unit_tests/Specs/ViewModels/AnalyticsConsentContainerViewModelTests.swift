@@ -27,8 +27,8 @@ struct AnalyticsConsentContainerViewModelTests {
         #expect(sut.privacyPolicyLinkAccessibilityTitle == "Read more about this in the privacy notice")
         #expect(sut.privacyPolicyLinkHint == "Opens in web browser")
         #expect(sut.privacyPolicyLinkUrl.absoluteString == "https://www.gov.uk/government/publications/govuk-app-privacy-notice-how-we-use-your-data")
-        #expect(sut.allowButtonTitle == "Allow statistics sharing")
-        #expect(sut.dontAllowButtonTitle == "Don't allow statistics sharing")
+        #expect(sut.allowButtonTitle == "Share statistics")
+        #expect(sut.dontAllowButtonTitle == "Not now")
     }
 
     @Test

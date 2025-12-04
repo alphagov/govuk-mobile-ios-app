@@ -14,7 +14,8 @@ struct AnalyticsConsentContainerView: View {
         VStack(spacing: 0) {
             ScrollView {
                 HeaderView(title: viewModel.title,
-                           subheading: viewModel.descriptionTop).padding(.bottom, 16)
+                           subheading: viewModel.descriptionTop)
+                .padding(.bottom, 16)
                 BulletView(bulletText: viewModel.descriptionBullets)
                 Text(viewModel.descriptionBottom)
                     .frame(maxWidth: .infinity, alignment: .leading)

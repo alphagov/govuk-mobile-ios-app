@@ -10,7 +10,10 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
 
     let title = String.onboarding.localized("analyticsConsentTitle")
     let descriptionTop = String.onboarding.localized("analyticsConsentDescriptionTop")
-    let descriptionBullets = String.onboarding.localized("analyticsConsentDescriptionBullets")
+    let descriptionBullets: [String] = [String.onboarding.localized("analyticsConsentBulletOne"),
+                                        String.onboarding.localized("analyticsConsentBulletTwo"),
+                                        String.onboarding.localized("analyticsConsentBulletThree"),
+                                        String.onboarding.localized("analyticsConsentBulletFour")]
     let descriptionBottom = String.onboarding.localized("analyticsConsentDescriptionBottom")
     let privacyPolicyLinkTitle = String.onboarding.localized("privacyPolicyLinkTitle")
     let privacyPolicyLinkAccessibilityTitle =

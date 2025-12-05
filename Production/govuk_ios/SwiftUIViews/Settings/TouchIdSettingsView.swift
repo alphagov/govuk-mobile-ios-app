@@ -29,10 +29,9 @@ struct TouchIdSettingsView: View {
                     .onChange(of: viewModel.touchIdEnabled) { enabled in
                         viewModel.touchIdToggleAction(enabled: enabled)
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 11)
+                    .padding(16)
                     .background(Color(UIColor.govUK.fills.surfaceList))
-                    .roundedBorder()
+                    .roundedBorder(borderColor: .clear)
                     ForEach(viewModel.body.split(separator: "\n\n"), id: \.self) { paragraph in
                         Text(paragraph).font(Font.govUK.body)
                     }

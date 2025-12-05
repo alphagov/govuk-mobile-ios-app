@@ -1,6 +1,6 @@
 import UIKit
 import Foundation
-import Factory
+import FactoryKit
 import GOVKit
 
 class TopicOnboardingCoordinator: BaseCoordinator {

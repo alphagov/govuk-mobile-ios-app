@@ -2,7 +2,7 @@ import UIKit
 import SwiftUI
 
 import iOSSnapshotTestCase
-import Factory
+import FactoryKit
 import Lottie
 
 @testable import govuk_ios

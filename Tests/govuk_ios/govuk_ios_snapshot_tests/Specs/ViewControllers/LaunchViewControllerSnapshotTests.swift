@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import UIKit
 
-import Factory
+import FactoryKit
 
 @testable import govuk_ios
 
@@ -15,7 +15,9 @@ class LaunchViewControllerSnapshotTests: SnapshotTestCase {
         mockAccessibilityManager = MockAccessibilityManager()
         Container.shared.accessibilityManager.register(
             factory: {
-                self.mockAccessibilityManager
+                MainActor.assumeIsolated {
+                    self.mockAccessibilityManager
+                }
             }
         )
     }

@@ -2,7 +2,7 @@ import Foundation
 import Authentication
 import AppAuth
 
-import Factory
+import FactoryKit
 
 extension Container {
     var appConfigServiceClient: Factory<AppConfigServiceClientInterface> {

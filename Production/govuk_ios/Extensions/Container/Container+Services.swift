@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
-import Factory
+import FactoryKit
 import GOVKit
 import UserNotifications
 
@@ -74,11 +74,13 @@ extension Container {
     @MainActor
     var appLaunchService: Factory<AppLaunchServiceInterface> {
         Factory(self) {
-            AppLaunchService(
-                configService: self.appConfigService.resolve(),
-                topicService: self.topicsService.resolve(),
-                notificationService: self.notificationService.resolve()
-            )
+            MainActor.assumeIsolated {
+                AppLaunchService(
+                    configService: self.appConfigService.resolve(),
+                    topicService: self.topicsService.resolve(),
+                    notificationService: self.notificationService.resolve()
+                )
+            }
         }.scope(.singleton)
     }
 
@@ -94,12 +96,14 @@ extension Container {
     @MainActor
     var topicsService: Factory<TopicsServiceInterface> {
         Factory(self) {
-            TopicsService(
-                topicsServiceClient: self.topicsServiceClient(),
-                topicsRepository: self.topicsRepository(),
-                analyticsService: self.analyticsService(),
-                userDefaultsService: self.userDefaultsService.resolve()
-            )
+            MainActor.assumeIsolated {
+                TopicsService(
+                    topicsServiceClient: self.topicsServiceClient(),
+                    topicsRepository: self.topicsRepository(),
+                    analyticsService: self.analyticsService(),
+                    userDefaultsService: self.userDefaultsService.resolve()
+                )
+            }
         }
     }
 
@@ -217,12 +221,14 @@ extension Container {
     @MainActor
     var chatService: Factory<ChatServiceInterface> {
         Factory(self) {
-            ChatService(
-                serviceClient: self.chatServiceClient.resolve(),
-                chatRepository: self.chatRepository.resolve(),
-                configService: self.appConfigService.resolve(),
-                userDefaultsService: self.userDefaultsService.resolve()
-            )
+            MainActor.assumeIsolated {
+                ChatService(
+                    serviceClient: self.chatServiceClient.resolve(),
+                    chatRepository: self.chatRepository.resolve(),
+                    configService: self.appConfigService.resolve(),
+                    userDefaultsService: self.userDefaultsService.resolve()
+                )
+            }
         }
     }
 

@@ -2,7 +2,7 @@ import UIKit
 import Foundation
 import Testing
 
-import Factory
+import FactoryKit
 
 
 @testable import govuk_ios

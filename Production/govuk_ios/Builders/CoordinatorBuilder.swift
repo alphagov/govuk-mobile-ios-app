@@ -1,7 +1,7 @@
 // swiftlint:disable file_length
 import UIKit
 import Foundation
-import Factory
+import FactoryKit
 
 @MainActor
 // swiftlint:disable:next type_body_length

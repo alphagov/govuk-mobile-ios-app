@@ -1,7 +1,7 @@
 import Testing
 import Combine
 import Foundation
-import Factory
+import FactoryKit
 
 @testable import govuk_ios
 

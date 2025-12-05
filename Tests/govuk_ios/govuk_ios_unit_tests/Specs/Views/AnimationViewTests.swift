@@ -3,7 +3,7 @@ import XCTest
 import Lottie
 import Testing
 
-import Factory
+import FactoryKit
 
 @testable import govuk_ios
 
@@ -19,7 +19,9 @@ class AnimationViewTests {
         }
         Container.shared.accessibilityManager.register(
             factory: {
-                self.mockAccessibilityManager
+                MainActor.assumeIsolated {
+                    self.mockAccessibilityManager
+                }
             }
         )
     }

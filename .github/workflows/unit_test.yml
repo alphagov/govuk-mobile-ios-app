@@ -29,7 +29,7 @@ jobs:
         run: xcodes select
 
       - name: Unit tests
-        run: bundle exec fastlane build
+        run: bundle exec fastlane unit
 
       - name: Archive failure diffs
         if: failure()

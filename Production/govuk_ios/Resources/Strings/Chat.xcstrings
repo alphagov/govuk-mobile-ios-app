@@ -23,6 +23,17 @@
         }
       }
     },
+    "accessibilityPrompt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You said,"
+          }
+        }
+      }
+    },
     "answerTitle" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -64,6 +64,15 @@ jobs:
       - name: Select xcode
         run: xcodes select
 
+      - name: Generate release notes
+        id: generate_release_notes
+        run: |
+          echo "Branch: ${{ github.ref_name }}
+          Environment: alpha
+          Subject: $(git log --format=%s -n 1)
+          Body: $(git log --format=%b -n 1)" >> "./build_output/release_notes.txt"
+
+
       - name: Deploy
         run: bundle exec fastlane alpha
         env:

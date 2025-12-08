@@ -32,10 +32,9 @@ struct FaceIdSettingsView: View {
                                 )
                                 .font(Font.govUK.bodySemibold)
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 11)
+                        .padding(16)
                         .background(Color(UIColor.govUK.fills.surfaceList))
-                        .roundedBorder()
+                        .roundedBorder(borderColor: .clear)
                     }
                     .alert(isPresented: $viewModel.showSettingsAlert) {
                         Alert(

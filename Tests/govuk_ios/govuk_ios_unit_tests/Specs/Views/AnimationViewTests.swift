@@ -13,17 +13,12 @@ class AnimationViewTests {
     private var mockAccessibilityManager: MockAccessibilityManager!
 
     init() {
-        mockAccessibilityManager = MockAccessibilityManager()
+        let mockManager = MockAccessibilityManager()
         Container.shared.lottieConfiguration.register {
             LottieConfiguration(renderingEngine: .mainThread)
         }
-        Container.shared.accessibilityManager.register(
-            factory: {
-                MainActor.assumeIsolated {
-                    self.mockAccessibilityManager
-                }
-            }
-        )
+        Container.shared.accessibilityManager.register { mockManager }
+        self.mockAccessibilityManager = mockManager
     }
 
     // This test isn't ideal, but there isn't much to assert against with Lottie

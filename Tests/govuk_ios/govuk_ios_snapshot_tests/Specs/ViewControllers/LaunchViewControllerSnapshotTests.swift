@@ -12,14 +12,9 @@ class LaunchViewControllerSnapshotTests: SnapshotTestCase {
 
     override func setUp() {
         super.setUp()
-        mockAccessibilityManager = MockAccessibilityManager()
-        Container.shared.accessibilityManager.register(
-            factory: {
-                MainActor.assumeIsolated {
-                    self.mockAccessibilityManager
-                }
-            }
-        )
+        let mockManager = MockAccessibilityManager()
+        Container.shared.accessibilityManager.register { mockManager }
+        self.mockAccessibilityManager = mockManager
     }
 
     func test_loadInNavigationController_rendersCorrectly() {

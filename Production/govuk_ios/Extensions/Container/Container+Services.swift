@@ -71,16 +71,13 @@ extension Container {
         }
     }
 
-    @MainActor
     var appLaunchService: Factory<AppLaunchServiceInterface> {
         Factory(self) {
-            MainActor.assumeIsolated {
-                AppLaunchService(
-                    configService: self.appConfigService.resolve(),
-                    topicService: self.topicsService.resolve(),
-                    notificationService: self.notificationService.resolve()
-                )
-            }
+            AppLaunchService(
+                configService: self.appConfigService.resolve(),
+                topicService: self.topicsService.resolve(),
+                notificationService: self.notificationService.resolve()
+            )
         }.scope(.singleton)
     }
 
@@ -92,18 +89,15 @@ extension Container {
             )
         }.scope(.singleton)
     }
-
-    @MainActor
+    
     var topicsService: Factory<TopicsServiceInterface> {
         Factory(self) {
-            MainActor.assumeIsolated {
-                TopicsService(
-                    topicsServiceClient: self.topicsServiceClient(),
-                    topicsRepository: self.topicsRepository(),
-                    analyticsService: self.analyticsService(),
-                    userDefaultsService: self.userDefaultsService.resolve()
-                )
-            }
+            TopicsService(
+                topicsServiceClient: self.topicsServiceClient(),
+                topicsRepository: self.topicsRepository(),
+                analyticsService: self.analyticsService(),
+                userDefaultsService: self.userDefaultsService.resolve()
+            )
         }
     }
 
@@ -218,24 +212,22 @@ extension Container {
         }
     }
 
-    @MainActor
     var chatService: Factory<ChatServiceInterface> {
         Factory(self) {
-            MainActor.assumeIsolated {
-                ChatService(
-                    serviceClient: self.chatServiceClient.resolve(),
-                    chatRepository: self.chatRepository.resolve(),
-                    configService: self.appConfigService.resolve(),
-                    userDefaultsService: self.userDefaultsService.resolve()
-                )
-            }
+            ChatService(
+                serviceClient: self.chatServiceClient.resolve(),
+                chatRepository: self.chatRepository.resolve(),
+                configService: self.appConfigService.resolve(),
+                userDefaultsService: self.userDefaultsService.resolve()
+            )
         }
     }
 
     var jailbreakDetectionService: Factory<JailbreakDetectionServiceInterface> {
-        Factory(self) {
+        let application = UIApplication.shared
+        return Factory(self) {
             JailbreakDetectionService(
-                urlOpener: UIApplication.shared
+                urlOpener: application
             )
         }
     }
@@ -247,8 +239,9 @@ extension Container {
     }
 
     var privacyService: Factory<PrivacyPresenting?> {
-        Factory(self) {
-            UIApplication.shared.connectedScenes.first?.delegate as? PrivacyPresenting
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
+        return Factory(self) {
+            sceneDelegate as? PrivacyPresenting
         }
     }
 }

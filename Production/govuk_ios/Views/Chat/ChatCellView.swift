@@ -48,7 +48,6 @@ struct ChatCellView: View {
                 .font(Font.govUK.body)
                 .multilineTextAlignment(.leading)
                 .padding()
-                .accessibilityLabel(viewModel.accessibilityPrompt + viewModel.message)
         }
     }
 

@@ -91,10 +91,9 @@ final class TopicsWidgetViewModel: ObservableObject {
     }
 
     func setTopicsScreenPriorToEdit() {
-        if !topicsHasBeenEddited {
-            topicsScreen = hasFavouritedTopics ? .favorite : .all
-            topicsHasBeenEddited = true
-        }
+        if !initialLoadComplete {
+            topicsScreen = .favorite
+         }
     }
 
     @MainActor

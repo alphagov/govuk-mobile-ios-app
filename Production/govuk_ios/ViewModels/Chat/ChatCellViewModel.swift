@@ -87,6 +87,10 @@ class ChatCellViewModel: ObservableObject {
         (type == .question || type ==  .loading) ? false : true
     }
 
+    var accessibilityPrompt: String {
+        type == .question ? String.chat.localized("accessibilityPrompt") : ""
+    }
+
     func copyToClipboard() {
         var textToCopy = MarkdownContent(message).renderPlainText()
         if !sources.isEmpty {

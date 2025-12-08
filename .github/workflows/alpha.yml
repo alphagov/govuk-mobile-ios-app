@@ -31,7 +31,7 @@ jobs:
       BW_ACCESS_TOKEN: ${{ secrets.BW_ACCESS_TOKEN }}
   deploy:
     name: Deploy
-    needs: sonar-scan
+    needs: unit-test
     runs-on: macos-26
     environment: ${{ inputs.environment == '' && 'Staging' || inputs.environment }}
 

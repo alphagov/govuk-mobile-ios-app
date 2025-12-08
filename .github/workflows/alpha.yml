@@ -69,7 +69,7 @@ jobs:
           echo "Branch: ${{ github.ref_name }}
           Environment: alpha
           Subject: $(git log --format=%s -n 1)
-          Body: $(git log --format=%b -n 1)" >> "./build_output/release_notes.txt"
+          Body: $(git log --format=%b -n 1)" > ./build_output/release_notes.txt
 
 
       - name: Deploy

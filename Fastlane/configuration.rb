@@ -148,7 +148,7 @@ class Configuration
   end
 
   def release_notes_file
-    "#{app_output_directory}/release_notes.txt"
+    "release_notes.txt"
   end
 
   private

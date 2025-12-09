@@ -68,7 +68,7 @@ jobs:
         id: generate_release_notes
         run: |
           echo "Branch: ${{ github.ref_name }}
-          Environment: alpha
+          Environment: ${{ inputs.environment }}
           Subject: $(git log --format=%s -n 1)
           Body: $(git log --format=%b -n 1)" > release_notes.txt
 

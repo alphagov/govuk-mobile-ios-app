@@ -155,6 +155,7 @@ platform :ios do
     firebase_app_distribution(
       app: configuration.firebase_app_id,
       firebase_cli_token: configuration.firebase_token,
+      release_notes_file: configuration.release_notes_file,
       groups: 'ios-alpha-testers'
     )
   end

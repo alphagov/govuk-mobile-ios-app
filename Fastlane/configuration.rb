@@ -147,6 +147,10 @@ class Configuration
     ENV['FIREBASE_TOKEN']
   end
 
+  def release_notes_file
+    "release_notes.txt"
+  end
+
   private
 
   attr_reader :lane_name, :yaml

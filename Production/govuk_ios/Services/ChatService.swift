@@ -160,17 +160,17 @@ extension ChatService {
     }
 
     var chatOptInAvailable: Bool {
-        false
+        true
 //        configService.isFeatureEnabled(key: .chatOptInV2)
     }
 
     var chatTestActive: Bool {
-        false
+        true
 //        configService.isFeatureEnabled(key: .chatTestActive)
     }
 
     var isEnabled: Bool {
-        false
+        true
 //      configService.isFeatureEnabled(key: .chat) && chatTestActive
     }
 

@@ -33,7 +33,12 @@ final class LocalAuthorityExplainerViewSnapshotTests: SnapshotTestCase {
         let view = LocalAuthorityExplainerView(
             viewModel: viewModel
         )
-        return HostingViewController(rootView: view)
+        let viewController = HostingViewController(
+            rootView: view,
+            navigationBarHidden: true
+        )
+        viewController.view.backgroundColor = .govUK.fills.surfaceModal
+        return viewController
     }
 }
 

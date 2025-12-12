@@ -178,10 +178,11 @@ struct CoordinatorBuilderTests {
 
     @Test
     func topicDetail_returnsExpectedResult() {
+        let coreData = CoreDataRepository.arrangeAndLoad
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.topicDetail(
-            Topic(),
+            Topic(context: coreData.viewContext),
             navigationController: mockNavigationController
         )
 
@@ -420,5 +421,15 @@ struct CoordinatorBuilderTests {
         )
 
         #expect(coordinator is ChatOffboardingCoordinator)
+    }
+
+    @Test
+    func privacy_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.privacy(
+            navigationController: UINavigationController()
+        )
+
+        #expect(coordinator is PrivacyCoordinator)
     }
 }

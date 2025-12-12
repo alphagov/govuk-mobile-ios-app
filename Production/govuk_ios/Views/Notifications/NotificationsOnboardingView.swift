@@ -53,13 +53,13 @@ struct NotificationsOnboardingView: View {
                 HStack(alignment: .center) {
                     Text(viewModel.privacyPolicyLinkTitle)
                         .frame(alignment: .center)
-                        .foregroundColor(Color(UIColor.govUK.text.link))
+                        .foregroundColor(Color(UIColor.govUK.text.linkSecondary))
                         .font(Font.govUK.body)
                         .multilineTextAlignment(.center)
                         .accessibilityHint(Text(String.common.localized("openWebLinkHint")))
                         .accessibilityAddTraits(.isLink)
                     Image(systemName: "arrow.up.right")
-                        .foregroundColor(Color(UIColor.govUK.text.link))
+                        .foregroundColor(Color(UIColor.govUK.text.linkSecondary))
                 }
                 .accessibilityElement(children: .combine)
                 .frame(maxWidth: .infinity, alignment: .center)

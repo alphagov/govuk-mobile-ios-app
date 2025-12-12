@@ -110,4 +110,24 @@ struct SearchHistoryRepositoryTests {
         #expect(items.count == 1)
         #expect(items[0].searchText == "Test text 1")
     }
+
+    @Test
+    func historyItemForId_returnsExpectedItem() throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = SearchHistoryRepository(
+            coreData: coreData
+        )
+
+        let context = coreData.backgroundContext
+
+        let searchHistoryItem = SearchHistoryItem(context: context)
+        searchHistoryItem.searchText = "test"
+        searchHistoryItem.date = Date()
+        context.performAndWait {
+            try? context.save()
+        }
+
+        let item = try #require(try sut.historyItem(for: searchHistoryItem.objectID))
+        #expect(item.searchText == "test")
+    }
 }

@@ -7,6 +7,7 @@ protocol ActivityRepositoryInterface {
     func save(params: ActivityItemCreateParams)
     func delete(objectIds: [NSManagedObjectID])
     func returnContext() -> NSManagedObjectContext
+    func activityItem(for objectId: NSManagedObjectID) throws -> ActivityItem?
 }
 
 struct ActivityRepository: ActivityRepositoryInterface {
@@ -29,10 +30,12 @@ struct ActivityRepository: ActivityRepositoryInterface {
 
     func save(params: ActivityItemCreateParams) {
         let localContext = coreData.backgroundContext
-        let local = get(id: params.id, context: localContext) ??
-        ActivityItem(context: localContext)
-        local.update(params)
-        try? localContext.save()
+        localContext.performAndWait {
+            let local = get(id: params.id, context: localContext) ??
+            ActivityItem(context: localContext)
+            local.update(params)
+            try? localContext.save()
+        }
     }
 
     private func get(id: String,
@@ -65,5 +68,9 @@ struct ActivityRepository: ActivityRepositoryInterface {
             coreData.backgroundContext.delete(object)
         }
         try? coreData.backgroundContext.save()
+    }
+
+    func activityItem(for objectId: NSManagedObjectID) throws -> ActivityItem? {
+        try coreData.viewContext.existingObject(with: objectId) as? ActivityItem
     }
 }

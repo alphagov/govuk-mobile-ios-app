@@ -86,13 +86,13 @@ class TabCoordinator: BaseCoordinator,
 
     private func showTabsIfRequired() {
         let viewControllers = tabController.viewControllers ?? []
-        guard viewControllers.isEmpty else {
-            return
+        if viewControllers.isEmpty {
+            tabController.viewControllers = coordinators.map { $0.root }
+            coordinators.forEach { start($0) }
         }
 
-        tabController.viewControllers = coordinators.map { $0.root }
+        tabController.selectedIndex = currentTabIndex
         set([tabController], animated: false)
-        coordinators.forEach { start($0) }
     }
 
     private func selectTabIndex(for navigationController: UINavigationController) {

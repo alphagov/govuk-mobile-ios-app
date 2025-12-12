@@ -1,4 +1,5 @@
 import Foundation
+import CoreData
 import GOVKit
 
 @testable import govuk_ios
@@ -8,8 +9,8 @@ class MockSearchHistoryViewModel: SearchHistoryViewModelInterface {
         MockAnalyticsService()
     }
 
-    var _stubbedSearchHistoryItems: [SearchHistoryItem] = []
-    var searchHistoryItems: [SearchHistoryItem] {
+    var _stubbedSearchHistoryItems: [NSManagedObjectID] = []
+    var searchHistoryItems: [NSManagedObjectID] {
         _stubbedSearchHistoryItems
     }
 
@@ -24,5 +25,9 @@ class MockSearchHistoryViewModel: SearchHistoryViewModelInterface {
 
     func delete(_ item: SearchHistoryItem) {
 
+    }
+
+    func historyItem(for objectId: NSManagedObjectID) -> SearchHistoryItem? {
+        nil
     }
 }

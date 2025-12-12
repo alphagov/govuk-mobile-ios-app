@@ -30,6 +30,7 @@ struct RecentActivityWidget: View {
         Text(viewModel.title)
             .font(Font.govUK.title3Semibold)
             .foregroundColor(Color(UIColor.govUK.text.primary))
+            .accessibility(addTraits: .isHeader)
     }
 
     private var emptyStateView: some View {

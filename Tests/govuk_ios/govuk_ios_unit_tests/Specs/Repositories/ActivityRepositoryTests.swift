@@ -130,4 +130,30 @@ struct ActivityRepositoryTests {
         #expect(count == 1)
         mockDelegate.retainerMethod()
     }
+
+    @Test
+    func activityItemForId_returnsExpectedItem() throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = ActivityRepository(
+            coreData: coreData
+        )
+
+        let context = coreData.backgroundContext
+
+        let originalId = UUID().uuidString
+        let params = ActivityItemCreateParams(
+            id: originalId,
+            title: "title",
+            date: .init(timeIntervalSince1970: 0),
+            url: "test"
+        )
+        let activityItem = ActivityItem(context: context)
+        activityItem.update(params)
+        context.performAndWait {
+            try? context.save()
+        }
+
+        let item = try #require(try sut.activityItem(for: activityItem.objectID))
+        #expect(item.title == "title")
+    }
 }

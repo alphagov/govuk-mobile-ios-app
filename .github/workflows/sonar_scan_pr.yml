@@ -14,7 +14,7 @@ concurrency:
 jobs:
   build:
     name: Sonar scan
-    runs-on: macos-26
+    runs-on: macos-15
 
     steps:
       - name: Add path globally

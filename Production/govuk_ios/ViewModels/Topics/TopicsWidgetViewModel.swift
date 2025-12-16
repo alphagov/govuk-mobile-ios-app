@@ -12,6 +12,7 @@ enum TopicSegment {
 final class TopicsWidgetViewModel: ObservableObject {
     private let topicsService: TopicsServiceInterface
     private let analyticsService: AnalyticsServiceInterface
+    private let remoteConfigService: RemoteConfigServiceInterface
     private let urlOpener: URLOpener
     let topicAction: (Topic) -> Void
     private let dismissEditAction: () -> Void
@@ -54,17 +55,26 @@ final class TopicsWidgetViewModel: ObservableObject {
     let emptyStateTitle = String.home.localized(
         "topicsEmptyStateTitle"
     )
-    let widgetTitle = String.home.localized(
-        "topicsWidgetTitle"
-    )
+    var widgetTitle: String {
+        //TODO: use string keys in remote config rather than the actual strings
+        //String.home.localized(remoteConfigService.topicsWidgetTitle)
+        
+        if !remoteConfigService.topicsWidgetTitle.isEmpty {
+            remoteConfigService.topicsWidgetTitle
+        } else {
+            String.home.localized("topicsWidgetTitle")
+        }
+    }
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
+         remoteConfigService: RemoteConfigServiceInterface,
          urlOpener: URLOpener = UIApplication.shared,
          topicAction: @escaping (Topic) -> Void,
          dismissEditAction: @escaping () -> Void) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
+        self.remoteConfigService = remoteConfigService
         self.urlOpener = urlOpener
         self.topicAction = topicAction
         self.dismissEditAction = dismissEditAction

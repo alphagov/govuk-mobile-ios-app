@@ -73,7 +73,8 @@ class CoordinatorBuilder {
             activityService: container.activityService.resolve(),
             localAuthorityService: container.localAuthorityService.resolve(),
             userDefaultsService: container.userDefaultsService.resolve(),
-            chatService: container.chatService.resolve()
+            chatService: container.chatService.resolve(),
+            remoteConfigService: container.remoteConfigService.resolve()
         )
     }
 

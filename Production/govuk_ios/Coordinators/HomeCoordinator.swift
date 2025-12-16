@@ -10,6 +10,7 @@ class HomeCoordinator: TabItemCoordinator {
     private let configService: AppConfigServiceInterface
     private let topicsService: TopicsServiceInterface
     private let notificationService: NotificationServiceInterface
+    private let remoteConfigService: RemoteConfigServiceInterface
 
     private let deviceInformationProvider: DeviceInformationProviderInterface
     private let searchService: SearchServiceInterface
@@ -35,7 +36,8 @@ class HomeCoordinator: TabItemCoordinator {
          activityService: ActivityServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
          userDefaultsService: UserDefaultsServiceInterface,
-         chatService: ChatServiceInterface) {
+         chatService: ChatServiceInterface,
+         remoteConfigService: RemoteConfigServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
@@ -49,6 +51,7 @@ class HomeCoordinator: TabItemCoordinator {
         self.localAuthorityService = localAuthorityService
         self.userDefaultsService = userDefaultsService
         self.chatService = chatService
+        self.remoteConfigService = remoteConfigService
         super.init(navigationController: navigationController)
     }
 
@@ -194,6 +197,7 @@ class HomeCoordinator: TabItemCoordinator {
         TopicsWidgetViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService,
+            remoteConfigService: remoteConfigService,
             topicAction: startTopicDetailCoordinator,
             dismissEditAction: { [weak self] in
                 self?.root.viewWillReAppear()

@@ -12,6 +12,12 @@ extension Container {
             )
         }
     }
+    
+    var remoteConfigServiceClient: Factory<RemoteConfigServiceClientInterface> {
+        Factory(self) {
+            RemoteConfigServiceClient()
+        }
+    }
 
     var searchServiceClient: Factory<SearchServiceClientInterface> {
         Factory(self) {

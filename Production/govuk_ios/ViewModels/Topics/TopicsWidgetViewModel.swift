@@ -16,7 +16,6 @@ final class TopicsWidgetViewModel: ObservableObject {
     let topicAction: (Topic) -> Void
     private let dismissEditAction: () -> Void
     @Published var fetchTopicsError = false
-    private var topicsHasBeenEddited = false
     @Published var favouriteTopics: [Topic] = []
     @Published var allTopics: [Topic] = []
     @Published var topicsScreen: TopicSegment = .favorite {

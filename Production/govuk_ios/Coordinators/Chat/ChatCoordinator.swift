@@ -21,7 +21,7 @@ class ChatCoordinator: TabItemCoordinator {
     }()
 
     var isEnabled: Bool {
-        chatService.isEnabled && chatService.chatOptedIn == true
+        chatService.isEnabled
     }
 
     init(navigationController: UINavigationController,

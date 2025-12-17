@@ -7,19 +7,6 @@ final class MockChatService: ChatServiceInterface {
 
     func clear() {
         chatOnboardingSeen = false
-        chatOptedIn = nil
-    }
-
-    var _stubbedChatTestActive = false
-    var chatTestActive: Bool {
-        _stubbedChatTestActive
-    }
-
-    var chatOptedIn: Bool?
-
-    var _stubbedChatOptInAvailable: Bool = false
-    var chatOptInAvailable: Bool {
-        _stubbedChatOptInAvailable
     }
 
     var _stubbedIsEnabled = true

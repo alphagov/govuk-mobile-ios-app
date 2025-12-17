@@ -9,6 +9,4 @@ enum Feature: String {
     case externalBrowser
     case notifications
     case chat
-    case chatOptInV2
-    case chatTestActive
 }

@@ -340,32 +340,6 @@ final class ChatServiceTests {
     }
 
     @Test
-    func isEnabled_featureUnavailableTestActive_returnsTrue() {
-        let sut = ChatService(
-            serviceClient: mockChatServiceClient,
-            chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            userDefaultsService: mockUserDefaultsService
-        )
-        mockConfigService.features = [.chatTestActive]
-
-        #expect(sut.isEnabled == false)
-    }
-
-    @Test
-    func isEnabled_featureAvailableTestActive_returnsTrue() {
-        let sut = ChatService(
-            serviceClient: mockChatServiceClient,
-            chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            userDefaultsService: mockUserDefaultsService
-        )
-        mockConfigService.features = [.chat, .chatTestActive]
-
-        #expect(sut.isEnabled == false)
-    }
-
-    @Test
     func chatOnboarded_setTrue_returnsTrue() {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
@@ -404,90 +378,8 @@ final class ChatServiceTests {
         )
 
         sut.chatOnboardingSeen = true
-        sut.chatOptedIn = true
         sut.clear()
         #expect(!sut.chatOnboardingSeen)
-        #expect(sut.chatOptedIn == nil)
-    }
-
-    @Test
-    func chatOptedIn_updatesChatOptedIn_returnsTrue() {
-        let sut = ChatService(
-            serviceClient: mockChatServiceClient,
-            chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            userDefaultsService: mockUserDefaultsService
-        )
-
-        #expect(sut.chatOptedIn == nil)
-        sut.chatOptedIn = true
-        #expect(sut.chatOptedIn!)
-    }
-
-    @Test
-    func chatOptedIn_updatesChatOptedIn_returnsFalse() {
-        let sut = ChatService(
-            serviceClient: mockChatServiceClient,
-            chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            userDefaultsService: mockUserDefaultsService
-        )
-
-        #expect(sut.chatOptedIn == nil)
-        sut.chatOptedIn = false
-        #expect(!sut.chatOptedIn!)
-    }
-
-    @Test
-    func chatOptInAvailable_featureAvailable_returnsTrue() {
-        mockConfigService.features = [.chatOptInV2]
-        let sut = ChatService(
-            serviceClient: mockChatServiceClient,
-            chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            userDefaultsService: mockUserDefaultsService
-        )
-
-        #expect(sut.chatOptInAvailable == false)
-    }
-
-    @Test
-    func chatTestActive_featureUnavailable_returnFalse() {
-        mockConfigService.features = []
-        let sut = ChatService(
-            serviceClient: mockChatServiceClient,
-            chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            userDefaultsService: mockUserDefaultsService
-        )
-
-        #expect(sut.chatTestActive == false)
-    }
-
-    @Test
-    func chatTestActive_featureAvailable_returnsTrue() {
-        mockConfigService.features = [.chatTestActive]
-        let sut = ChatService(
-            serviceClient: mockChatServiceClient,
-            chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            userDefaultsService: mockUserDefaultsService
-        )
-
-        #expect(sut.chatTestActive == false)
-    }
-
-    @Test
-    func chatOptInAvailable_featureUnavailable_returnFalse() {
-        mockConfigService.features = []
-        let sut = ChatService(
-            serviceClient: mockChatServiceClient,
-            chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            userDefaultsService: mockUserDefaultsService
-        )
-
-        #expect(sut.chatOptInAvailable == false)
     }
 
     @Test

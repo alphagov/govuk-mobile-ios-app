@@ -102,7 +102,7 @@ class AuthenticationCoordinatorTests {
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: false)
         )
-        mockChatService.chatOptedIn = true
+
         let mockAnalyticsService = MockAnalyticsService()
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
@@ -128,7 +128,6 @@ class AuthenticationCoordinatorTests {
         #expect(mockAnalyticsService._resetConsentCalled)
         #expect(!mockAnalyticsService._setExistingConsentCalled)
         #expect(mockTopicsService._resetOnboardingCalled)
-        #expect(mockChatService.chatOptedIn == nil)
     }
 
     @Test

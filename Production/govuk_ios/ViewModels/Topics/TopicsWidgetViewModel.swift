@@ -95,6 +95,10 @@ final class TopicsWidgetViewModel: ObservableObject {
          }
     }
 
+    func setTopic(topic: TopicSegment) {
+        topicsScreen = topic
+    }
+
     @MainActor
     func refreshTopics() {
         fetchTopics()

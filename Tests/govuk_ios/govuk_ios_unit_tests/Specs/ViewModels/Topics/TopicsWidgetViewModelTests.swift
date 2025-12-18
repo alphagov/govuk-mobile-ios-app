@@ -156,7 +156,7 @@ struct TopicsWidgetViewModelTests {
                 }.store(in: &cancellables)
             sut.setTopicsScreenPriorToEdit()
         }
-        #expect(result == .all)
+        #expect(result == .favorite)
     }
 
     @Test

@@ -968,6 +968,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		4E6B2D742EF1A87400D61966 /* container */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = container; sourceTree = "<group>"; };
 		5D9CDE3A2CD928FB0045DFC3 /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (5D9CDF202CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 5D9CDF212CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 5D9CDF222CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64, ); path = Tests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -1576,6 +1577,7 @@
 		5DAD716B2BD250DA0075F648 = {
 			isa = PBXGroup;
 			children = (
+				4E6B2D742EF1A87400D61966 /* container */,
 				D0EBFBCC2D0C9653000A3151 /* GOVKit */,
 				5DAD71B42BD286730075F648 /* Production */,
 				5D9CDE3A2CD928FB0045DFC3 /* Tests */,
@@ -2083,6 +2085,9 @@
 			dependencies = (
 				5DCAFA672D3FE0E800C3F284 /* PBXTargetDependency */,
 			);
+			fileSystemSynchronizedGroups = (
+				4E6B2D742EF1A87400D61966 /* container */,
+			);
 			name = govuk_ios;
 			packageProductDependencies = (
 				5D7F267D2C0F0EF000842090 /* Factory */,
@@ -2193,6 +2198,7 @@
 				D090467D2DBBC1ED0096EE66 /* XCRemoteSwiftPackageReference "jwt-kit" */,
 				D016F29C2E0C5C8B00659AC3 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				5DA223D32EC7289D006AB125 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */,
+				4E6B2D642EEC332B00D61966 /* XCRemoteSwiftPackageReference "google-tag-manager-ios-sdk" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -2934,6 +2940,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.2;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				OTHER_SWIFT_FLAGS = "$(ADDITIONAL_SWIFT_FLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER_APP)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2977,6 +2984,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.2;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				OTHER_SWIFT_FLAGS = "$(ADDITIONAL_SWIFT_FLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER_APP)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3168,6 +3176,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.1.2;
+			};
+		};
+		4E6B2D642EEC332B00D61966 /* XCRemoteSwiftPackageReference "google-tag-manager-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleanalytics/google-tag-manager-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
 			};
 		};
 		5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */ = {

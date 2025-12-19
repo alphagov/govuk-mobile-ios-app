@@ -2,12 +2,13 @@ import Foundation
 import XCTest
 import UIKit
 import GOVKit
+import Combine
 
 @testable import govuk_ios
 
 @MainActor
 class SettingsViewControllerSnapshotTests: SnapshotTestCase {
-    func test_loadInNavigationController_light_rendersCorrectly() {
+    func test_loadInNavigationController_light_rendersCorrectly() async {
         let mockVersionProvider = MockAppVersionProvider()
         mockVersionProvider.versionNumber = "1.2.3"
         mockVersionProvider.buildNumber = "123"
@@ -34,14 +35,26 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             rootView: settingsContentView,
             statusBarStyle: .darkContent
         )
-        VerifySnapshotInNavigationController(
-            viewController: hostingViewController,
-            mode: .light,
-            prefersLargeTitles: true
-        )
+
+        var cancellables = Set<AnyCancellable>()
+        viewModel.updateEmail()
+        await withCheckedContinuation { continuation in
+            viewModel.objectWillChange
+                .receive(on: DispatchQueue.main)
+                .sink(receiveValue: { _ in
+                    self.VerifySnapshotInNavigationController(
+                        viewController: hostingViewController,
+                        mode: .light,
+                        prefersLargeTitles: true
+                    )
+                    continuation.resume()
+                    cancellables.removeAll()
+                })
+                .store(in: &cancellables)
+        }
     }
 
-    func test_loadInNavigationController_dark_rendersCorrectly() {
+    func test_loadInNavigationController_dark_rendersCorrectly() async {
         let mockVersionProvider = MockAppVersionProvider()
         mockVersionProvider.versionNumber = "1.2.3"
         mockVersionProvider.buildNumber = "123"
@@ -69,16 +82,28 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             rootView: settingsContentView,
             statusBarStyle: .darkContent
         )
-        VerifySnapshotInNavigationController(
+
+        var cancellables = Set<AnyCancellable>()
+        viewModel.updateEmail()
+        await withCheckedContinuation { continuation in
+            viewModel.objectWillChange
+                .receive(on: DispatchQueue.main)
+                .sink(receiveValue: { _ in
+                    self.VerifySnapshotInNavigationController(
             viewController: hostingViewController,
             mode: .dark,
             prefersLargeTitles: true
         )
         // This is here to meet code coverage requirements
         viewModel.scrollToTop = true
+                    continuation.resume()
+                    cancellables.removeAll()
+                })
+                .store(in: &cancellables)
+        }
     }
 
-    func test_loadInNavigationController_notificationsFeatureEnabled_light_rendersCorrectly() {
+    func test_loadInNavigationController_notificationsFeatureEnabled_light_rendersCorrectly() async {
         let mockVersionProvider = MockAppVersionProvider()
         mockVersionProvider.versionNumber = "1.2.3"
         mockVersionProvider.buildNumber = "123"
@@ -105,14 +130,26 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             rootView: settingsContentView,
             statusBarStyle: .darkContent
         )
-        VerifySnapshotInNavigationController(
-            viewController: hostingViewController,
-            mode: .light,
-            prefersLargeTitles: true
-        )
+
+        var cancellables = Set<AnyCancellable>()
+        viewModel.updateEmail()
+        await withCheckedContinuation { continuation in
+            viewModel.objectWillChange
+                .receive(on: DispatchQueue.main)
+                .sink(receiveValue: { _ in
+                    self.VerifySnapshotInNavigationController(
+                        viewController: hostingViewController,
+                        mode: .light,
+                        prefersLargeTitles: true
+                    )
+                    continuation.resume()
+                    cancellables.removeAll()
+                })
+                .store(in: &cancellables)
+        }
     }
 
-    func test_loadInNavigationController_notificationsFeatureEnabled_dark_rendersCorrectly() {
+    func test_loadInNavigationController_notificationsFeatureEnabled_dark_rendersCorrectly() async {
         let mockVersionProvider = MockAppVersionProvider()
         mockVersionProvider.versionNumber = "1.2.3"
         mockVersionProvider.buildNumber = "123"
@@ -140,11 +177,23 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             rootView: settingsContentView,
             statusBarStyle: .darkContent
         )
-        VerifySnapshotInNavigationController(
-            viewController: hostingViewController,
-            mode: .dark,
-            prefersLargeTitles: true
-        )
+
+        var cancellables = Set<AnyCancellable>()
+        viewModel.updateEmail()
+        await withCheckedContinuation { continuation in
+            viewModel.objectWillChange
+                .receive(on: DispatchQueue.main)
+                .sink(receiveValue: { _ in
+                    self.VerifySnapshotInNavigationController(
+                        viewController: hostingViewController,
+                        mode: .dark,
+                        prefersLargeTitles: true
+                    )
+                    continuation.resume()
+                    cancellables.removeAll()
+                })
+                .store(in: &cancellables)
+        }
     }
 
     func test_loadInNavigationController_preview_rendersCorrectly() {
@@ -179,4 +228,23 @@ class GroupedListViewModel: SettingsViewModelInterface {
     }
     var signoutAction: (() -> Void)?
     var openAction: ((SettingsViewModelURLParameters) -> Void)?
+    func updateEmail() {
+
+    }
+}
+
+class SettingsViewModelTester: ObservableObject {
+    @Published var settingsViewModel: SettingsViewModel
+    private var cancellables: Set<AnyCancellable> = []
+
+    init(settingsViewModel: SettingsViewModel) {
+        self.settingsViewModel = settingsViewModel
+        observe()
+    }
+
+    private func observe() {
+        settingsViewModel.objectWillChange
+            .sink(receiveValue: objectWillChange.send)
+            .store(in: &self.cancellables)
+    }
 }

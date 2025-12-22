@@ -69,7 +69,7 @@ final class RecentActivityWidgetViewControllerSnapshotTests: SnapshotTestCase {
             seeAllAction: {},
             openURLAction: { _ in }
         )
-        let view = RecentActivityWidget(viewModel: viewModel)
+        let view = RecentActivityWidgetView(viewModel: viewModel)
         return UIHostingController(rootView: view)
     }
 }

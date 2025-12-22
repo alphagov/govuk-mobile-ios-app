@@ -86,7 +86,7 @@
 		4E0043142D9BE25E00DDDA8A /* NotificationSettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0043132D9BE25D00DDDA8A /* NotificationSettingsCoordinator.swift */; };
 		4E00EEEF2CCB04B0007B61E8 /* TopicsOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEEE2CCB04B0007B61E8 /* TopicsOnboardingViewModel.swift */; };
 		4E00EF072CCB12CD007B61E8 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */; };
-		4E1534032E398073002DEDB9 /* TopicsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1534022E398073002DEDB9 /* TopicsWidget.swift */; };
+		4E1534032E398073002DEDB9 /* TopicsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1534022E398073002DEDB9 /* TopicsWidgetView.swift */; };
 		4E1534052E3982E7002DEDB9 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1534042E3982E7002DEDB9 /* TopicCard.swift */; };
 		4E15340B2E398647002DEDB9 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15340A2E398647002DEDB9 /* HomeContentView.swift */; };
 		4E15340D2E3A248E002DEDB9 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15340C2E3A248E002DEDB9 /* TopicsWidgetViewModel.swift */; };
@@ -507,7 +507,7 @@
 		4E0043132D9BE25D00DDDA8A /* NotificationSettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsCoordinator.swift; sourceTree = "<group>"; };
 		4E00EEEE2CCB04B0007B61E8 /* TopicsOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsOnboardingViewModel.swift; sourceTree = "<group>"; };
 		4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
-		4E1534022E398073002DEDB9 /* TopicsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidget.swift; sourceTree = "<group>"; };
+		4E1534022E398073002DEDB9 /* TopicsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetView.swift; sourceTree = "<group>"; };
 		4E1534042E3982E7002DEDB9 /* TopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCard.swift; sourceTree = "<group>"; };
 		4E15340A2E398647002DEDB9 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
 		4E15340C2E3A248E002DEDB9 /* TopicsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModel.swift; sourceTree = "<group>"; };
@@ -1968,7 +1968,7 @@
 			isa = PBXGroup;
 			children = (
 				4E1534042E3982E7002DEDB9 /* TopicCard.swift */,
-				4E1534022E398073002DEDB9 /* TopicsWidget.swift */,
+				4E1534022E398073002DEDB9 /* TopicsWidgetView.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -2362,7 +2362,7 @@
 				5DFB488D2DE9F7F600B41CDA /* AppForcedUpdateCoordinator.swift in Sources */,
 				5DFB488E2DE9F7F600B41CDA /* ReLaunchCoordinator.swift in Sources */,
 				5DFB488F2DE9F7F600B41CDA /* PeriAuthCoordinator.swift in Sources */,
-				4E1534032E398073002DEDB9 /* TopicsWidget.swift in Sources */,
+				4E1534032E398073002DEDB9 /* TopicsWidgetView.swift in Sources */,
 				5DFB48902DE9F7F600B41CDA /* AuthenticationCoordinator.swift in Sources */,
 				5DFB48912DE9F7F600B41CDA /* TopicOnboardingCoordinator.swift in Sources */,
 				5DFB48922DE9F7F600B41CDA /* PostAuthCoordinator.swift in Sources */,

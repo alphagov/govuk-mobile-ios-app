@@ -89,12 +89,6 @@ final class TopicsWidgetViewModel: ObservableObject {
         allTopics = topicsService.fetchAll()
     }
 
-    func setTopicsScreenPriorToEdit() {
-        if !initialLoadComplete {
-            topicsScreen = .favorite
-         }
-    }
-
     func setTopic(topic: TopicSegment) {
         topicsScreen = topic
     }
@@ -104,7 +98,6 @@ final class TopicsWidgetViewModel: ObservableObject {
         fetchTopics()
         updateFavouriteTopics()
         updateAllTopics()
-        setTopicsScreenPriorToEdit()
     }
 
     func openErrorURL() {

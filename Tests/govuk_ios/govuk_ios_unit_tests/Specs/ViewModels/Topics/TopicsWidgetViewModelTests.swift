@@ -132,32 +132,6 @@ struct TopicsWidgetViewModelTests {
         #expect(sut.hasFavouritedTopics == true)
     }
 
-    @Test
-    func setTopicsScreen_setTheCorrectSegmentedScreen() async {
-        var cancellables = Set<AnyCancellable>()
-        let result = await withCheckedContinuation { continuation in
-            let allOne = Topic.arrange(context: coreData.backgroundContext)
-            let allTwo = Topic.arrange(context: coreData.backgroundContext)
-
-            mockTopicService._stubbedFetchAllTopics = [allOne, allTwo]
-
-            let sut = TopicsWidgetViewModel(
-                topicsService: mockTopicService,
-                analyticsService: mockAnalyticsService,
-                topicAction: { _ in },
-                dismissEditAction: { }
-            )
-            sut.$topicsScreen
-                .dropFirst()
-                .receive(on: DispatchQueue.main)
-                .sink { value in
-                    continuation.resume(returning: value)
-                    cancellables.removeAll()
-                }.store(in: &cancellables)
-            sut.setTopicsScreenPriorToEdit()
-        }
-        #expect(result == .favorite)
-    }
 
     @Test
     func topicsToBeDisplayed_topicsHaveBeenEdited_returnsFavourites() async {

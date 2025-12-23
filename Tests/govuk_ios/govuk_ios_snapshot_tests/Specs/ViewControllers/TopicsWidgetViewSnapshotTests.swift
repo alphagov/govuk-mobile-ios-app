@@ -63,7 +63,12 @@ final class TopicWidgetViewSnapshotTests: SnapshotTestCase {
             topicAction: { _ in },
             dismissEditAction: { }
         )
- 
+        if topicScreen == .all {
+            viewModel.topicsScreen = .all
+        } else {
+            viewModel.topicsScreen = .favorite
+        }
+
         let view = TopicsWidget(
             viewModel: viewModel
         )

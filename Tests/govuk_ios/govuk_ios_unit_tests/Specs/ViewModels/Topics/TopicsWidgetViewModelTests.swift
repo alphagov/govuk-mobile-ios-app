@@ -181,7 +181,7 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     @MainActor
-    func setTopics_allTopics_createsExpectedEcommerceEvent() throws {
+    func setTopicsScreen_allTopics_createsExpectedECommerceEvent() throws {
         let allOne = Topic.arrange(context: coreData.backgroundContext)
         let allTwo = Topic.arrange(context: coreData.backgroundContext)
 
@@ -195,7 +195,7 @@ struct TopicsWidgetViewModelTests {
         )
         sut.refreshTopics()
         sut.initialLoadComplete = true
-        sut.setTopic(topic: .all)
+        sut.topicsScreen = .all
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.name == "view_item_list")
         let eventParams = try #require(mockAnalyticsService._trackedEvents.first?.params)
@@ -206,7 +206,7 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     @MainActor
-    func setTopics_favouriteTopics_createsExpectedEcommerceEvent() throws {
+    func setTopicsScreen_favouriteTopics_createsExpectedECommerceEvent() throws {
         let favoriteOne = Topic.arrange(
             context: coreData.backgroundContext,
             isFavourite: true
@@ -226,8 +226,8 @@ struct TopicsWidgetViewModelTests {
         )
         sut.initialLoadComplete = true
         sut.refreshTopics()
-        sut.setTopic(topic: .all)
-        sut.setTopic(topic: .favorite)
+        sut.topicsScreen = .all
+        sut.topicsScreen = .favorite
         #expect(mockAnalyticsService._trackedEvents.count == 2)
         #expect(mockAnalyticsService._trackedEvents.first?.name == "view_item_list")
         let eventParams = try #require(mockAnalyticsService._trackedEvents[1].params)
@@ -237,7 +237,55 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     @MainActor
-    func selectingTopic_createsExpectedEcommerceEvent() throws {
+    func setTopicsScreen_isTheSameAsOldValue_doesNotCreateECommerceEvent() throws {
+        let favoriteOne = Topic.arrange(
+            context: coreData.backgroundContext,
+            isFavourite: true
+        )
+        let favoriteTwo = Topic.arrange(
+            context: coreData.backgroundContext,
+            isFavourite: true
+        )
+
+        mockTopicService._stubbedFetchFavouriteTopics = [favoriteOne, favoriteTwo]
+
+        let sut = TopicsWidgetViewModel(
+            topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
+            topicAction: { _ in },
+            dismissEditAction: { }
+        )
+        sut.initialLoadComplete = true
+        sut.refreshTopics()
+        sut.topicsScreen = .favorite
+        #expect(mockAnalyticsService._trackedEvents.count == 0)
+    }
+
+    @Test
+    @MainActor
+    func setTopicsScreen_initialLoadCompleteIsFalse_doesNotcreateECommerceEvent() throws {
+
+        let allOne = Topic.arrange(context: coreData.backgroundContext)
+        let allTwo = Topic.arrange(context: coreData.backgroundContext)
+
+        mockTopicService._stubbedFetchAllTopics = [allOne, allTwo]
+
+        let sut = TopicsWidgetViewModel(
+            topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
+            topicAction: { _ in },
+            dismissEditAction: { }
+        )
+        sut.initialLoadComplete = false
+        sut.refreshTopics()
+        sut.topicsScreen = .favorite
+        #expect(mockAnalyticsService._trackedEvents.count == 0)
+        #expect(mockAnalyticsService._trackedEvents.first?.name == nil)
+    }
+
+    @Test
+    @MainActor
+    func selectingTopic_createsExpectedECommerceEvent() throws {
 
         let favoriteOne = Topic.arrange(
             context: coreData.backgroundContext,
@@ -270,7 +318,7 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     @MainActor
-    func dismissEdit_prevenntsNextEcommerceEventFire() throws {
+    func dismissEdit_preventsNextECommerceEventFire() throws {
         let allOne = Topic.arrange(context: coreData.backgroundContext)
         let allTwo = Topic.arrange(context: coreData.backgroundContext)
 

@@ -63,7 +63,7 @@ final class TopicWidgetViewSnapshotTests: SnapshotTestCase {
             topicAction: { _ in },
             dismissEditAction: { }
         )
-        viewModel.setTopic(topic: topicScreen)
+ 
         let view = TopicsWidget(
             viewModel: viewModel
         )

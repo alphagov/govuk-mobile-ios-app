@@ -1,7 +1,7 @@
 import SwiftUI
 import GOVKit
 
-struct RecentActivityWidget: View {
+struct RecentActivityWidgetView: View {
     @ObservedObject var viewModel: RecentActivityHomepageWidgetViewModel
     var body: some View {
         if viewModel.sections.isEmpty {

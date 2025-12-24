@@ -8,7 +8,7 @@ import SwiftUI
 @testable import govuk_ios
 
 @MainActor
-final class RecentActivityWidgetViewControllerSnapshotTests: SnapshotTestCase {
+final class RecentActivityWidgetViewSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_activities_light_renderCorrectly() {
         VerifySnapshotInNavigationController(
@@ -69,7 +69,7 @@ final class RecentActivityWidgetViewControllerSnapshotTests: SnapshotTestCase {
             seeAllAction: {},
             openURLAction: { _ in }
         )
-        let view = RecentActivityWidget(viewModel: viewModel)
+        let view = RecentActivityWidgetView(viewModel: viewModel)
         return UIHostingController(rootView: view)
     }
 }

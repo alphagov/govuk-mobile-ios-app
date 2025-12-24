@@ -89,16 +89,11 @@ final class TopicsWidgetViewModel: ObservableObject {
         allTopics = topicsService.fetchAll()
     }
 
-    func setTopicsScreen() {
-        topicsScreen = hasFavouritedTopics ? .favorite : .all
-    }
-
     @MainActor
     func refreshTopics() {
         fetchTopics()
         updateFavouriteTopics()
         updateAllTopics()
-        setTopicsScreen()
     }
 
     func openErrorURL() {

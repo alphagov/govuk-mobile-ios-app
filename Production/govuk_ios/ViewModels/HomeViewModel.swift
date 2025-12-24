@@ -101,7 +101,7 @@ class HomeViewModel: ObservableObject {
         guard featureEnabled(.topics)
         else { return nil }
         return HomepageWidget(
-            content: TopicsWidget(
+            content: TopicsWidgetView(
                 viewModel: self.topicsWidgetViewModel
             )
         )

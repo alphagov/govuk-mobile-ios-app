@@ -3,6 +3,7 @@ import Foundation
 import GOVKit
 
 struct ChatWidgetViewModel {
+    private let analyticsService: AnalyticsServiceInterface
     let id: String
     let title: String
     let body: String
@@ -11,7 +12,8 @@ struct ChatWidgetViewModel {
     let urlOpener: URLOpener
     let dismiss: () -> Void
 
-    init(chat: ChatBanner,
+    init(analyticsService: AnalyticsServiceInterface,
+         chat: ChatBanner,
          urlOpener: URLOpener,
          dismiss: @escaping () -> Void) {
         id = chat.id
@@ -19,11 +21,14 @@ struct ChatWidgetViewModel {
         body = chat.body
         linkUrl = chat.link.url
         linkTitle = chat.link.title
+        self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.dismiss = dismiss
     }
 
     func open() {
+        let event = AppEvent.widgetNavigation(text: title)
+        analyticsService.track(event: event)
         urlOpener.openIfPossible(linkUrl)
     }
 }

@@ -30,9 +30,11 @@ final class ChatWidgetViewControllerSnapshotTests: SnapshotTestCase {
             body: "body",
             link: ChatBanner.Link(title: "link", url: URL(string: "www.test.com")!)
         )
-        let viewModel = ChatWidgetViewModel(chat: mockAppConfigService._stubbedChatBanner!,
-                                                  urlOpener: MockURLOpener(),
-                                                  dismiss: {}
+        let viewModel = ChatWidgetViewModel(
+            analyticsService: MockAnalyticsService(),
+            chat: mockAppConfigService._stubbedChatBanner!,
+            urlOpener: MockURLOpener(),
+            dismiss: {}
         )
         let view = ChatWidgetView(viewModel: viewModel)
         return HostingViewController(rootView: view)

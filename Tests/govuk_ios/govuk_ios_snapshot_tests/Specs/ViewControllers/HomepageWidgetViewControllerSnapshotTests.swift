@@ -32,7 +32,7 @@ final class HomepageWidgetViewControllerSnapshotTests: SnapshotTestCase {
             dismissEditAction: { }
         )
         let view = HomepageWidget(
-            content: TopicsWidget(
+            content: TopicsWidgetView(
             viewModel: viewModel
             )
         ).frame(width: 400,height: 250)

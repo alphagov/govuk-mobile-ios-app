@@ -6,7 +6,7 @@ import UIKit
 @testable import govuk_ios
 
 @MainActor
-final class TopicWidgetViewSnapshotTests: SnapshotTestCase {
+final class TopicsWidgetViewSnapshotTests: SnapshotTestCase {
     let coreData = CoreDataRepository.arrangeAndLoad
 
     func test_loadInNavigationController_populated_light_rendersCorrectly() {
@@ -63,16 +63,19 @@ final class TopicWidgetViewSnapshotTests: SnapshotTestCase {
             topicAction: { _ in },
             dismissEditAction: { }
         )
+
         if topicScreen == .all {
             viewModel.topicsScreen = .all
         } else {
             viewModel.topicsScreen = .favorite
         }
 
-        let view = TopicsWidget(
+        let view = TopicsWidgetView(
             viewModel: viewModel
         )
-        return HostingViewController(rootView: view)
+        return HostingViewController(
+            rootView: view
+        )
     }
 }
 

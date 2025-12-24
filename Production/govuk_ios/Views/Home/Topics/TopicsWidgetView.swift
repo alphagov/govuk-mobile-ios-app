@@ -2,7 +2,7 @@ import SwiftUI
 import UIComponents
 import GOVKit
 
-struct TopicsWidget: View {
+struct TopicsWidgetView: View {
     @StateObject var viewModel: TopicsWidgetViewModel
     @State var showingEditScreen: Bool = false
 

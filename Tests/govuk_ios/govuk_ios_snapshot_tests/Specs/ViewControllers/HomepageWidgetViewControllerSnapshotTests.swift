@@ -31,7 +31,7 @@ final class HomepageWidgetViewControllerSnapshotTests: SnapshotTestCase {
             topicAction: {_ in},
             dismissEditAction: { }
         )
-        let view = HomepageWidget(content: TopicsWidget(viewModel: viewModel))
+        let view = HomepageWidget(content: TopicsWidgetView(viewModel: viewModel))
         return HostingViewController(rootView: view)
     }
 }

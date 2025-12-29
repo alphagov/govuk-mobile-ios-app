@@ -4,7 +4,7 @@ import CoreData
 import GOVKit
 import UIComponents
 
-enum TopicSegment {
+enum TopicSegment: CaseIterable {
     case favorite
     case all
 }

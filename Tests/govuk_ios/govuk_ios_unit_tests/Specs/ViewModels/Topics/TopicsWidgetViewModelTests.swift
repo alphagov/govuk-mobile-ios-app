@@ -246,6 +246,7 @@ struct TopicsWidgetViewModelTests {
             context: coreData.backgroundContext,
             isFavourite: true
         )
+        var lastTopicsScreen = [TopicSegment]()
 
         mockTopicService._stubbedFetchFavouriteTopics = [favoriteOne, favoriteTwo]
 
@@ -255,15 +256,20 @@ struct TopicsWidgetViewModelTests {
             topicAction: { _ in },
             dismissEditAction: { }
         )
+        lastTopicsScreen.append(sut.topicsScreen)
         sut.initialLoadComplete = true
         sut.refreshTopics()
-        sut.topicsScreen = .favorite
-        #expect(mockAnalyticsService._trackedEvents.count == 0)
+        sut.topicsScreen = TopicSegment.allCases.randomElement()!
+        lastTopicsScreen.append(sut.topicsScreen)
+        let areDuplicates = Set(lastTopicsScreen).count != lastTopicsScreen.count
+        let nonTrackingCase = areDuplicates && mockAnalyticsService._trackedEvents.count == 0
+        let trackingCase = !areDuplicates && mockAnalyticsService._trackedEvents.count == 1
+        #expect(trackingCase || nonTrackingCase)
     }
 
     @Test
     @MainActor
-    func setTopicsScreen_initialLoadCompleteIsFalse_doesNotcreateECommerceEvent() throws {
+    func setTopicsScreen_initialLoadCompleteIsFalse_andTopicsIsDifferentFromOldValue_doesNotcreateECommerceEvent() throws {
 
         let allOne = Topic.arrange(context: coreData.backgroundContext)
         let allTwo = Topic.arrange(context: coreData.backgroundContext)
@@ -278,7 +284,7 @@ struct TopicsWidgetViewModelTests {
         )
         sut.initialLoadComplete = false
         sut.refreshTopics()
-        sut.topicsScreen = .favorite
+        sut.topicsScreen = .all
         #expect(mockAnalyticsService._trackedEvents.count == 0)
         #expect(mockAnalyticsService._trackedEvents.first?.name == nil)
     }

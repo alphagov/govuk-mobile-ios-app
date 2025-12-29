@@ -48,6 +48,7 @@ class CoordinatorBuilder {
                   completion: @escaping () -> Void) -> BaseCoordinator {
         PostAuthCoordinator(
             coordinatorBuilder: self,
+            remoteConfigService: container.remoteConfigService.resolve(),
             navigationController: navigationController,
             completion: completion
         )
@@ -73,8 +74,7 @@ class CoordinatorBuilder {
             activityService: container.activityService.resolve(),
             localAuthorityService: container.localAuthorityService.resolve(),
             userDefaultsService: container.userDefaultsService.resolve(),
-            chatService: container.chatService.resolve(),
-            remoteConfigService: container.remoteConfigService.resolve()
+            chatService: container.chatService.resolve()
         )
     }
 

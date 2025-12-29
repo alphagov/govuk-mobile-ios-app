@@ -13,7 +13,8 @@ struct AppLaunchService: AppLaunchServiceInterface {
     init(configService: AppConfigServiceInterface,
          topicService: TopicsServiceInterface,
          notificationService: NotificationServiceInterface,
-         remoteConfigService: RemoteConfigServiceInterface) {
+         remoteConfigService: RemoteConfigServiceInterface
+    ) {
         self.configService = configService
         self.topicService = topicService
         self.notificationService = notificationService
@@ -25,13 +26,12 @@ struct AppLaunchService: AppLaunchServiceInterface {
             async let configResult = await fetchConfig()
             async let topicResult = await fetchTopics()
             async let notificationResult = await notificationService.fetchConsentAlignment()
-            async let remoteConfigResult = await fetchRemoteConfig()
+            async let _ = await fetchRemoteConfig()
             let response = await AppLaunchResponse(
                 configResult: configResult,
                 topicResult: topicResult,
                 notificationConsentResult: notificationResult,
-                appVersionProvider: Bundle.main,
-                remoteConfigResult: remoteConfigResult
+                appVersionProvider: Bundle.main
             )
             DispatchQueue.main.async {
                 completion(response)
@@ -55,7 +55,7 @@ struct AppLaunchService: AppLaunchServiceInterface {
         }
     }
     
-    private func fetchRemoteConfig() async -> Result<Void, Error> {
-        await remoteConfigService.fetchAndActivate()
+    private func fetchRemoteConfig() async {
+        await remoteConfigService.fetch()
     }
 }

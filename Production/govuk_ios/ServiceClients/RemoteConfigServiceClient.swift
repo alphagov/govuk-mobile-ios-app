@@ -1,13 +1,13 @@
 import FirebaseRemoteConfig
 
-enum RemoteConfigKey: String {
-    case topicsWidgetTitle = "topics_widget_title"
-}
-
 protocol RemoteConfigServiceClientInterface {
-    func fetchAndActivate() async -> Result<Void, Error>
-    func string(forKey key: RemoteConfigKey) -> String
-    func bool(forKey key: RemoteConfigKey) -> Bool
+    func fetch() async throws
+    func activate() async throws
+    
+    func string(forKey key: String) -> String?
+    func bool(forKey key: String) -> Bool?
+    func int(forKey key: String) -> Int?
+    func double(forKey key: String) -> Double?
 }
 
 struct RemoteConfigServiceClient: RemoteConfigServiceClientInterface {
@@ -16,29 +16,49 @@ struct RemoteConfigServiceClient: RemoteConfigServiceClientInterface {
     
     init() {
         let settings = RemoteConfigSettings()
-        settings.fetchTimeout = 10
+        settings.fetchTimeout = 5
         remoteConfig.configSettings = settings
-        remoteConfig.setDefaults(fromPlist: "RemoteConfigDefaults")
     }
     
-    func fetchAndActivate() async -> Result<Void, Error> {
-        do {
-            let _ = try await remoteConfig.fetchAndActivate()
-            return .success(())
-        } catch {
-            return .failure(error)
+    func fetch() async throws {
+        try await remoteConfig.fetch()
+    }
+    
+    func activate() async throws {
+        try await remoteConfig.activate()
+    }
+    
+    func string(forKey key: String) -> String? {
+        if let value = value(key) {
+            return value.stringValue
         }
+        return nil
     }
     
-    func string(forKey key: RemoteConfigKey) -> String {
-        return remoteConfig[key.rawValue].stringValue
+    func bool(forKey key: String) -> Bool? {
+        if let value = value(key) {
+            return value.boolValue
+        }
+        return nil
     }
     
-    func bool(forKey key: RemoteConfigKey) -> Bool {
-        return remoteConfig[key.rawValue].boolValue
+    func int(forKey key: String) -> Int? {
+        if let value = value(key) {
+            return value.numberValue.intValue
+        }
+        return nil
     }
     
-    //func codable<T: Decodable>(forKey key: RemoteConfigKey, type: T.Type) -> T...
+    func double(forKey key: String) -> Double? {
+        if let value = value(key) {
+            return value.numberValue.doubleValue
+        }
+        return nil
+    }
     
+    private func value(_ key: String) -> RemoteConfigValue? {
+        let value = remoteConfig[key]
+        return value.source == .static ? nil : value //stops Firebase defaulting values when no key present
+    }
     
 }

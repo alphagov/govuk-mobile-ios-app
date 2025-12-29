@@ -95,7 +95,8 @@ extension Container {
     var remoteConfigService: Factory<RemoteConfigServiceInterface> {
         Factory(self) {
             RemoteConfigService(
-                remoteConfigServiceClient: self.remoteConfigServiceClient.resolve()
+                remoteConfigServiceClient: self.remoteConfigServiceClient.resolve(),
+                analyticsService: self.analyticsService.resolve()
             )
         }.scope(.singleton)
     }

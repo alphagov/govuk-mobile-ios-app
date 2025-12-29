@@ -5,12 +5,9 @@ struct AppLaunchResponse {
     let topicResult: FetchTopicsListResult
     let notificationConsentResult: NotificationConsentResult
     let appVersionProvider: AppVersionProvider
-    let remoteConfigResult: Result<Void, Error>
 
     var isAppAvailable: Bool {
         guard let result = try? configResult.get()
-        else { return false }
-        guard let remoteConfigResult = try? remoteConfigResult.get()
         else { return false }
         return result.config.available
     }

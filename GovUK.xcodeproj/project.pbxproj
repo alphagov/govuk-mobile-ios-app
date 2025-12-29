@@ -275,7 +275,6 @@
 		815C58682EE970E200322705 /* RemoteConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C58672EE970DC00322705 /* RemoteConfigService.swift */; };
 		815C586A2EE973FC00322705 /* RemoteConfigServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C58692EE973F400322705 /* RemoteConfigServiceClient.swift */; };
 		815C586C2EE9744E00322705 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 815C586B2EE9744E00322705 /* FirebaseRemoteConfig */; };
-		815C5B9E2EF16FD800322705 /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 815C5B9D2EF16FD800322705 /* RemoteConfigDefaults.plist */; };
 		B04C2E7E2DA913B100F0F63E /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C2E7D2DA913B100F0F63E /* WebViewController.swift */; };
 		B04C2E802DA9141400F0F63E /* WebDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C2E7F2DA9141400F0F63E /* WebDeeplinkRoute.swift */; };
 		B04C2E822DA9339B00F0F63E /* WebViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C2E812DA9339B00F0F63E /* WebViewCoordinator.swift */; };
@@ -703,7 +702,6 @@
 		5DFE5F1D2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Interface.swift"; sourceTree = "<group>"; };
 		815C58672EE970DC00322705 /* RemoteConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigService.swift; sourceTree = "<group>"; };
 		815C58692EE973F400322705 /* RemoteConfigServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigServiceClient.swift; sourceTree = "<group>"; };
-		815C5B9D2EF16FD800322705 /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		B04C2E7D2DA913B100F0F63E /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B04C2E7F2DA9141400F0F63E /* WebDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDeeplinkRoute.swift; sourceTree = "<group>"; };
 		B04C2E812DA9339B00F0F63E /* WebViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewCoordinator.swift; sourceTree = "<group>"; };
@@ -1655,7 +1653,6 @@
 			isa = PBXGroup;
 			children = (
 				5DAD71772BD250DB0075F648 /* AppDelegate.swift */,
-				815C5B9D2EF16FD800322705 /* RemoteConfigDefaults.plist */,
 				162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */,
 				D0B3EBFD2CE226AC00A8F321 /* GoogleService-Info-Dev.plist */,
 				D0B3EBFE2CE226AC00A8F321 /* GoogleService-Info-Live.plist */,
@@ -2265,7 +2262,6 @@
 				5D742BDA2C99791A00E7B87A /* Settings.xcstrings in Resources */,
 				5DD4CB142D9548EF00459FB5 /* RecentActivity.xcstrings in Resources */,
 				5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */,
-				815C5B9E2EF16FD800322705 /* RemoteConfigDefaults.plist in Resources */,
 				162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */,
 				3D3378122CAAC0A0004BF83F /* AppAvailability.xcstrings in Resources */,
 				5D742BDC2C99799000E7B87A /* Search.xcstrings in Resources */,

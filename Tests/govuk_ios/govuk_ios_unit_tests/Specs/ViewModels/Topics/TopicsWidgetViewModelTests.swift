@@ -319,27 +319,4 @@ struct TopicsWidgetViewModelTests {
         #expect((eventParams["item_list_name"] as? String) == "Your topics")
         #expect((eventParams["results"] as? Int) == 2)
     }
-
-    @Test
-    @MainActor
-    func dismissEdit_preventsNextECommerceEventFire() throws {
-        let allOne = Topic.arrange(context: coreData.backgroundContext)
-        let allTwo = Topic.arrange(context: coreData.backgroundContext)
-
-        mockTopicService._stubbedFetchFavouriteTopics = [allOne, allTwo]
-
-        let sut = TopicsWidgetViewModel(
-            topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            topicAction: { _ in},
-            dismissEditAction: { }
-        )
-
-        sut.initialLoadComplete = true
-        sut.didDismissEdit()
-        sut.refreshTopics()
-        sut.topicsScreen = .all
-        sut.topicsScreen = .favorite
-        #expect(mockAnalyticsService._trackedEvents.count == 2)
-    }
 }

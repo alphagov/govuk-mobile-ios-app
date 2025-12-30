@@ -59,13 +59,11 @@ struct TopicsWidgetView: View {
                 Text(viewModel.personalisedTopicsPickerTitle)
                     .foregroundColor(
                         Color(UIColor.govUK.text.primary)
-                    ).onTapGesture { viewModel.topicsScreen = .favorite }
-                    .tag(TopicSegment.favorite)
+                    ).tag(TopicSegment.favorite)
                 Text(viewModel.allTopicsPickerTitle)
                     .foregroundColor(
                         Color(UIColor.govUK.text.primary)
-                    ).onTapGesture { viewModel.topicsScreen = .all }
-                    .tag(TopicSegment.all)
+                    ).tag(TopicSegment.all)
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 16)

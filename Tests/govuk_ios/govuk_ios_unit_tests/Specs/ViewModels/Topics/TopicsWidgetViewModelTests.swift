@@ -259,12 +259,10 @@ struct TopicsWidgetViewModelTests {
         lastTopicsScreen.append(sut.topicsScreen)
         sut.initialLoadComplete = true
         sut.refreshTopics()
-        sut.topicsScreen = TopicSegment.allCases.randomElement()!
-        lastTopicsScreen.append(sut.topicsScreen)
-        let areDuplicates = Set(lastTopicsScreen).count != lastTopicsScreen.count
-        let nonTrackingCase = areDuplicates && mockAnalyticsService._trackedEvents.count == 0
-        let trackingCase = !areDuplicates && mockAnalyticsService._trackedEvents.count == 1
-        #expect(trackingCase || nonTrackingCase)
+        sut.topicsScreen = .favorite
+        mockAnalyticsService._trackedEvents = []
+        sut.topicsScreen = .favorite
+        #expect(mockAnalyticsService._trackedEvents.count == 0)
     }
 
     @Test

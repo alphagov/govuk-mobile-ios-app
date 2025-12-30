@@ -19,6 +19,7 @@ protocol SettingsViewModelInterface: ObservableObject {
     func updateNotificationPermissionState()
     func handleNotificationAlertAction()
     func trackScreen(screen: TrackableScreen)
+    func updateEmail()
 }
 
 struct SettingsViewModelURLParameters {
@@ -69,7 +70,6 @@ class SettingsViewModel: SettingsViewModelInterface {
         self.localAuthenticationService = localAuthenticationService
         updateNotificationPermissionState()
         observeAppMoveToForeground()
-        setEmail()
     }
 
     private func observeAppMoveToForeground() {
@@ -127,8 +127,8 @@ class SettingsViewModel: SettingsViewModelInterface {
         getGroupedList()
     }
 
-    private func setEmail() {
-        Task {
+    func updateEmail() {
+        Task { @MainActor in
             userEmail = await self.authenticationService.userEmail
         }
     }

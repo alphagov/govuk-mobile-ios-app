@@ -11,7 +11,7 @@ final class TopicsWidgetViewSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_populated_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            viewController: viewController(),
+            viewController: viewController(topicScreen: .favorite),
             mode: .light,
             prefersLargeTitles: true
         )
@@ -19,13 +19,29 @@ final class TopicsWidgetViewSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_populated_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            viewController: viewController(),
+            viewController: viewController(topicScreen: .favorite),
             mode: .dark,
             prefersLargeTitles: true
         )
     }
 
-    private func viewController() -> UIViewController {
+    func test_loadInNavigationController_populated_allTopics_light_rendersCorrectly() {
+        VerifySnapshotInNavigationController(
+            viewController: viewController(topicScreen: .all),
+            mode: .light,
+            prefersLargeTitles: true
+        )
+    }
+
+    func test_loadInNavigationController_populated_allTopics_dark_rendersCorrectly() {
+        VerifySnapshotInNavigationController(
+            viewController: viewController(topicScreen: .all),
+            mode: .dark,
+            prefersLargeTitles: true
+        )
+    }
+
+    private func viewController(topicScreen: TopicSegment) -> UIViewController {
 
         let mockTopicService = MockTopicsService()
         let favouriteOne = Topic.arrange(
@@ -35,6 +51,8 @@ final class TopicsWidgetViewSnapshotTests: SnapshotTestCase {
         mockTopicService._stubbedHasCustomisedTopics = true
         let allOne = Topic.arrange(context: coreData.backgroundContext)
         let allTwo = Topic.arrange(context: coreData.backgroundContext)
+        allOne.title = "test2"
+        allTwo.title = "test3"
 
         mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne]
         mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne]
@@ -45,10 +63,14 @@ final class TopicsWidgetViewSnapshotTests: SnapshotTestCase {
             topicAction: { _ in },
             dismissEditAction: { }
         )
+        viewModel.topicsScreen = topicScreen
+
         let view = TopicsWidgetView(
             viewModel: viewModel
         )
-        return HostingViewController(rootView: view)
+        return HostingViewController(
+            rootView: view
+        )
     }
 }
 

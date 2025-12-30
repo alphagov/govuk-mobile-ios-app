@@ -1,5 +1,5 @@
 {
-  "originHash" : "2848ae3e33ffb0ede7841944a36e934f0a18a123164155730d0a27f17fa687a9",
+  "originHash" : "7fb17b97cbd295861530b82411c9c7cfbc5e2c145a424e53fc84064b08a1ba0e",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -62,6 +62,15 @@
       "state" : {
         "revision" : "70a7857886f065a40486a7607268781c49db04ae",
         "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "google-tag-manager-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleanalytics/google-tag-manager-ios-sdk.git",
+      "state" : {
+        "revision" : "e264753e8d3c005de09fae0b73dba7c13e92655a",
+        "version" : "9.0.0"
       }
     },
     {

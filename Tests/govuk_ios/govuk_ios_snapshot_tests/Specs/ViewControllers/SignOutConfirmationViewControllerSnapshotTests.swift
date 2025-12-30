@@ -15,7 +15,7 @@ class SignOutConfirmationViewControllerSnapshotTests: SnapshotTestCase {
         let signOutConfirmationView = SignOutConfirmationView(
             viewModel: viewModel
         )
-        let hostingViewController =  HostingViewController(
+        let hostingViewController = HostingViewController(
             rootView: signOutConfirmationView,
             statusBarStyle: .darkContent
         )
@@ -33,10 +33,11 @@ class SignOutConfirmationViewControllerSnapshotTests: SnapshotTestCase {
         let signOutConfirmationView = SignOutConfirmationView(
             viewModel: viewModel
         )
-        let hostingViewController =  HostingViewController(
+        let hostingViewController = HostingViewController(
             rootView: signOutConfirmationView,
             statusBarStyle: .darkContent
         )
+        hostingViewController.view.backgroundColor = .clear
         VerifySnapshotInNavigationController(
             viewController: hostingViewController,
             mode: .dark,

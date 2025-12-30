@@ -83,8 +83,6 @@ struct PostAuthCoordinatorTests {
         mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
         mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
         mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
-        mockCoordinatorBuilder._receivedChatOptInCompletion?()
-        mockCoordinatorBuilder._receivedChatOffboardingCompletion?()
 
         #expect(completionCalled)
     }

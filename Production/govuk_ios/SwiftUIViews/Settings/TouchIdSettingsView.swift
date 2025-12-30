@@ -32,13 +32,14 @@ struct TouchIdSettingsView: View {
                     .padding(.horizontal, 16)
                     .padding(.vertical, 11)
                     .background(Color(UIColor.govUK.fills.surfaceList))
-                    .roundedBorder()
+                    .roundedBorder(borderColor: .clear)
                     ForEach(viewModel.body.split(separator: "\n\n"), id: \.self) { paragraph in
                         Text(paragraph).font(Font.govUK.body)
                     }
                 }
                 .padding(16)
             }
+            .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
             .accessibilityElement(children: .contain)
         }
         .onAppear {

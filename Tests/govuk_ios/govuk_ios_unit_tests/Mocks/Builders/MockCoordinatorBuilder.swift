@@ -264,22 +264,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         return _stubbedRecentActivityCoordinator ?? MockBaseCoordinator()
     }
 
-    var _receivedChatOffboardingCompletion: (() -> Void)?
-    var _stubbedChatOffboardingCoordinator: MockBaseCoordinator?
-    override func chatOffboarding(navigationController: UINavigationController,
-                                  completionAction: @escaping () -> Void) -> BaseCoordinator {
-        _receivedChatOffboardingCompletion = completionAction
-        return _stubbedChatOffboardingCoordinator ?? MockBaseCoordinator()
-    }
-
-    var _receivedChatOptInCompletion: (() -> Void)?
-    var _stubbedChatOptInCoordinator: MockBaseCoordinator?
-    override func chatOptIn(navigationController: UINavigationController,
-                            completionAction: @escaping () -> Void) -> BaseCoordinator {
-        _receivedChatOptInCompletion = completionAction
-        return _stubbedChatOptInCoordinator ?? MockBaseCoordinator()
-    }
-
     var _receivedChatInfoOnboardingCompletion: ((Bool) -> Void)?
     var _stubbedChatInfoOnboardingCoordinator: MockBaseCoordinator?
     override func chatInfoOnboarding(cancelOnboardingAction: @escaping () -> Void,

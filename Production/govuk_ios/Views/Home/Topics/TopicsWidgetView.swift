@@ -2,7 +2,7 @@ import SwiftUI
 import UIComponents
 import GOVKit
 
-struct TopicsWidget: View {
+struct TopicsWidgetView: View {
     @StateObject var viewModel: TopicsWidgetViewModel
     @State var showingEditScreen: Bool = false
 
@@ -134,6 +134,7 @@ struct TopicsWidget: View {
             Text(viewModel.widgetTitle)
                 .font(Font.govUK.title3Semibold)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
+                .accessibilityAddTraits(.isHeader)
             Spacer()
             Button(
                 action: {

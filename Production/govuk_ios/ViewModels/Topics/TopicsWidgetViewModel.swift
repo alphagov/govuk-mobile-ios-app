@@ -4,7 +4,7 @@ import CoreData
 import GOVKit
 import UIComponents
 
-enum TopicSegment: CaseIterable {
+enum TopicSegment {
     case favorite
     case all
 }
@@ -21,15 +21,13 @@ final class TopicsWidgetViewModel: ObservableObject {
     @Published var topicsScreen: TopicSegment = .favorite {
         didSet {
             if oldValue != topicsScreen &&
-                initialLoadComplete &&
-                !isEditInProgress {
+                initialLoadComplete {
                 trackECommerce()
             }
         }
     }
 
     @Published var initialLoadComplete = false
-    private var isEditInProgress = false
 
     var errorViewModel: AppErrorViewModel {
         .topicErrorWithAction { [weak self] in
@@ -101,7 +99,6 @@ final class TopicsWidgetViewModel: ObservableObject {
     }
 
     func didDismissEdit() {
-        isEditInProgress = true
         dismissEditAction()
     }
 
@@ -140,7 +137,6 @@ final class TopicsWidgetViewModel: ObservableObject {
                                           id: listName,
                                           items: items)
         analyticsService.track(event: event)
-        isEditInProgress = false
     }
 
     func trackECommerceSelection(_ name: String) {

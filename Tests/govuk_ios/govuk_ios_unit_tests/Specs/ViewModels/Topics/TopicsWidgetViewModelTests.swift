@@ -340,6 +340,6 @@ struct TopicsWidgetViewModelTests {
         sut.refreshTopics()
         sut.topicsScreen = .all
         sut.topicsScreen = .favorite
-        #expect(mockAnalyticsService._trackedEvents.count == 0)
+        #expect(mockAnalyticsService._trackedEvents.count == 2)
     }
 }

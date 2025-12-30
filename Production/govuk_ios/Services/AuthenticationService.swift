@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import Authentication
 import SecureStore
-import Factory
+import FactoryKit
 import GOVKit
 
 protocol AuthenticationServiceInterface: AnyObject {

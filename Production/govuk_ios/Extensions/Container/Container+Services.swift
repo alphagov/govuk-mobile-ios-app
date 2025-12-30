@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
-import Factory
+import FactoryKit
 import GOVKit
 import UserNotifications
 
@@ -71,7 +71,6 @@ extension Container {
         }
     }
 
-    @MainActor
     var appLaunchService: Factory<AppLaunchServiceInterface> {
         Factory(self) {
             AppLaunchService(
@@ -90,8 +89,6 @@ extension Container {
             )
         }.scope(.singleton)
     }
-
-    @MainActor
     var topicsService: Factory<TopicsServiceInterface> {
         Factory(self) {
             TopicsService(
@@ -214,7 +211,6 @@ extension Container {
         }
     }
 
-    @MainActor
     var chatService: Factory<ChatServiceInterface> {
         Factory(self) {
             ChatService(
@@ -227,9 +223,10 @@ extension Container {
     }
 
     var jailbreakDetectionService: Factory<JailbreakDetectionServiceInterface> {
-        Factory(self) {
+        let application = UIApplication.shared
+        return Factory(self) {
             JailbreakDetectionService(
-                urlOpener: UIApplication.shared
+                urlOpener: application
             )
         }
     }
@@ -241,8 +238,9 @@ extension Container {
     }
 
     var privacyService: Factory<PrivacyPresenting?> {
-        Factory(self) {
-            UIApplication.shared.connectedScenes.first?.delegate as? PrivacyPresenting
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
+        return Factory(self) {
+            sceneDelegate as? PrivacyPresenting
         }
     }
 }

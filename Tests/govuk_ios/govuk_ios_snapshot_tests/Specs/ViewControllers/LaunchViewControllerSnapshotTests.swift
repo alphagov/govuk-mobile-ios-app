@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import UIKit
 
-import Factory
+import FactoryKit
 
 @testable import govuk_ios
 
@@ -12,12 +12,9 @@ class LaunchViewControllerSnapshotTests: SnapshotTestCase {
 
     override func setUp() {
         super.setUp()
-        mockAccessibilityManager = MockAccessibilityManager()
-        Container.shared.accessibilityManager.register(
-            factory: {
-                self.mockAccessibilityManager
-            }
-        )
+        let mockManager = MockAccessibilityManager()
+        Container.shared.accessibilityManager.register { mockManager }
+        self.mockAccessibilityManager = mockManager
     }
 
     func test_loadInNavigationController_rendersCorrectly() {

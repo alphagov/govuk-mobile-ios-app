@@ -1,6 +1,6 @@
 import Foundation
 
-import Factory
+import FactoryKit
 import Lottie
 import SecureStore
 

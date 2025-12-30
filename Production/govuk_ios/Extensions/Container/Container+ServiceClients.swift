@@ -2,7 +2,7 @@ import Foundation
 import Authentication
 import AppAuth
 
-import Factory
+import FactoryKit
 
 extension Container {
     var appConfigServiceClient: Factory<AppConfigServiceClientInterface> {
@@ -50,7 +50,6 @@ extension Container {
         }
     }
 
-    @MainActor
     var chatServiceClient: Factory<ChatServiceClientInterface> {
         Factory(self) {
             ChatServiceClient(

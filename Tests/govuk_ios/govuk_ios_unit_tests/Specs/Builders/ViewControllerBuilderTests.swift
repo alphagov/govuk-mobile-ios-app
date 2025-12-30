@@ -3,7 +3,7 @@ import SafariServices
 import Testing
 import SwiftUI
 import CoreData
-import Factory
+import FactoryKit
 import GOVKit
 
 @testable import govuk_ios

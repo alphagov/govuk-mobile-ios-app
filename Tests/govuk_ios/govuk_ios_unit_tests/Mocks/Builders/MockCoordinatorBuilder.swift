@@ -1,6 +1,6 @@
 import UIKit
 import Foundation
-import Factory
+import FactoryKit
 
 @testable import govuk_ios
 

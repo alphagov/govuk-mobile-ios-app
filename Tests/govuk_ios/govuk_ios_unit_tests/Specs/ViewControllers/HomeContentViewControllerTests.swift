@@ -2,7 +2,7 @@
 //import UIKit
 //import Testing
 //
-//import Factory
+//import FactoryKit
 //
 //@testable import govuk_ios
 //

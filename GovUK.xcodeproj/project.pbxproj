@@ -162,6 +162,7 @@
 		5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */; };
 		5D54F4732CC8473900A3B6A7 /* Topics.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5D54F4722CC8473900A3B6A7 /* Topics.xcstrings */; };
 		5D54F4752CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4742CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift */; };
+		5D5958192F040FB70042C532 /* FactoryTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 5D5958182F040FB70042C532 /* FactoryTesting */; };
 		5D60E6AD2E4A46E20046C1A1 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D60E6AC2E4A46E20046C1A1 /* UserDefaultsService.swift */; };
 		5D62ABC32C32F49F0072BE6C /* Container+Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D62ABC22C32F49F0072BE6C /* Container+Configs.swift */; };
 		5D66D1842CBFC12400006723 /* AppEvent+Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1832CBFC12400006723 /* AppEvent+Function.swift */; };
@@ -978,6 +979,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D5958192F040FB70042C532 /* FactoryTesting in Frameworks */,
 				5D4B9D3E2C074227005F126A /* iOSSnapshotTestCase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2065,6 +2067,7 @@
 			name = govuk_ios_snapshot_tests;
 			packageProductDependencies = (
 				5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */,
+				5D5958182F040FB70042C532 /* FactoryTesting */,
 			);
 			productName = govuk_ios_snapshot_tests;
 			productReference = 5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */;
@@ -3280,6 +3283,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5D89226D2C071FE70019FBD7 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */;
 			productName = iOSSnapshotTestCase;
+		};
+		5D5958182F040FB70042C532 /* FactoryTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8181DBF82EE214B100F47531 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = FactoryTesting;
 		};
 		5DA223D42EC7289D006AB125 /* UIComponents */ = {
 			isa = XCSwiftPackageProductDependency;

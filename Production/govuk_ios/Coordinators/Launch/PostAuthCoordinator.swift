@@ -4,10 +4,8 @@ import UIKit
 class PostAuthCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let completion: () -> Void
-    
     private let remoteConfigService: RemoteConfigServiceInterface
-    
-    private(set) var remoteConfigActivationTask: Task<Void,Never>?
+    private(set) var remoteConfigActivationTask: Task<Void, Never>?
 
     init(coordinatorBuilder: CoordinatorBuilder,
          remoteConfigService: RemoteConfigServiceInterface,
@@ -27,12 +25,12 @@ class PostAuthCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.analyticsConsent(
             navigationController: root,
             completion: { [weak self] in
-                self?.activateRemoteConfig() //activate remote config after analytics consent to support a/b testing
+                self?.activateRemoteConfig()
+                // activate remote config after analytics consent to support a/b testing
             }
         )
         start(coordinator)
     }
-    
     private func activateRemoteConfig() {
         remoteConfigActivationTask = Task {
             await remoteConfigService.activate()

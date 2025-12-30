@@ -54,7 +54,6 @@ struct AppLaunchService: AppLaunchServiceInterface {
             )
         }
     }
-    
     private func fetchRemoteConfig() async {
         await remoteConfigService.fetch()
     }

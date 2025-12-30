@@ -116,7 +116,11 @@ struct CoordinatorBuilderTests {
     
     @Test
     func appUnavailable_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
+        let container = Container()
+        container.remoteConfigService.register {
+            MockRemoteConfigService()
+        }
+        let subject = CoordinatorBuilder(container: container)
         let coordinator = subject.appUnavailable(
             navigationController: MockNavigationController(),
             launchResponse: .arrangeAvailable,

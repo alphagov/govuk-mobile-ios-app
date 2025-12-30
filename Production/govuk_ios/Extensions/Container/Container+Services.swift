@@ -91,7 +91,6 @@ extension Container {
             )
         }.scope(.singleton)
     }
-    
     var remoteConfigService: Factory<RemoteConfigServiceInterface> {
         Factory(self) {
             RemoteConfigService(

@@ -12,7 +12,6 @@ extension Container {
             )
         }
     }
-    
     var remoteConfigServiceClient: Factory<RemoteConfigServiceClientInterface> {
         Factory(self) {
             RemoteConfigServiceClient()

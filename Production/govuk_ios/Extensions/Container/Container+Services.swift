@@ -89,7 +89,6 @@ extension Container {
             )
         }.scope(.singleton)
     }
-    
     var topicsService: Factory<TopicsServiceInterface> {
         Factory(self) {
             TopicsService(

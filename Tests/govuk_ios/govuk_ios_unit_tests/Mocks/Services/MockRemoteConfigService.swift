@@ -4,18 +4,16 @@ class MockRemoteConfigService: RemoteConfigServiceInterface {
     
     var _stubbedRemoteConfigValues: [String: Any] = [:]
 
-    var _activateCompletionBlock: (() -> Void)?
-
-    var fetchCallCount = 0
-    var activateCallCount = 0 
-    
+    var _fetchCallCount = 0
     func fetch() async -> RemoteConfigFetchResult {
-        fetchCallCount += 1
+        _fetchCallCount += 1
         return .success
     }
-    
+
+    var _activateCompletionBlock: (() -> Void)?
+    var _activateCallCount = 0
     func activate() async {
-        activateCallCount += 1
+        _activateCallCount += 1
         _activateCompletionBlock?()
     }
     

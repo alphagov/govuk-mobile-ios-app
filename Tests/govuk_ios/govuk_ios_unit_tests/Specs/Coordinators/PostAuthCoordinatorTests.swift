@@ -46,7 +46,7 @@ struct PostAuthCoordinatorTests {
             mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
         }
 
-        #expect(mockRemoteConfigService.activateCallCount == 1)
+        #expect(mockRemoteConfigService._activateCallCount == 1)
     }
 
     @Test

@@ -74,6 +74,6 @@ struct AppLaunchServiceTests {
             )
         }
         
-        #expect(mockRemoteConfigService.fetchCallCount == 1)
+        #expect(mockRemoteConfigService._fetchCallCount == 1)
     }
 }

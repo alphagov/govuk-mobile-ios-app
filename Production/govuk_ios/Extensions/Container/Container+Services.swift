@@ -58,7 +58,7 @@ extension Container {
         Factory(self) {
             let remoteConfig = RemoteConfig.remoteConfig()
             let settings = RemoteConfigSettings()
-            settings.fetchTimeout = 5
+            settings.fetchTimeout = 10
             remoteConfig.configSettings = settings
             return remoteConfig
         }

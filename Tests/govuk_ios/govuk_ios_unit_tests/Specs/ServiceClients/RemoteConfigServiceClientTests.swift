@@ -21,7 +21,7 @@ struct RemoteConfigServiceClientTests {
 
     @Test
     func fetch_throwsWhenRemoteConfigThrows() async {
-        mockRemoteConfig._fetchError = MockRemoteConfigError.generic
+        mockRemoteConfig._stubbedFetchError = MockRemoteConfigError.generic
 
         await #expect(throws: MockRemoteConfigError.generic) {
             try await sut.fetch()
@@ -36,7 +36,7 @@ struct RemoteConfigServiceClientTests {
 
     @Test
     func activate_throwsWhenRemoteConfigThrows() async {
-        mockRemoteConfig._activateError = MockRemoteConfigError.generic
+        mockRemoteConfig._stubbedActivateError = MockRemoteConfigError.generic
 
         await #expect(throws: MockRemoteConfigError.generic) {
             try await sut.activate()

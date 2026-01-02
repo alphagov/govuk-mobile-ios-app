@@ -811,6 +811,7 @@
 				govuk_ios/govuk_ios_unit_tests/Resources/MockTopicDetailsResponses/FiveStepByStep.json,
 				govuk_ios/govuk_ios_unit_tests/Resources/MockTopicDetailsResponses/NoUnpopularContent.json,
 				govuk_ios/govuk_ios_unit_tests/Resources/MockTopicDetailsResponses/UnpopularContent.json,
+				govuk_ios/govuk_ios_unit_tests/Specs/Views/HeaderViewComponent.swift,
 			);
 			target = 5DAD71732BD250DB0075F648 /* govuk_ios */;
 		};

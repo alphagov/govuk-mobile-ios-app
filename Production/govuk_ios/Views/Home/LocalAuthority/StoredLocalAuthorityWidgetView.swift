@@ -10,24 +10,18 @@ struct StoredLocalAuthorityWidgetView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Text(viewModel.title)
-                    .font(Font.govUK.title3Semibold)
-                    .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
-                    .accessibilityAddTraits(.isHeader)
-                Spacer()
-                Button {
-                    viewModel.openEditViewAction()
-                } label: {
-                    Text(viewModel.editButtonTitle)
-                        .font(.govUK.subheadlineSemibold)
-                        .foregroundColor(
-                            Color(uiColor: UIColor.govUK.text.buttonSecondary
-                                 )
-                        )
-                }
-                .accessibilityLabel(viewModel.editButtonAltText)
-            }
+            HeaderViewComponent(
+                model: HeaderViewModel(
+                    title: viewModel.title,
+                    secondaryButton: .init(
+                        title: viewModel.editButtonTitle,
+                        accessibilityLabel: viewModel.editButtonAltText,
+                        action: {
+                            viewModel.openEditViewAction()
+                        }
+                    )
+                )
+            )
             .padding(.bottom, 8)
             .padding(.top, 16)
             if viewModel.localAuthorities.count == 1,

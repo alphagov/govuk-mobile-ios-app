@@ -11,13 +11,11 @@ struct LocalAuthorityWidget: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Text(viewModel.title)
-                    .font(Font.govUK.title3Semibold)
-                    .foregroundColor(Color(UIColor.govUK.text.primary))
-                    .accessibilityAddTraits(.isHeader)
-                Spacer()
-            }
+            HeaderViewComponent(
+                model: HeaderViewModel(
+                    title: viewModel.title
+                )
+            )
             .padding(.horizontal)
             .padding(.bottom, 8)
             .padding(.top, 16)

@@ -13,6 +13,14 @@ extension Container {
         }
     }
 
+    var remoteConfigServiceClient: Factory<RemoteConfigServiceClientInterface> {
+        Factory(self) {
+            RemoteConfigServiceClient(
+                remoteConfig: self.remoteConfig()
+            )
+        }
+    }
+
     var searchServiceClient: Factory<SearchServiceClientInterface> {
         Factory(self) {
             SearchServiceClient(

@@ -11,6 +11,7 @@ struct AppLaunchResponseTests {
             configResult: .failure(.invalidSignature),
             topicResult: .success([]),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: MockAppVersionProvider()
         )
 
@@ -23,6 +24,7 @@ struct AppLaunchResponseTests {
             configResult: .success(.arrange(config: .arrange(available: false))),
             topicResult: .success([]),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: MockAppVersionProvider()
         )
 
@@ -41,6 +43,7 @@ struct AppLaunchResponseTests {
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: mockVersionProvider
         )
 
@@ -59,6 +62,7 @@ struct AppLaunchResponseTests {
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: mockVersionProvider
         )
 
@@ -78,6 +82,7 @@ struct AppLaunchResponseTests {
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: mockVersionProvider
         )
 
@@ -90,6 +95,7 @@ struct AppLaunchResponseTests {
             configResult: .failure(.invalidSignature),
             topicResult: .success([]),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: MockAppVersionProvider()
         )
 
@@ -102,6 +108,7 @@ struct AppLaunchResponseTests {
             configResult: .failure(.remoteJson),
             topicResult: .failure(.apiUnavailable),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: MockAppVersionProvider()
         )
 
@@ -120,6 +127,7 @@ struct AppLaunchResponseTests {
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: mockVersionProvider
         )
 
@@ -138,6 +146,7 @@ struct AppLaunchResponseTests {
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: mockVersionProvider
         )
 
@@ -156,6 +165,7 @@ struct AppLaunchResponseTests {
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: mockVersionProvider
         )
 
@@ -168,6 +178,7 @@ struct AppLaunchResponseTests {
             configResult: .failure(.remoteJson),
             topicResult: .failure(.apiUnavailable),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: MockAppVersionProvider()
         )
 

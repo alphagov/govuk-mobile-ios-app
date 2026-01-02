@@ -67,6 +67,7 @@ struct AppUnavailableViewModelTests {
                 ]
             ),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: MockAppVersionProvider()
         )
         mockAppLaunchService._receivedFetchCompletion?(expectedResponse)
@@ -97,6 +98,7 @@ struct AppUnavailableViewModelTests {
                 ]
             ),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: MockAppVersionProvider()
         )
 

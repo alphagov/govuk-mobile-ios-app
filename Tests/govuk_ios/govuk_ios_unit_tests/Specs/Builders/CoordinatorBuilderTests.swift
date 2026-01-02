@@ -57,7 +57,11 @@ struct CoordinatorBuilderTests {
 
     @Test
     func postAuth_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
+        let container = Container()
+        container.remoteConfigService.register {
+            MockRemoteConfigService()
+        }
+        let subject = CoordinatorBuilder(container: container)
         let coordinator = subject.postAuth(
             navigationController: MockNavigationController(),
             completion: { }
@@ -84,7 +88,11 @@ struct CoordinatorBuilderTests {
 
     @Test
     func launch_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
+        let container = Container()
+        container.remoteConfigService.register {
+            MockRemoteConfigService()
+        }
+        let subject = CoordinatorBuilder(container: container)
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.launch(
             navigationController: mockNavigationController,
@@ -108,7 +116,11 @@ struct CoordinatorBuilderTests {
     
     @Test
     func appUnavailable_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
+        let container = Container()
+        container.remoteConfigService.register {
+            MockRemoteConfigService()
+        }
+        let subject = CoordinatorBuilder(container: container)
         let coordinator = subject.appUnavailable(
             navigationController: MockNavigationController(),
             launchResponse: .arrangeAvailable,

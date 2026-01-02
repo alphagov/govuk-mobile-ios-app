@@ -1,16 +1,16 @@
 import FirebaseRemoteConfig
 
-protocol RemoteConfigInterface {
-    func fetchConfig() async throws
-    func activateConfig() async throws
-    func configValue(forKey key: String) -> RemoteConfigValueInterface
-}
-
 protocol RemoteConfigValueInterface {
     var stringValue: String { get }
     var boolValue: Bool { get }
     var numberValue: NSNumber { get }
     var isSourceStatic: Bool { get }
+}
+
+protocol RemoteConfigInterface {
+    func fetchConfig() async throws
+    func activateConfig() async throws
+    func configValue(forKey key: String) -> RemoteConfigValueInterface
 }
 
 extension RemoteConfig: RemoteConfigInterface {

@@ -18,6 +18,7 @@ struct LaunchCoordinatorTests {
             configResult: .success(.arrange),
             topicResult: .success(expectedTopics),
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: .success,
             appVersionProvider: MockAppVersionProvider()
         )
         var sut: LaunchCoordinator?

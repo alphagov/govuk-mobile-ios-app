@@ -21,7 +21,7 @@ class MockRemoteConfig: RemoteConfigInterface {
     }
 
     func configValue(forKey key: String) -> RemoteConfigValueInterface {
-        return _stubbedRemoteConfigValues[key] ?? MockRemoteConfigValue()
+        _stubbedRemoteConfigValues[key] ?? MockRemoteConfigValue()
     }
 
 }

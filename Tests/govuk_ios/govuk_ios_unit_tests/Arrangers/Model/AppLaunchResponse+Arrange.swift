@@ -33,13 +33,15 @@ extension AppLaunchResponse {
 
     static func arrange(configResult: FetchAppConfigResult = .success(.arrange),
                         topicResult: FetchTopicsListResult? = nil,
-                        appVersionProvider: AppVersionProvider? = nil) -> AppLaunchResponse {
+                        appVersionProvider: AppVersionProvider? = nil,
+                        remoteConfigFetchResult: RemoteConfigFetchResult = .success) -> AppLaunchResponse {
         let topic = topicResult ?? .success(TopicResponseItem.arrangeMultiple)
         let provider = appVersionProvider ?? MockAppVersionProvider()
         return .init(
             configResult: configResult,
             topicResult: topic,
             notificationConsentResult: .aligned,
+            remoteConfigFetchResult: remoteConfigFetchResult,
             appVersionProvider: provider
         )
     }

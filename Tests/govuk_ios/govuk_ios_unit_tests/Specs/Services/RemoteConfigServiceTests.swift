@@ -22,7 +22,7 @@ struct RemoteConfigServiceTests {
     func stringForKey_whenFetchedAndActivated_withValidKey_returnsExpectedValue() async throws {
         mockRemoteConfigServiceClient._stubbedRemoteConfigValues = ["test_key": "testStringValue"]
         
-        await sut.fetch()
+        let _ = await sut.fetch()
         await sut.activate()
         
         let result = sut.string(forKey: .testKey, defaultValue: "defaultStringValue")
@@ -37,7 +37,7 @@ struct RemoteConfigServiceTests {
     func stringForKey_whenFetchedAndActivated_withInvalidKey_returnsDefaultValue() async throws {
         mockRemoteConfigServiceClient._stubbedRemoteConfigValues = ["test_key_1" : "testStringValue"]
         
-        await sut.fetch()
+        let _ = await sut.fetch()
         await sut.activate()
         
         let result = sut.string(forKey: .testKey, defaultValue: "defaultStringValue")
@@ -48,7 +48,7 @@ struct RemoteConfigServiceTests {
     func boolForKey_whenFetchedAndActivated_withValidKey_returnsExpectedValue() async throws {
         mockRemoteConfigServiceClient._stubbedRemoteConfigValues = ["test_key": true]
         
-        await sut.fetch()
+        let _ = await sut.fetch()
         await sut.activate()
         
         let result = sut.bool(forKey: .testKey, defaultValue: false)
@@ -59,7 +59,7 @@ struct RemoteConfigServiceTests {
     func intForKey_whenFetchedAndActivated_withValidKey_returnsExpectedValue() async throws {
         mockRemoteConfigServiceClient._stubbedRemoteConfigValues = ["test_key": 3]
         
-        await sut.fetch()
+        let _ = await sut.fetch()
         await sut.activate()
         
         let result = sut.int(forKey: .testKey, defaultValue: 5)
@@ -70,18 +70,47 @@ struct RemoteConfigServiceTests {
     func doubleForKey_whenFetchedAndActivated_withValidKey_returnsExpectedValue() async throws {
         mockRemoteConfigServiceClient._stubbedRemoteConfigValues = ["test_key": 10.0]
         
-        await sut.fetch()
+        let _ = await sut.fetch()
         await sut.activate()
         
         let result = sut.double(forKey: .testKey, defaultValue: 30.0)
         #expect(result == 10.0)
     }
-    
+
+    @Test
+    func fetch_success_returnsExpectedResult() async {
+        let result = await sut.fetch()
+        var wasSuccessful: Bool
+        switch result {
+        case .success:
+            wasSuccessful = true
+        case .failure(_):
+            wasSuccessful = false
+        }
+        #expect(wasSuccessful)
+    }
+
+    @Test
+    func fetch_whenFails_returnsExpectedResult() async {
+        mockRemoteConfigServiceClient._stubbedFetchError = MockRemoteConfigError.generic
+        let result = await sut.fetch()
+
+        var returnedError: Error?
+        switch result {
+        case .failure(let error):
+            returnedError = error
+        default:
+            break
+        }
+        #expect(returnedError as? MockRemoteConfigError == .generic)
+
+    }
+
     @Test
     func fetch_whenFails_tracksErrorInAnalytics() async throws {
         mockRemoteConfigServiceClient._stubbedFetchError = MockRemoteConfigError.generic
 
-        await sut.fetch()
+        let _ = await sut.fetch()
         
         #expect(mockAnalyticsService._trackErrorReceivedErrors.count == 1)
         #expect(mockAnalyticsService._trackErrorReceivedErrors.first as? MockRemoteConfigError == MockRemoteConfigError.generic)

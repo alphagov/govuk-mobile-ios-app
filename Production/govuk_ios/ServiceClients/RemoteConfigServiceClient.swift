@@ -1,3 +1,5 @@
+import Foundation
+
 protocol RemoteConfigServiceClientInterface {
     func fetch() async throws
     func activate() async throws
@@ -23,19 +25,19 @@ struct RemoteConfigServiceClient: RemoteConfigServiceClientInterface {
     }
 
     func string(forKey key: String) -> String? {
-        return value(key)?.stringValue
+        value(key)?.stringValue
     }
 
     func bool(forKey key: String) -> Bool? {
-        return value(key)?.boolValue
+        value(key)?.boolValue
     }
 
     func int(forKey key: String) -> Int? {
-        return value(key)?.numberValue.intValue
+        value(key)?.numberValue.intValue
     }
 
     func double(forKey key: String) -> Double? {
-        return value(key)?.numberValue.doubleValue
+        value(key)?.numberValue.doubleValue
     }
 
     private func value(_ key: String) -> RemoteConfigValueInterface? {

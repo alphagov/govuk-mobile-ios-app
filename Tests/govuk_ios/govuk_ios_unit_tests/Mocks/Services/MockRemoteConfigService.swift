@@ -9,8 +9,9 @@ class MockRemoteConfigService: RemoteConfigServiceInterface {
     var fetchCallCount = 0
     var activateCallCount = 0 
     
-    func fetch() async {
+    func fetch() async -> RemoteConfigFetchResult {
         fetchCallCount += 1
+        return .success
     }
     
     func activate() async {

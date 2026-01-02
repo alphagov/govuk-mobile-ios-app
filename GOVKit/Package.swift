@@ -14,7 +14,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/alphagov/govuk-mobile-ios-ui-components", branch: "feature/brand-refresh")
+        .package(url: "https://github.com/alphagov/govuk-mobile-ios-ui-components", branch: "main")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.

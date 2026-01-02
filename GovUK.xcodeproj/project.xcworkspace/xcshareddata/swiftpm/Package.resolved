@@ -1,5 +1,5 @@
 {
-  "originHash" : "2848ae3e33ffb0ede7841944a36e934f0a18a123164155730d0a27f17fa687a9",
+  "originHash" : "dce9509106f682f0b664cfd3d25a26ede4c6dd1821aeb45f5c0c56f889344683",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hmlongco/Factory",
       "state" : {
-        "revision" : "587995f7d5cc667951d635fbf6b4252324ba0439",
-        "version" : "2.3.2"
+        "revision" : "ccc898f21992ebc130bc04cc197460a5ae230bcf",
+        "version" : "2.5.3"
       }
     },
     {
@@ -62,6 +62,15 @@
       "state" : {
         "revision" : "70a7857886f065a40486a7607268781c49db04ae",
         "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "google-tag-manager-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleanalytics/google-tag-manager-ios-sdk.git",
+      "state" : {
+        "revision" : "e264753e8d3c005de09fae0b73dba7c13e92655a",
+        "version" : "9.0.0"
       }
     },
     {
@@ -96,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/alphagov/govuk-mobile-ios-ui-components",
       "state" : {
-        "branch" : "feature/brand-refresh",
-        "revision" : "e87b06d595dbdefc1ee910ec9744e921f6616e7f"
+        "branch" : "main",
+        "revision" : "05cf6092e61e5ea31a477aeb03dd98ce78500e1c"
       }
     },
     {

@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-import Factory
+import FactoryKit
 import UIKit
 
 @testable import govuk_ios
@@ -408,31 +408,6 @@ struct CoordinatorBuilderTests {
         )
 
         #expect(coordinator is ChatConsentOnboardingCoordinator)
-    }
-
-    @Test
-    func chatOptIn_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
-        let coordinator = subject.chatOptIn(
-            navigationController: UINavigationController(),
-            completionAction: { }
-        )
-
-        #expect(coordinator is ChatOptInCoordinator)
-    }
-
-    @Test
-    func chatOffboarding_returnsExpectedResult() {
-        let container = Container()
-        container.chatService.register { MockChatService() }
-        container.analyticsService.register { MockAnalyticsService() }
-        let subject = CoordinatorBuilder(container: container)
-        let coordinator = subject.chatOffboarding(
-            navigationController: UINavigationController(),
-            completionAction: { }
-        )
-
-        #expect(coordinator is ChatOffboardingCoordinator)
     }
 
     @Test

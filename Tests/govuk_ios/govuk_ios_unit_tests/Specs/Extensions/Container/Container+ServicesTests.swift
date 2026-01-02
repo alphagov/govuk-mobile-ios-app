@@ -1,11 +1,12 @@
 import Foundation
 import Testing
 
-import Factory
+import FactoryKit
+import FactoryTesting
 
 @testable import govuk_ios
 
-@Suite(.serialized)
+@Suite(.container)
 struct Container_ServicesTests {
     @Test
     func analyticsService_returnsExpectedValue() async {

@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-import Factory
+import FactoryKit
 import UIKit
 
 @testable import govuk_ios
@@ -128,8 +128,6 @@ struct PostAuthCoordinatorTests {
 
         mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
         mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
-        mockCoordinatorBuilder._receivedChatOptInCompletion?()
-        mockCoordinatorBuilder._receivedChatOffboardingCompletion?()
 
         #expect(completionCalled)
     }

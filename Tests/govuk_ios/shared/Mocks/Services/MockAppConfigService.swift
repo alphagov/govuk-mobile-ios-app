@@ -22,7 +22,6 @@ class MockAppConfigService: AppConfigServiceInterface {
         .search,
         .topics,
         .recentActivity,
-        .chatOptInV2,
         .localServices
     ]
 

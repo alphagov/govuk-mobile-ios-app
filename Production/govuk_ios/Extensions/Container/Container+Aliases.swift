@@ -1,6 +1,6 @@
 import Foundation
 
-import Factory
+import FactoryKit
 
 typealias Inject = Injected
 typealias LazyInject = LazyInjected

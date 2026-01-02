@@ -1,7 +1,7 @@
 // swiftlint:disable file_length
 import UIKit
 import Foundation
-import Factory
+import FactoryKit
 
 @MainActor
 // swiftlint:disable:next type_body_length
@@ -427,34 +427,6 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve(),
             chatService: container.chatService.resolve(),
             cancelOnboardingAction: cancelOnboardingAction,
-            completionAction: completionAction
-        )
-    }
-
-    func chatOptIn(
-        navigationController: UINavigationController,
-        completionAction: @escaping () -> Void
-    ) -> BaseCoordinator {
-        ChatOptInCoordinator(
-            navigationController: navigationController,
-            viewControllerBuilder: ViewControllerBuilder(),
-            coordinatorBuilder: self,
-            analyticsService: container.analyticsService.resolve(),
-            chatService: container.chatService.resolve(),
-            completionAction: completionAction
-        )
-    }
-
-    func chatOffboarding(
-        navigationController: UINavigationController,
-        completionAction: @escaping () -> Void
-    ) -> BaseCoordinator {
-        ChatOffboardingCoordinator(
-            navigationController: navigationController,
-            viewControllerBuilder: ViewControllerBuilder(),
-            coordinatorBuilder: self,
-            analyticsService: container.analyticsService.resolve(),
-            chatService: container.chatService.resolve(),
             completionAction: completionAction
         )
     }

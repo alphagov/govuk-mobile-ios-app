@@ -2,7 +2,7 @@
 import Foundation
 import UIKit
 import SwiftUI
-import Factory
+import FactoryKit
 import GOVKit
 import SafariServices
 
@@ -556,68 +556,6 @@ class ViewControllerBuilder {
         viewController.navigationItem.rightBarButtonItem = viewModel.rightBarButtonItem
         viewController.isModalInPresentation = true
         return viewController
-    }
-
-    func chatOptIn(
-        analyticsService: AnalyticsServiceInterface,
-        chatService: ChatServiceInterface,
-        openURLAction: @escaping (URL) -> Void,
-        completionAction: @escaping () -> Void
-    ) -> UIViewController {
-        let viewModel = ChatOptInViewModel(
-            analyticsService: analyticsService,
-            chatService: chatService,
-            completionAction: completionAction
-        )
-        let linksView = InfoLinksView(
-            linkList: [
-                InfoLinkListItem(
-                    text: String.chat.localized("optInPrivacyLinkTitle"),
-                    url: chatService.privacyPolicy
-                ),
-                InfoLinkListItem(
-                    text: String.chat.localized("optInTermsLinkTitle"),
-                    url: chatService.termsAndConditions
-                )
-            ],
-            openURLAction: openURLAction
-        )
-        let containerView = InfoView<ChatOptInViewModel>(
-            viewModel: viewModel,
-            customView: { AnyView(linksView) }
-        )
-        return HostingViewController(
-            rootView: containerView
-        )
-    }
-
-    func chatOffboarding(
-        analyticsService: AnalyticsServiceInterface,
-        chatService: ChatServiceInterface,
-        openURLAction: @escaping (URL) -> Void,
-        completionAction: @escaping () -> Void
-    ) -> UIViewController {
-        let viewModel = ChatOffboardingViewModel(
-            analyticsService: analyticsService,
-            chatService: chatService,
-            completionAction: completionAction
-        )
-        let linksView = InfoLinksView(
-            linkList: [
-                InfoLinkListItem(
-                    text: String.chat.localized("feedbackMenuAccessibilityTitle"),
-                    url: chatService.feedback
-                )
-            ],
-            openURLAction: openURLAction
-        )
-        let containerView = InfoView<ChatOffboardingViewModel>(
-            viewModel: viewModel,
-            customView: { AnyView(linksView) }
-        )
-        return HostingViewController(
-            rootView: containerView
-        )
     }
 }
 // swiftlint:enable file_length

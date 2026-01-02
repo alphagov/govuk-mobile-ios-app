@@ -1,5 +1,5 @@
 {
-  "originHash" : "312eca0287c1cb2dcb7dddf471bcfd7859acdf088da9cb015227847afb14b059",
+  "originHash" : "2848ae3e33ffb0ede7841944a36e934f0a18a123164155730d0a27f17fa687a9",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hmlongco/Factory",
       "state" : {
-        "revision" : "587995f7d5cc667951d635fbf6b4252324ba0439",
-        "version" : "2.3.2"
+        "revision" : "ccc898f21992ebc130bc04cc197460a5ae230bcf",
+        "version" : "2.5.3"
       }
     },
     {
@@ -177,8 +177,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/govuk-one-login/mobile-ios-secure-store",
       "state" : {
-        "revision" : "21d5630f448e2b3af39614b00ea52ed67ae6dea1",
-        "version" : "1.5.0"
+        "revision" : "e8f52319ca662a1d2e89cec05bf9226e30cde3d1",
+        "version" : "1.2.1"
       }
     },
     {

@@ -101,7 +101,7 @@ class HomeViewModel: ObservableObject {
         guard featureEnabled(.topics)
         else { return nil }
         return HomepageWidget(
-            content: TopicsWidget(
+            content: TopicsWidgetView(
                 viewModel: self.topicsWidgetViewModel
             )
         )
@@ -155,7 +155,7 @@ class HomeViewModel: ObservableObject {
             },
             openURLAction: openURLAction
         )
-        let view = RecentActivityWidget(viewModel: viewModel)
+        let view = RecentActivityWidgetView(viewModel: viewModel)
             .padding(.top, 32)
         return HomepageWidget(
             content: view

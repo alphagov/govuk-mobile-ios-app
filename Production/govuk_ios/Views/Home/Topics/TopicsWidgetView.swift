@@ -2,7 +2,7 @@ import SwiftUI
 import UIComponents
 import GOVKit
 
-struct TopicsWidget: View {
+struct TopicsWidgetView: View {
     @StateObject var viewModel: TopicsWidgetViewModel
     @State var showingEditScreen: Bool = false
 
@@ -59,13 +59,11 @@ struct TopicsWidget: View {
                 Text(viewModel.personalisedTopicsPickerTitle)
                     .foregroundColor(
                         Color(UIColor.govUK.text.primary)
-                    )
-                    .tag(TopicSegment.favorite)
+                    ).tag(TopicSegment.favorite)
                 Text(viewModel.allTopicsPickerTitle)
                     .foregroundColor(
                         Color(UIColor.govUK.text.primary)
-                    )
-                    .tag(TopicSegment.all)
+                    ).tag(TopicSegment.all)
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 16)

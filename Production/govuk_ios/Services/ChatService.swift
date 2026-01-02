@@ -15,9 +15,6 @@ protocol ChatServiceInterface {
     func clear()
 
     // MARK: - Configuration
-    var chatOptedIn: Bool? { get set }
-    var chatOptInAvailable: Bool { get }
-    var chatTestActive: Bool { get }
     var currentConversationId: String? { get }
     var isEnabled: Bool { get }
     var privacyPolicy: URL { get }
@@ -143,7 +140,6 @@ final class ChatService: ChatServiceInterface {
     }
 
     func clear() {
-        chatOptedIn = nil
         chatOnboardingSeen = false
     }
 
@@ -159,19 +155,9 @@ extension ChatService {
         configService.chatPollIntervalSeconds
     }
 
-    var chatOptInAvailable: Bool {
-        false
-//        configService.isFeatureEnabled(key: .chatOptInV2)
-    }
-
-    var chatTestActive: Bool {
-        false
-//        configService.isFeatureEnabled(key: .chatTestActive)
-    }
-
     var isEnabled: Bool {
         false
-//      configService.isFeatureEnabled(key: .chat) && chatTestActive
+//      configService.isFeatureEnabled(key: .chat)
     }
 
     var chatOnboardingSeen: Bool {
@@ -182,18 +168,6 @@ extension ChatService {
                 userDefaultsService.set(bool: newValue, forKey: .chatOnboardingSeen)
             } else {
                 userDefaultsService.removeObject(forKey: .chatOnboardingSeen)
-            }
-        }
-    }
-
-    var chatOptedIn: Bool? {
-        get {
-            userDefaultsService.value(forKey: .chatOptedIn) as? Bool
-        } set {
-            if let newValue = newValue {
-                userDefaultsService.set(bool: newValue, forKey: .chatOptedIn)
-            } else {
-                userDefaultsService.removeObject(forKey: .chatOptedIn)
             }
         }
     }

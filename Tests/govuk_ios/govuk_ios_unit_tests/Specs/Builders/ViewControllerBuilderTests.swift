@@ -3,7 +3,7 @@ import SafariServices
 import Testing
 import SwiftUI
 import CoreData
-import Factory
+import FactoryKit
 import GOVKit
 
 @testable import govuk_ios
@@ -335,36 +335,6 @@ struct ViewControllerBuilderTests {
 
         let rootView =
         (result as? HostingViewController<InfoView<ChatConsentOnboardingViewModel>>)?.rootView
-        #expect(rootView != nil)
-    }
-
-    @Test
-    func chatOptIn_returnsExpectedResult() {
-        let subject = ViewControllerBuilder()
-        let result = subject.chatOptIn(
-            analyticsService: MockAnalyticsService(),
-            chatService: MockChatService(),
-            openURLAction: { _ in },
-            completionAction: { }
-        )
-
-        let rootView =
-        (result as? HostingViewController<InfoView<ChatOptInViewModel>>)?.rootView
-        #expect(rootView != nil)
-    }
-
-    @Test
-    func chatOffboarding_returnsExpectedResult() {
-        let subject = ViewControllerBuilder()
-        let result = subject.chatOffboarding(
-            analyticsService: MockAnalyticsService(),
-            chatService: MockChatService(),
-            openURLAction: { _ in },
-            completionAction: { }
-        )
-
-        let rootView =
-        (result as? HostingViewController<InfoView<ChatOffboardingViewModel>>)?.rootView
         #expect(rootView != nil)
     }
 }

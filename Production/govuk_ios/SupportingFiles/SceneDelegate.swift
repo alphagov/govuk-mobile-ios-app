@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
-import Factory
+import FactoryKit
 import GOVKit
 
 class SceneDelegate: UIResponder,

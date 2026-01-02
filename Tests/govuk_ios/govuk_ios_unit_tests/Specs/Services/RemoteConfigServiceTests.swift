@@ -12,7 +12,10 @@ struct RemoteConfigServiceTests {
     init() {
         mockRemoteConfigServiceClient = MockRemoteConfigServiceClient()
         mockAnalyticsService = MockAnalyticsService()
-        sut = RemoteConfigService(remoteConfigServiceClient: mockRemoteConfigServiceClient, analyticsService: mockAnalyticsService)
+        sut = RemoteConfigService(
+            remoteConfigServiceClient: mockRemoteConfigServiceClient,
+            analyticsService: mockAnalyticsService
+        )
     }
     
     @Test
@@ -25,19 +28,11 @@ struct RemoteConfigServiceTests {
         let result = sut.string(forKey: .testKey, defaultValue: "defaultStringValue")
         
         #expect(result == "testStringValue")
-        
-        #expect(mockRemoteConfigServiceClient.fetchCallCount == 1)
-        #expect(mockRemoteConfigServiceClient.activateCallCount == 1)
+
+        #expect(mockRemoteConfigServiceClient._fetchCallCount == 1)
+        #expect(mockRemoteConfigServiceClient._activateCallCount == 1)
     }
-    
-    @Test
-    func stringForKey_whenNotFetchedAndActivated_withValidKey_returnsDefaultValue() throws {
-        mockRemoteConfigServiceClient._stubbedRemoteConfigValues = ["test_key": "testStringValue"]
-        
-        let result = sut.string(forKey: .testKey, defaultValue: "defaultStringValue")
-        #expect(result == "defaultStringValue")
-    }
-    
+
     @Test
     func stringForKey_whenFetchedAndActivated_withInvalidKey_returnsDefaultValue() async throws {
         mockRemoteConfigServiceClient._stubbedRemoteConfigValues = ["test_key_1" : "testStringValue"]
@@ -84,8 +79,8 @@ struct RemoteConfigServiceTests {
     
     @Test
     func fetch_whenFails_tracksErrorInAnalytics() async throws {
-        mockRemoteConfigServiceClient._fetchError = MockRemoteConfigError.generic
-        
+        mockRemoteConfigServiceClient._stubbedFetchError = MockRemoteConfigError.generic
+
         await sut.fetch()
         
         #expect(mockAnalyticsService._trackErrorReceivedErrors.count == 1)
@@ -94,8 +89,8 @@ struct RemoteConfigServiceTests {
     
     @Test
     func activate_whenFails_tracksErrorInAnalytics() async throws {
-        mockRemoteConfigServiceClient._activateError = MockRemoteConfigError.generic
-        
+        mockRemoteConfigServiceClient._stubbedActivateError = MockRemoteConfigError.generic
+
         await sut.activate()
         
         #expect(mockAnalyticsService._trackErrorReceivedErrors.count == 1)

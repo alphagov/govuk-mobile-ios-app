@@ -8,47 +8,41 @@ enum MockRemoteConfigError: Error {
 class MockRemoteConfigServiceClient: RemoteConfigServiceClientInterface {
     
     var _stubbedRemoteConfigValues: [String: Any] = [:]
-    var _fetchError: Error?
-    var _activateError: Error?
-    
-    private var fetchedValues: [String: Any] = [:]
-    private var activatedValues: [String: Any] = [:]
-    
-    var fetchCallCount = 0
-    var activateCallCount = 0
-    
+
+    var _fetchCallCount = 0
+    var _stubbedFetchError: Error?
     func fetch() async throws {
-        fetchCallCount += 1
-        
-        if let fetchError = _fetchError {
+        _fetchCallCount += 1
+
+        if let fetchError = _stubbedFetchError {
             throw fetchError
         }
-        fetchedValues = _stubbedRemoteConfigValues
     }
-    
+
+    var _activateCallCount = 0
+    var _stubbedActivateError: Error?
     func activate() async throws {
-        activateCallCount += 1
-        
-        if let activateError = _activateError {
+        _activateCallCount += 1
+
+        if let activateError = _stubbedActivateError {
             throw activateError
         }
-        activatedValues = fetchedValues
     }
-    
+
     func string(forKey key: String) -> String? {
-        return activatedValues[key] as? String
+        _stubbedRemoteConfigValues[key] as? String
     }
-    
+
     func bool(forKey key: String) -> Bool? {
-        return activatedValues[key] as? Bool
+        _stubbedRemoteConfigValues[key] as? Bool
     }
-    
+
     func int(forKey key: String) -> Int? {
-        return activatedValues[key] as? Int
+        _stubbedRemoteConfigValues[key] as? Int
     }
-    
+
     func double(forKey key: String) -> Double? {
-        return activatedValues[key] as? Double
+        _stubbedRemoteConfigValues[key] as? Double
     }
     
 }

@@ -54,9 +54,9 @@ final class TopicsWidgetViewModel: ObservableObject {
     let emptyStateTitle = String.home.localized(
         "topicsEmptyStateTitle"
     )
-    var widgetTitle: String {
-        return String.home.localized("topicsWidgetTitle")
-    }
+    let widgetTitle = String.home.localized(
+        "topicsWidgetTitle"
+    )
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,

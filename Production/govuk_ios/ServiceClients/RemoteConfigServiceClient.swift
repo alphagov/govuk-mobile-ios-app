@@ -1,5 +1,3 @@
-import FirebaseRemoteConfig
-
 protocol RemoteConfigServiceClientInterface {
     func fetch() async throws
     func activate() async throws
@@ -10,45 +8,32 @@ protocol RemoteConfigServiceClientInterface {
 }
 
 struct RemoteConfigServiceClient: RemoteConfigServiceClientInterface {
-    private let remoteConfig = RemoteConfig.remoteConfig()
-    init() {
-        let settings = RemoteConfigSettings()
-        settings.fetchTimeout = 5
-        remoteConfig.configSettings = settings
+    private let remoteConfig: RemoteConfigInterface
+
+    init(remoteConfig: RemoteConfigInterface) {
+        self.remoteConfig = remoteConfig
     }
     func fetch() async throws {
-        try await remoteConfig.fetch()
+        try await remoteConfig.fetchConfig()
     }
     func activate() async throws {
-        try await remoteConfig.activate()
+        try await remoteConfig.activateConfig()
     }
     func string(forKey key: String) -> String? {
-        if let value = value(key) {
-            return value.stringValue
-        }
-        return nil
+        return value(key)?.stringValue
     }
     func bool(forKey key: String) -> Bool? {
-        if let value = value(key) {
-            return value.boolValue
-        }
-        return nil
+        return value(key)?.boolValue
     }
     func int(forKey key: String) -> Int? {
-        if let value = value(key) {
-            return value.numberValue.intValue
-        }
-        return nil
+        return value(key)?.numberValue.intValue
     }
     func double(forKey key: String) -> Double? {
-        if let value = value(key) {
-            return value.numberValue.doubleValue
-        }
-        return nil
+        return value(key)?.numberValue.doubleValue
     }
-    private func value(_ key: String) -> RemoteConfigValue? {
-        let value = remoteConfig[key]
-        return value.source == .static ? nil : value
+    private func value(_ key: String) -> RemoteConfigValueInterface? {
+        let value = remoteConfig.configValue(forKey: key)
+        return value.isSourceStatic ? nil : value
         // stops Firebase defaulting values when no key present
     }
 }

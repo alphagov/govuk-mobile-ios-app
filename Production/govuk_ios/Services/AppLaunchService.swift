@@ -13,8 +13,7 @@ struct AppLaunchService: AppLaunchServiceInterface {
     init(configService: AppConfigServiceInterface,
          topicService: TopicsServiceInterface,
          notificationService: NotificationServiceInterface,
-         remoteConfigService: RemoteConfigServiceInterface
-    ) {
+         remoteConfigService: RemoteConfigServiceInterface) {
         self.configService = configService
         self.topicService = topicService
         self.notificationService = notificationService

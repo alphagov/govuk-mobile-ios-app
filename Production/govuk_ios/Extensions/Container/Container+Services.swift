@@ -9,6 +9,7 @@ import Firebase
 import FirebaseAnalytics
 import FirebaseCrashlytics
 import FirebaseAppCheck
+import FirebaseRemoteConfig
 import OneSignalFramework
 
 extension Container {
@@ -50,6 +51,16 @@ extension Container {
     var crashlyticsClient: Factory<AnalyticsClient> {
         Factory(self) {
             CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
+        }
+    }
+
+    var remoteConfig: Factory<RemoteConfigInterface> {
+        Factory(self) {
+            let remoteConfig = RemoteConfig.remoteConfig()
+            let settings = RemoteConfigSettings()
+            settings.fetchTimeout = 5
+            remoteConfig.configSettings = settings
+            return remoteConfig
         }
     }
 

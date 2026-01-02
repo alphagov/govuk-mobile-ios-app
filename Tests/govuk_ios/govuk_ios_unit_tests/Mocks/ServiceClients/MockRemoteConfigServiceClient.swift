@@ -1,3 +1,4 @@
+import Foundation
 @testable import govuk_ios
 
 enum MockRemoteConfigError: Error {
@@ -49,6 +50,5 @@ class MockRemoteConfigServiceClient: RemoteConfigServiceClientInterface {
     func double(forKey key: String) -> Double? {
         return activatedValues[key] as? Double
     }
-    
     
 }

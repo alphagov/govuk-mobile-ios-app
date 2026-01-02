@@ -5,7 +5,6 @@ class PostAuthCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let completion: () -> Void
     private let remoteConfigService: RemoteConfigServiceInterface
-    private(set) var remoteConfigActivationTask: Task<Void, Never>?
 
     init(coordinatorBuilder: CoordinatorBuilder,
          remoteConfigService: RemoteConfigServiceInterface,
@@ -32,7 +31,7 @@ class PostAuthCoordinator: BaseCoordinator {
         start(coordinator)
     }
     private func activateRemoteConfig() {
-        remoteConfigActivationTask = Task {
+        Task {
             await remoteConfigService.activate()
             startTopicOnboarding()
         }

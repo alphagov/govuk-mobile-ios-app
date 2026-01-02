@@ -63,4 +63,14 @@ struct Container_ServicesTests {
         let client = container.privacyService.resolve()
         #expect(client != nil)
     }
+
+    @Test
+    func remoteConfigService_returnsExpectedValue() async {
+        let container = Container()
+        container.remoteConfigServiceClient.register {
+            MockRemoteConfigServiceClient()
+        }
+        let sut = container.remoteConfigService.resolve()
+        #expect(sut is RemoteConfigService)
+    }
 }

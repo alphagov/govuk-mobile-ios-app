@@ -35,8 +35,7 @@ class HomeCoordinator: TabItemCoordinator {
          activityService: ActivityServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
          userDefaultsService: UserDefaultsServiceInterface,
-         chatService: ChatServiceInterface
-    ) {
+         chatService: ChatServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore

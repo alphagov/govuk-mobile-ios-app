@@ -19,4 +19,15 @@ struct Container_ServiceClientsTests {
         #expect(sut is AuthenticationServiceClient)
     }
 
+    @Test
+    func remoteConfigServiceClient_returnsExpectedValue() {
+        let container = Container()
+        container.remoteConfig.register {
+            MockRemoteConfig()
+        }
+
+        let sut = container.remoteConfigServiceClient.resolve()
+        #expect(sut is RemoteConfigServiceClient)
+    }
+
 }

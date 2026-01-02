@@ -37,12 +37,15 @@ struct PostAuthCoordinatorTests {
             navigationController: MockNavigationController(),
             completion: { }
         )
-        
-        subject.start(url: nil)
-        
-        mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
-        await subject.remoteConfigActivationTask?.value
-        
+
+        await withCheckedContinuation { continuation in
+            mockRemoteConfigService._activateCompletionBlock = {
+                continuation.resume()
+            }
+            subject.start(url: nil)
+            mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
+        }
+
         #expect(mockRemoteConfigService.activateCallCount == 1)
     }
 
@@ -60,10 +63,13 @@ struct PostAuthCoordinatorTests {
         let mockTopicOnboardingCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedTopicOnboardingCoordinator = mockTopicOnboardingCoordinator
 
-        subject.start(url: nil)
-
-        mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
-        await subject.remoteConfigActivationTask?.value
+        await withCheckedContinuation { continuation in
+            mockRemoteConfigService._activateCompletionBlock = {
+                continuation.resume()
+            }
+            subject.start(url: nil)
+            mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
+        }
 
         #expect(mockTopicOnboardingCoordinator._startCalled)
     }
@@ -71,9 +77,10 @@ struct PostAuthCoordinatorTests {
     @Test
     func topicsOnboardingCompletion_startsNotificationOnboarding() async {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockRemoteConfigService = MockRemoteConfigService()
         let subject = PostAuthCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
-            remoteConfigService: MockRemoteConfigService(),
+            remoteConfigService: mockRemoteConfigService,
             navigationController: MockNavigationController(),
             completion: { }
         )
@@ -81,9 +88,14 @@ struct PostAuthCoordinatorTests {
         let mockTopicOnboardingCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedTopicOnboardingCoordinator = mockTopicOnboardingCoordinator
 
-        subject.start(url: nil)
-        mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
-        await subject.remoteConfigActivationTask?.value
+        await withCheckedContinuation { continuation in
+            mockRemoteConfigService._activateCompletionBlock = {
+                continuation.resume()
+            }
+            subject.start(url: nil)
+            mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
+        }
+
         mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
 
         #expect(mockTopicOnboardingCoordinator._startCalled)
@@ -92,10 +104,11 @@ struct PostAuthCoordinatorTests {
     @Test
     func notificationOnboardingCompletion_completesCoordinator() async {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockRemoteConfigService = MockRemoteConfigService()
         var completionCalled = false
         let subject = PostAuthCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
-            remoteConfigService: MockRemoteConfigService(),
+            remoteConfigService: mockRemoteConfigService,
             navigationController: MockNavigationController(),
             completion: {
                 completionCalled = true
@@ -105,9 +118,14 @@ struct PostAuthCoordinatorTests {
         let mockTopicOnboardingCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedTopicOnboardingCoordinator = mockTopicOnboardingCoordinator
 
-        subject.start(url: nil)
-        mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
-        await subject.remoteConfigActivationTask?.value
+        await withCheckedContinuation { continuation in
+            mockRemoteConfigService._activateCompletionBlock = {
+                continuation.resume()
+            }
+            subject.start(url: nil)
+            mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
+        }
+
         mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
         mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
         mockCoordinatorBuilder._receivedChatOptInCompletion?()

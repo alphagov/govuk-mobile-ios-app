@@ -271,9 +271,10 @@
 		815C58682EE970E200322705 /* RemoteConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C58672EE970DC00322705 /* RemoteConfigService.swift */; };
 		815C586A2EE973FC00322705 /* RemoteConfigServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C58692EE973F400322705 /* RemoteConfigServiceClient.swift */; };
 		815C586C2EE9744E00322705 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 815C586B2EE9744E00322705 /* FirebaseRemoteConfig */; };
-		81EADD9D2F04268300CA7B37 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EADD9C2F04267E00CA7B37 /* RemoteConfig.swift */; };
 		8181DBFA2EE214B100F47531 /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8181DBF92EE214B100F47531 /* FactoryKit */; };
 		8181DBFC2EE214B100F47531 /* FactoryTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 8181DBFB2EE214B100F47531 /* FactoryTesting */; };
+		81A190212F081A1B00D70C25 /* RemoteConfigValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A190202F081A1700D70C25 /* RemoteConfigValue.swift */; };
+		81EADD9D2F04268300CA7B37 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EADD9C2F04267E00CA7B37 /* RemoteConfig.swift */; };
 		B04C2E7E2DA913B100F0F63E /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C2E7D2DA913B100F0F63E /* WebViewController.swift */; };
 		B04C2E802DA9141400F0F63E /* WebDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C2E7F2DA9141400F0F63E /* WebDeeplinkRoute.swift */; };
 		B04C2E822DA9339B00F0F63E /* WebViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C2E812DA9339B00F0F63E /* WebViewCoordinator.swift */; };
@@ -697,6 +698,7 @@
 		5DFE5F1D2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Interface.swift"; sourceTree = "<group>"; };
 		815C58672EE970DC00322705 /* RemoteConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigService.swift; sourceTree = "<group>"; };
 		815C58692EE973F400322705 /* RemoteConfigServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigServiceClient.swift; sourceTree = "<group>"; };
+		81A190202F081A1700D70C25 /* RemoteConfigValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigValue.swift; sourceTree = "<group>"; };
 		81EADD9C2F04267E00CA7B37 /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		B04C2E7D2DA913B100F0F63E /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B04C2E7F2DA9141400F0F63E /* WebDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDeeplinkRoute.swift; sourceTree = "<group>"; };
@@ -1864,6 +1866,7 @@
 			isa = PBXGroup;
 			children = (
 				81EADD9C2F04267E00CA7B37 /* RemoteConfig.swift */,
+				81A190202F081A1700D70C25 /* RemoteConfigValue.swift */,
 			);
 			path = RemoteConfig;
 			sourceTree = "<group>";
@@ -2481,6 +2484,7 @@
 				D04DD32D2E0046DC002B5F19 /* PendingQuestion.swift in Sources */,
 				D04DD32E2E0046DC002B5F19 /* AnsweredQuestion.swift in Sources */,
 				D0A35E0A2E740DFD007D3D27 /* ChatMarkdownTheme.swift in Sources */,
+				81A190212F081A1B00D70C25 /* RemoteConfigValue.swift in Sources */,
 				D04DD32F2E0046DC002B5F19 /* Answer.swift in Sources */,
 				D04DD3302E0046DC002B5F19 /* History.swift in Sources */,
 				D090467A2DBBC1AC0096EE66 /* TokenExtractor.swift in Sources */,

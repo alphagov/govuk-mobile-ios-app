@@ -6,7 +6,7 @@ import UIKit
 @testable import govuk_ios
 
 @MainActor
-final class HomepageWidgetViewControllerSnapshotTests: SnapshotTestCase {
+final class HomepageWidgetSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(

@@ -5,7 +5,7 @@ import GOVKit
 import UIComponents
 
 enum TopicSegment {
-    case favorite
+    case favourite
     case all
 }
 
@@ -18,7 +18,7 @@ final class TopicsWidgetViewModel: ObservableObject {
     @Published var fetchTopicsError = false
     @Published var favouriteTopics: [Topic] = []
     @Published var allTopics: [Topic] = []
-    @Published var topicsScreen: TopicSegment = .favorite {
+    @Published var topicsScreen: TopicSegment = .favourite {
         didSet {
             if oldValue != topicsScreen &&
                 initialLoadComplete {
@@ -117,11 +117,11 @@ final class TopicsWidgetViewModel: ObservableObject {
     }
 
     private var listName: String {
-        topicsScreen == .favorite ? "Your topics" : "All topics"
+        topicsScreen == .favourite ? "Your topics" : "All topics"
     }
 
     func trackECommerce() {
-        let trackedTopics = topicsScreen == .favorite ? favouriteTopics : allTopics
+        let trackedTopics = topicsScreen == .favourite ? favouriteTopics : allTopics
         var items = [HomeCommerceItem]()
         trackedTopics.enumerated().forEach { index, topic in
             let item = HomeCommerceItem(
@@ -140,7 +140,7 @@ final class TopicsWidgetViewModel: ObservableObject {
     }
 
     func trackECommerceSelection(_ name: String) {
-        let trackedTopics = topicsScreen == .favorite ? favouriteTopics : allTopics
+        let trackedTopics = topicsScreen == .favourite ? favouriteTopics : allTopics
         guard let topic = trackedTopics.first(where: {$0.title == name}),
               let index = trackedTopics.firstIndex(of: topic) else {
             return

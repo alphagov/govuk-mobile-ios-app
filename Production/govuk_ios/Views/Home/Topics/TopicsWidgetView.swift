@@ -19,7 +19,7 @@ struct TopicsWidgetView: View {
                 VStack(spacing: 0) {
                     topicPicker
                     switch viewModel.topicsScreen {
-                    case .favorite:
+                    case .favourite:
                         if viewModel.hasFavouritedTopics {
                             topicsListViewFor(topics: viewModel.favouriteTopics)
                         } else {
@@ -59,7 +59,7 @@ struct TopicsWidgetView: View {
                 Text(viewModel.personalisedTopicsPickerTitle)
                     .foregroundColor(
                         Color(UIColor.govUK.text.primary)
-                    ).tag(TopicSegment.favorite)
+                    ).tag(TopicSegment.favourite)
                 Text(viewModel.allTopicsPickerTitle)
                     .foregroundColor(
                         Color(UIColor.govUK.text.primary)

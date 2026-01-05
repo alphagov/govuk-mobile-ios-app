@@ -11,7 +11,7 @@ final class TopicsWidgetViewSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_populated_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            viewController: viewController(topicScreen: .favorite),
+            viewController: viewController(topicScreen: .favourite),
             mode: .light,
             prefersLargeTitles: true
         )
@@ -19,7 +19,7 @@ final class TopicsWidgetViewSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_populated_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            viewController: viewController(topicScreen: .favorite),
+            viewController: viewController(topicScreen: .favourite),
             mode: .dark,
             prefersLargeTitles: true
         )

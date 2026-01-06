@@ -1,5 +1,6 @@
 import Foundation
 import GOVKit
+import FactoryKit
 
 protocol TopicsServiceInterface {
     func fetchRemoteList(completion: @escaping FetchTopicsListCompletion)
@@ -16,18 +17,18 @@ protocol TopicsServiceInterface {
     func resetOnboarding()
 }
 
-struct TopicsService: TopicsServiceInterface {
+class TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
-    private let topicsRepository: TopicsRepositoryInterface
+    private lazy var topicsRepository: TopicsRepositoryInterface = {
+        Container.shared.topicsRepository.resolve()
+    }()
     private let analyticsService: AnalyticsServiceInterface
     private let userDefaultsService: UserDefaultsServiceInterface
 
     init(topicsServiceClient: TopicsServiceClientInterface,
-         topicsRepository: TopicsRepositoryInterface,
          analyticsService: AnalyticsServiceInterface,
          userDefaultsService: UserDefaultsServiceInterface) {
         self.topicsServiceClient = topicsServiceClient
-        self.topicsRepository = topicsRepository
         self.analyticsService = analyticsService
         self.userDefaultsService = userDefaultsService
     }
@@ -37,7 +38,7 @@ struct TopicsService: TopicsServiceInterface {
             completion: { result in
                 switch result {
                 case .success(let topics):
-                    topicsRepository.save(topics: topics)
+                    self.topicsRepository.save(topics: topics)
                     completion(.success(topics))
                 case .failure(let error):
                     completion(.failure(error))

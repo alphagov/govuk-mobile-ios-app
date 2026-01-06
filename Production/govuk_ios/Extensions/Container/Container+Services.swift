@@ -93,7 +93,6 @@ extension Container {
         Factory(self) {
             TopicsService(
                 topicsServiceClient: self.topicsServiceClient(),
-                topicsRepository: self.topicsRepository(),
                 analyticsService: self.analyticsService(),
                 userDefaultsService: self.userDefaultsService.resolve()
             )

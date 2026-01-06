@@ -156,7 +156,6 @@ extension Container {
         Factory(self) {
             ReturningUserService(
                 openSecureStoreService: self.openSecureStoreService.resolve(),
-                coreDataDeletionService: self.coreDataDeletionService.resolve(),
                 localAuthenticationService: self.localAuthenticationService.resolve()
             )
         }
@@ -178,7 +177,7 @@ extension Container {
         }
     }
 
-    var coreDataDeletionService: Factory<CoreDataDeletionService> {
+    var coreDataDeletionService: Factory<CoreDataDeletionServiceInterface> {
         Factory(self) {
             CoreDataDeletionService(
                 coreDataRepository: self.coreDataRepository.resolve()

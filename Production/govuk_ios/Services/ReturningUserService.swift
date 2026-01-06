@@ -1,5 +1,6 @@
 import Foundation
 import SecureStore
+import FactoryKit
 
 typealias ReturningUserResult = Result<Bool, ReturningUserServiceError>
 
@@ -9,7 +10,6 @@ protocol ReturningUserServiceInterface {
 
 class ReturningUserService: ReturningUserServiceInterface {
     private let openSecureStoreService: SecureStorable
-    private let coreDataDeletionService: CoreDataDeletionServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
 
     private var storedPersistentUserIdentifier: String? {
@@ -17,10 +17,8 @@ class ReturningUserService: ReturningUserServiceInterface {
     }
 
     init(openSecureStoreService: SecureStorable,
-         coreDataDeletionService: CoreDataDeletionServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface) {
         self.openSecureStoreService = openSecureStoreService
-        self.coreDataDeletionService = coreDataDeletionService
         self.localAuthenticationService = localAuthenticationService
     }
 
@@ -68,6 +66,7 @@ class ReturningUserService: ReturningUserServiceInterface {
             return saveResult
         }
         do {
+            let coreDataDeletionService = Container.shared.coreDataDeletionService.resolve()
             try coreDataDeletionService.deleteAllObjects()
         } catch {
             return .failure(.coreDataDeletionError)

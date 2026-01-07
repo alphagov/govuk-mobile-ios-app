@@ -6,19 +6,37 @@ import Testing
 @Suite
 struct SearchItemTests {
     @Test
-    func init_withValidLinkPath_returnsItem() throws {
+    func init_completeValues_returnsItem() throws {
         let expectedTitle = UUID().uuidString
+        let expectedContentId = UUID().uuidString
         let expectedDescription = UUID().uuidString
+        let expectedHighlightingDescription = UUID().uuidString
         let json = [
             "title": expectedTitle,
-            "description_with_highlighting": expectedDescription,
+            "description_with_highlighting": expectedHighlightingDescription,
+            "description": expectedDescription,
+            "content_id": expectedContentId,
             "link": "/test",
         ]
         let data = try JSONSerialization.data(withJSONObject: json)
         let result = try JSONDecoder().decode(SearchItem.self, from: data)
         #expect(result.title == expectedTitle)
-        #expect(result.description == expectedDescription)
+        #expect(result.contentId == expectedContentId)
         #expect(result.link.absoluteString == "https://www.gov.uk/test")
+        #expect(result.description == expectedHighlightingDescription)
+    }
+
+    @Test
+    func init_withDescription_returnsItem() throws {
+        let expectedDescription = UUID().uuidString
+        let json = [
+            "title": UUID().uuidString,
+            "description": expectedDescription,
+            "link": "/test",
+        ]
+        let data = try JSONSerialization.data(withJSONObject: json)
+        let result = try JSONDecoder().decode(SearchItem.self, from: data)
+        #expect(result.description == expectedDescription)
     }
 
     @Test
@@ -33,13 +51,11 @@ struct SearchItemTests {
         ]
         let data = try JSONSerialization.data(withJSONObject: json)
         let result = try JSONDecoder().decode(SearchItem.self, from: data)
-        #expect(result.title == expectedTitle)
-        #expect(result.description == expectedDescription)
         #expect(result.link.absoluteString == expectedURL)
     }
 
     @Test
-    func init_invalidLinkURL_returnsItem() throws {
+    func init_invalidLinkURL_returnsError() throws {
         let expectedTitle = UUID().uuidString
         let expectedDescription = UUID().uuidString
         let json = [
@@ -56,17 +72,19 @@ struct SearchItemTests {
     }
 
     @Test
-    func init_withBlankDescription_returnsItem() throws {
+    func init_withValidBlankValues_returnsItem() throws {
         let expectedTitle = UUID().uuidString
         let json = [
             "title": expectedTitle,
             "description_with_highlighting": nil,
+            "description": nil,
+            "contentId": nil,
             "link": "/test",
         ]
         let data = try JSONSerialization.data(withJSONObject: json)
         let result = try JSONDecoder().decode(SearchItem.self, from: data)
-        #expect(result.title == expectedTitle)
         #expect(result.description == nil)
-        #expect(result.link.absoluteString == "https://www.gov.uk/test")
+        #expect(result.descriptionWithHighlighting == nil)
+        #expect(result.contentId == nil)
     }
 }

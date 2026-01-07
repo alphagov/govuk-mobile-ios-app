@@ -20,6 +20,7 @@ struct SearchViewModelTests{
         let item = SearchItem(
             title: expectedTitle,
             description: UUID().uuidString,
+            contentId: nil,
             link: URL(string: "https://www.gov.uk/random")!
         )
 
@@ -49,6 +50,7 @@ struct SearchViewModelTests{
         let item = SearchItem(
             title: expectedTitle,
             description: UUID().uuidString,
+            contentId: nil,
             link: URL(string: "https://www.google.com/random")!
         )
         

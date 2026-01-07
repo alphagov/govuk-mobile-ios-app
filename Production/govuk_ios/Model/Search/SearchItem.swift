@@ -6,6 +6,7 @@ struct SearchItem: Codable,
     let title: String
     var description: String?
     var descriptionWithHighlighting: String?
+    let contentId: String?
     let link: URL
 
     enum CodingKeys: String,
@@ -13,6 +14,7 @@ struct SearchItem: Codable,
         case title
         case description
         case descriptionWithHighlighting = "description_with_highlighting"
+        case contentId = "content_id"
         case link
     }
 
@@ -35,15 +37,18 @@ struct SearchItem: Codable,
         self.init(
             title: try container.decode(String.self, forKey: .title),
             description: descWithHighlighting ?? desc,
+            contentId: try container.decodeIfPresent(String.self, forKey: .contentId),
             link: url
         )
     }
 
     init(title: String,
          description: String?,
+         contentId: String?,
          link: URL) {
         self.title = title
         self.description = description
+        self.contentId = contentId
         self.link = link
     }
 }

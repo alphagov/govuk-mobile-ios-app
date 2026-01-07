@@ -24,11 +24,10 @@ extension AppEvent {
     }
 
     static func selectSearchItem(name: String,
-                                 results: Int,
                                  items: [ECommerceItem]) -> AppEvent {
         selectItem(listName: "Search / " + name,
                    listId: name,
-                   results: results,
+                   results: items.count,
                    items: items)
     }
 

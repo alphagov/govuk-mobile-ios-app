@@ -101,7 +101,7 @@ struct EmergencyBannerWidgetViewModel {
         let event = AppEvent.buttonFunction(
             text: analyticsText,
             section: "Banner",
-            action: "dismiss")
+            action: "Remove")
         analyticsService.track(event: event)
         dismissAction()
     }

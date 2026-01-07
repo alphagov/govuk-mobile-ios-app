@@ -84,10 +84,8 @@ struct AppEvent_EcommerceTests {
     func selectSearchItem_returnsExpectedResult() throws {
         let expectedName = "Search"
         let expectedItems = SearchCommerceItem.arrangeItems(count: 1)
-        let expectedResultCount = 3
         let result = AppEvent.selectSearchItem(
             name: expectedName,
-            results: expectedResultCount,
             items: expectedItems
         )
 
@@ -95,7 +93,7 @@ struct AppEvent_EcommerceTests {
         #expect(result.params?.count == 4)
         #expect(result.params?["item_list_id"] as? String == expectedName)
         #expect(result.params?["item_list_name"] as? String == "Search / " + expectedName)
-        #expect(result.params?["results"] as? Int == expectedResultCount)
+        #expect(result.params?["results"] as? Int == 1)
         #expect((result.params?["items"] as? [[String: String]])?.count == 1)
         let firstItem = try #require((result.params?["items"] as? [[String: String]])?.first)
         #expect(firstItem["item_name"] == "name 1")

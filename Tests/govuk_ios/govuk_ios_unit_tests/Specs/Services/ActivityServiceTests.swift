@@ -18,6 +18,7 @@ struct ActivityServiceTests {
         let expectedItem = SearchItem(
             title: expectedTitle,
             description: "test_description",
+            contentId: nil,
             link: URL(string: "https://www.govuk.com/test")!
         )
         sut.save(searchItem: expectedItem)

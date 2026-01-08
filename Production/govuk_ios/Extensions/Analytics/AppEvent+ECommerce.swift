@@ -23,6 +23,15 @@ extension AppEvent {
                    items: items)
     }
 
+    static func selectSearchItem(name: String,
+                                 results: Int,
+                                 items: [ECommerceItem]) -> AppEvent {
+        selectItem(listName: "Search / " + name,
+                   listId: name,
+                   results: results,
+                   items: items)
+    }
+
     static func selectHomePageItem(results: Int,
                                    items: [ECommerceItem]) -> AppEvent {
         selectItem(listName: "Homepage",

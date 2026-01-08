@@ -81,6 +81,30 @@ struct AppEvent_EcommerceTests {
     }
 
     @Test
+    func selectSearchItem_returnsExpectedResult() throws {
+        let expectedName = "Search"
+        let expectedItems = SearchCommerceItem.arrangeItems(count: 1)
+        let result = AppEvent.selectSearchItem(
+            name: expectedName,
+            results: 1,
+            items: expectedItems
+        )
+
+        #expect(result.name == "select_item")
+        #expect(result.params?.count == 4)
+        #expect(result.params?["item_list_id"] as? String == expectedName)
+        #expect(result.params?["item_list_name"] as? String == "Search / " + expectedName)
+        #expect(result.params?["results"] as? Int == 1)
+        #expect((result.params?["items"] as? [[String: String]])?.count == 1)
+        let firstItem = try #require((result.params?["items"] as? [[String: String]])?.first)
+        #expect(firstItem["item_name"] == "name 1")
+        #expect(firstItem["index"] == "1")
+        #expect(firstItem["term"] == "Search term")
+        #expect(firstItem["item_location"] == "item_location 1")
+        #expect(firstItem["item_id"] == "item_id 1")
+    }
+
+    @Test
     func selectHomePageItem_returnsExpectedResult() throws {
         let expectedItems = HomeCommerceItem.arrangeItems(count: 1)
         let expectedResultCount = 3
@@ -140,5 +164,24 @@ extension HomeCommerceItem {
         }
         return items
 
+    }
+}
+
+extension SearchCommerceItem {
+    static func arrange(index: Int) -> SearchCommerceItem {
+        SearchCommerceItem(name: "name \(index)",
+                           index: index,
+                           term: "Search term",
+                           itemLocation: "item_location \(index)",
+                           itemId: "item_id \(index)")
+    }
+
+    static func arrangeItems(count: Int) -> [SearchCommerceItem] {
+        var items = [SearchCommerceItem]()
+        for index in 1...count {
+            let item = SearchCommerceItem.arrange(index: index)
+            items.append(item)
+        }
+        return items
     }
 }

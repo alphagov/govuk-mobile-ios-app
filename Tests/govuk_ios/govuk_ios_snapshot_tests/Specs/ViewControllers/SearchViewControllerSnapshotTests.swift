@@ -10,9 +10,18 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
         let url = URL(string: "https://www.gov.uk")!
         let result = SearchResult(
             results: [
-                SearchItem(title: "Test 1", description: "Description 1", link: url),
-                SearchItem(title: "Test 2", description: "Description 2", link: url),
-                SearchItem(title: "Test 3", description: nil, link: url)
+                SearchItem(title: "Test 1",
+                           description: "Description 1",
+                           contentId: nil,
+                           link: url),
+                SearchItem(title: "Test 2",
+                           description: "Description 2",
+                           contentId: UUID().uuidString,
+                           link: url),
+                SearchItem(title: "Test 3",
+                           description: nil,
+                           contentId: UUID().uuidString,
+                           link: url)
             ]
         )
         let viewController = createViewController(result: .success(result))
@@ -28,7 +37,12 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
     func test_search_successResponse_withResults_dark_rendersCorrectly() {
         let url = URL(string: "https://www.gov.uk")!
         let result = SearchResult(
-            results: [SearchItem(title: "Test 1", description: "Description 1", link: url)]
+            results: [
+                SearchItem(title: "Test 1",
+                           description: "Description 1",
+                           contentId: UUID().uuidString,
+                           link: url)
+            ]
         )
         let viewController = createViewController(result: .success(result))
         viewController.viewDidLoad()

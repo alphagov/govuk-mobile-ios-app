@@ -14,6 +14,7 @@ struct AppEvent_SearchTests {
         let item = SearchItem(
             title: expectedTitle,
             description: "description",
+            contentId: nil,
             link: expectedURL
         )
         let result = AppEvent.searchResultNavigation(

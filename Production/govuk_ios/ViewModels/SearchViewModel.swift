@@ -79,7 +79,7 @@ class SearchViewModel {
     private func trackSearchItemSelected(_ item: SearchItem) {
         let event = AppEvent.searchResultNavigation(item: item)
         analyticsService.track(event: event)
-        trackEcommerceSelectedResult(name: item.title)
+        trackEcommerceSelectedResult(item)
     }
 
     private func trackSearchTerm(type: SearchInvocationType) {
@@ -103,13 +103,20 @@ class SearchViewModel {
         )
     }
 
-    private func trackEcommerceSelectedResult(name: String) {
+    private func trackEcommerceSelectedResult(_ item: SearchItem) {
         guard let results else { return }
+
+        let ecommerceResults = ecommerceResults(results)
+        let indexedSelectedResult = ecommerceResults.first {
+            $0.itemLocation == item.link.absoluteString
+        }
+        guard let indexedSelectedResult else { return }
 
         analyticsService.track(
             event: AppEvent.selectSearchItem(
-                name: name,
-                items: ecommerceResults(results)
+                name: item.title,
+                results: ecommerceResults.count,
+                items: [indexedSelectedResult]
             )
         )
     }

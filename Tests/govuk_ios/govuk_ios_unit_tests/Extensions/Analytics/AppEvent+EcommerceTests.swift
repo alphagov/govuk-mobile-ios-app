@@ -86,6 +86,7 @@ struct AppEvent_EcommerceTests {
         let expectedItems = SearchCommerceItem.arrangeItems(count: 1)
         let result = AppEvent.selectSearchItem(
             name: expectedName,
+            results: 1,
             items: expectedItems
         )
 

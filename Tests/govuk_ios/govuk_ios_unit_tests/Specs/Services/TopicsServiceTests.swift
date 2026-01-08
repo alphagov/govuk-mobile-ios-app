@@ -1,32 +1,32 @@
 import Foundation
 import Testing
 import GOVKit
-import FactoryKit
 
 @testable import govuk_ios
 
 @Suite(.serialized)
-struct TopicsServiceTests {
+final class TopicsServiceTests {
     var sut: TopicsService!
     var mockTopicsServiceClient: MockTopicsServiceClient!
+    var mockTopicsRepository: MockTopicsRepository!
     var mockAnalyticsService: MockAnalyticsService!
 
     init() {
         mockTopicsServiceClient = MockTopicsServiceClient()
+        mockTopicsRepository = MockTopicsRepository()
         mockAnalyticsService = MockAnalyticsService()
         sut = TopicsService(
             topicsServiceClient: mockTopicsServiceClient,
             analyticsService: mockAnalyticsService,
-            userDefaultsService: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService(),
+            topicsRepository: {
+                self.mockTopicsRepository
+            }
         )
     }
 
     @Test
     func downloadTopicsList_success_returnsExpectedData() async {
-        let mockTopicsRepository = MockTopicsRepository()
-        Container.shared.topicsRepository.register {
-            mockTopicsRepository
-        }
         let result = await withCheckedContinuation { continuation in
             sut.fetchRemoteList { result in
                 continuation.resume(returning: result)
@@ -39,15 +39,10 @@ struct TopicsServiceTests {
         let topicsList = try? result.get()
         #expect(topicsList?.count == 3)
         #expect(mockTopicsRepository._didCallSaveTopicsList == true)
-        Container.shared.topicsService.reset()
     }
 
     @Test
     func downloadTopicsList_failure_returnsExpectedResult() async {
-        let mockTopicsRepository = MockTopicsRepository()
-        Container.shared.topicsRepository.register {
-            mockTopicsRepository
-        }
         let result = await withCheckedContinuation { continuation in
             sut.fetchRemoteList { result in
                 continuation.resume(returning: result)
@@ -60,40 +55,24 @@ struct TopicsServiceTests {
         #expect((try? result.get()) == nil)
         #expect(result.getError() == .decodingError)
         #expect(mockTopicsRepository._didCallSaveTopicsList == false)
-        Container.shared.topicsService.reset()
     }
 
     @Test
     func fetchAll_fetchesFromRepository() {
-        let mockTopicsRepository = MockTopicsRepository()
-        Container.shared.topicsRepository.register {
-            mockTopicsRepository
-        }
         _ = sut.fetchAll()
         #expect(mockTopicsRepository._didCallFetchAll)
-        Container.shared.topicsService.reset()
     }
 
     @Test
     func fetchFavourites_fetchesFromRepository() {
-        let mockTopicsRepository = MockTopicsRepository()
-        Container.shared.topicsRepository.register {
-            mockTopicsRepository
-        }
         _ = sut.fetchFavourites()
         #expect(mockTopicsRepository._didCallFetchFavourites)
-        Container.shared.topicsService.reset()
     }
 
     @Test
     func save_savesChangesToRepository() {
-        let mockTopicsRepository = MockTopicsRepository()
-        Container.shared.topicsRepository.register {
-            mockTopicsRepository
-        }
         sut.save()
         #expect(mockTopicsRepository._didCallSaveChanges)
-        Container.shared.topicsService.reset()
     }
 
     @Test
@@ -120,7 +99,10 @@ struct TopicsServiceTests {
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
             analyticsService: MockAnalyticsService(),
-            userDefaultsService: mockUserDefaults
+            userDefaultsService: mockUserDefaults,
+            topicsRepository: {
+                MockTopicsRepository()
+            }
         )
 
         #expect(mockUserDefaults.bool(forKey: .topicsOnboardingSeen) == false)
@@ -139,7 +121,10 @@ struct TopicsServiceTests {
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
             analyticsService: MockAnalyticsService(),
-            userDefaultsService: mockUserDefaults
+            userDefaultsService: mockUserDefaults,
+            topicsRepository: {
+                MockTopicsRepository()
+            }
         )
 
         #expect(sut.hasOnboardedTopics == expectedValue)
@@ -159,7 +144,10 @@ struct TopicsServiceTests {
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
             analyticsService: MockAnalyticsService(),
-            userDefaultsService: mockUserDefaults
+            userDefaultsService: mockUserDefaults,
+            topicsRepository: {
+                MockTopicsRepository()
+            }
         )
 
         sut.resetOnboarding()

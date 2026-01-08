@@ -1,6 +1,5 @@
 import Foundation
 import Testing
-import FactoryKit
 
 @testable import govuk_ios
 
@@ -14,7 +13,10 @@ struct ReturningUserServiceTests {
         mockSecureStoreService._stubbedSaveItemResult = .success(())
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
-            localAuthenticationService: mockLocalAuthenticationService
+            localAuthenticationService: mockLocalAuthenticationService,
+            coreDataDeletionService: {
+                MockCoreDataDeletionService()
+            }
         )
         let result = await sut.process(idToken: Self.idToken)
 
@@ -37,7 +39,10 @@ struct ReturningUserServiceTests {
         )
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
-            localAuthenticationService: mockLocalAuthenticationService
+            localAuthenticationService: mockLocalAuthenticationService,
+            coreDataDeletionService: {
+                MockCoreDataDeletionService()
+            }
         )
         let result = await sut.process(idToken: Self.idToken)
 
@@ -53,15 +58,15 @@ struct ReturningUserServiceTests {
     func process_differentIdentifier_setsIsReturningUserFalse() async {
         let mockSecureStoreService = MockSecureStoreService()
         let mockCoreDataDeletionService = MockCoreDataDeletionService()
-        Container.shared.coreDataDeletionService.register {
-            mockCoreDataDeletionService
-        }
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
         mockSecureStoreService._stubbedReadItemResult = .success(UUID().uuidString)
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
-            localAuthenticationService: mockLocalAuthenticationService
+            localAuthenticationService: mockLocalAuthenticationService,
+            coreDataDeletionService: {
+                mockCoreDataDeletionService
+            }
         )
 
         let result = await sut.process(idToken: Self.idToken)
@@ -72,7 +77,6 @@ struct ReturningUserServiceTests {
                 #expect(mockCoreDataDeletionService._deleteAllObjectsCalled)
                 let tokenIdentifier = await userIdentifier(idToken: Self.idToken)
                 #expect(mockSecureStoreService._savedItems[SecureStoreableConstant.persistentUserIdentifier.rawValue] == tokenIdentifier)
-                Container.shared.coreDataDeletionService.reset()
                 confirmation()
             }
         }
@@ -82,16 +86,16 @@ struct ReturningUserServiceTests {
     func process_differentIdentifier_coreDataError_returnsFailure() async {
         let mockSecureStoreService = MockSecureStoreService()
         let mockCoreDataDeletionService = MockCoreDataDeletionService()
-        Container.shared.coreDataDeletionService.register {
-            mockCoreDataDeletionService
-        }
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
         mockSecureStoreService._stubbedReadItemResult = .success(UUID().uuidString)
         mockCoreDataDeletionService._deleteAllObjectsError = NSError()
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
-            localAuthenticationService: mockLocalAuthenticationService
+            localAuthenticationService: mockLocalAuthenticationService,
+            coreDataDeletionService: {
+                mockCoreDataDeletionService
+            }
         )
 
         let result = await sut.process(idToken: Self.idToken)
@@ -99,7 +103,6 @@ struct ReturningUserServiceTests {
         await confirmation() { confirmation in
             if case let .failure(error) = result {
                 #expect(error == .coreDataDeletionError)
-                Container.shared.coreDataDeletionService.reset()
                 confirmation()
             }
         }
@@ -111,7 +114,10 @@ struct ReturningUserServiceTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
-            localAuthenticationService: mockLocalAuthenticationService
+            localAuthenticationService: mockLocalAuthenticationService,
+            coreDataDeletionService: {
+                MockCoreDataDeletionService()
+            }
         )
         let result = await sut.process(idToken: nil)
 
@@ -131,7 +137,10 @@ struct ReturningUserServiceTests {
         mockSecureStoreService._stubbedReadItemResult = .failure(NSError())
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
-            localAuthenticationService: mockLocalAuthenticationService
+            localAuthenticationService: mockLocalAuthenticationService,
+            coreDataDeletionService: {
+                MockCoreDataDeletionService()
+            }
         )
         let result = await sut.process(idToken: Self.idToken)
 
@@ -153,7 +162,10 @@ struct ReturningUserServiceTests {
         mockSecureStoreService._stubbedReadItemResult = .success(UUID().uuidString)
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
-            localAuthenticationService: mockLocalAuthenticationService
+            localAuthenticationService: mockLocalAuthenticationService,
+            coreDataDeletionService: {
+                MockCoreDataDeletionService()
+            }
         )
         let result = await sut.process(idToken: Self.idToken)
 

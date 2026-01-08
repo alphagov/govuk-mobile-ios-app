@@ -94,7 +94,10 @@ extension Container {
             TopicsService(
                 topicsServiceClient: self.topicsServiceClient(),
                 analyticsService: self.analyticsService(),
-                userDefaultsService: self.userDefaultsService.resolve()
+                userDefaultsService: self.userDefaultsService.resolve(),
+                topicsRepository: {
+                    self.topicsRepository.resolve()
+                }
             )
         }
     }
@@ -155,7 +158,10 @@ extension Container {
         Factory(self) {
             ReturningUserService(
                 openSecureStoreService: self.openSecureStoreService.resolve(),
-                localAuthenticationService: self.localAuthenticationService.resolve()
+                localAuthenticationService: self.localAuthenticationService.resolve(),
+                coreDataDeletionService: {
+                    self.coreDataDeletionService.resolve()
+                }
             )
         }
     }

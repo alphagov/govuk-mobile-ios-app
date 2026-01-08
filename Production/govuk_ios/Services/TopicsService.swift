@@ -1,6 +1,5 @@
 import Foundation
 import GOVKit
-import FactoryKit
 
 protocol TopicsServiceInterface {
     func fetchRemoteList(completion: @escaping FetchTopicsListCompletion)
@@ -19,18 +18,18 @@ protocol TopicsServiceInterface {
 
 class TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
-    private lazy var topicsRepository: TopicsRepositoryInterface = {
-        Container.shared.topicsRepository.resolve()
-    }()
+    private let topicsRepository: () -> TopicsRepositoryInterface
     private let analyticsService: AnalyticsServiceInterface
     private let userDefaultsService: UserDefaultsServiceInterface
 
     init(topicsServiceClient: TopicsServiceClientInterface,
          analyticsService: AnalyticsServiceInterface,
-         userDefaultsService: UserDefaultsServiceInterface) {
+         userDefaultsService: UserDefaultsServiceInterface,
+         topicsRepository: @escaping () -> TopicsRepositoryInterface) {
         self.topicsServiceClient = topicsServiceClient
         self.analyticsService = analyticsService
         self.userDefaultsService = userDefaultsService
+        self.topicsRepository = topicsRepository
     }
 
     func fetchRemoteList(completion: @escaping FetchTopicsListCompletion) {
@@ -38,7 +37,7 @@ class TopicsService: TopicsServiceInterface {
             completion: { result in
                 switch result {
                 case .success(let topics):
-                    self.topicsRepository.save(topics: topics)
+                    self.topicsRepository().save(topics: topics)
                     completion(.success(topics))
                 case .failure(let error):
                     completion(.failure(error))
@@ -56,19 +55,19 @@ class TopicsService: TopicsServiceInterface {
     }
 
     func fetchAll() -> [Topic] {
-        topicsRepository.fetchAll()
+        topicsRepository().fetchAll()
     }
 
     func fetchFavourites() -> [Topic] {
-        topicsRepository.fetchFavourites()
+        topicsRepository().fetchFavourites()
     }
 
     func save() {
-        topicsRepository.save()
+        topicsRepository().save()
     }
 
     func rollback() {
-        topicsRepository.rollback()
+        topicsRepository().rollback()
     }
 
     func resetOnboarding() {

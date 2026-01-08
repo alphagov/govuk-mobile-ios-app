@@ -11,9 +11,9 @@ struct LocalAuthorityWidget: View {
 
     var body: some View {
         VStack {
-            HeaderViewComponent(
-                model: HeaderViewModel(
-                    title: viewModel.title
+            SectionHeaderLabelView(
+                model: SectionHeaderLabelViewModel(
+                    title: viewModel.title,
                 )
             )
             .padding(.horizontal)

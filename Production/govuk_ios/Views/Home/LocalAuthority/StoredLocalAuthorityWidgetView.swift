@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UIComponents
 
 struct StoredLocalAuthorityWidgetView: View {
     private let viewModel: StoredLocalAuthorityWidgetViewModel
@@ -10,18 +11,14 @@ struct StoredLocalAuthorityWidgetView: View {
 
     var body: some View {
         VStack {
-            HeaderViewComponent(
-                model: HeaderViewModel(
-                    title: viewModel.title,
-                    secondaryButton: .init(
-                        title: viewModel.editButtonTitle,
-                        accessibilityLabel: viewModel.editButtonAltText,
-                        action: {
-                            viewModel.openEditViewAction()
-                        }
-                    )
+            SectionHeaderLabelView(model: SectionHeaderLabelViewModel(
+                title: viewModel.title,
+                button: .init(
+                    localisedTitle: viewModel.editButtonTitle,
+                    localisedAccessibilityLabel: viewModel.editButtonAltText,
+                    action: { viewModel.openEditViewAction() }
                 )
-            )
+            ))
             .padding(.bottom, 8)
             .padding(.top, 16)
             if viewModel.localAuthorities.count == 1,

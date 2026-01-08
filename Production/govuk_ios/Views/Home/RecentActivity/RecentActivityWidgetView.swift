@@ -1,4 +1,5 @@
 import SwiftUI
+import UIComponents
 import GOVKit
 
 struct RecentActivityWidgetView: View {
@@ -11,15 +12,13 @@ struct RecentActivityWidgetView: View {
                 alignment: .leading,
                 spacing: .zero,
                 content: {
-                        HeaderViewComponent(
-                            model: HeaderViewModel(
-                                title: viewModel.title,
-                                secondaryButton: .init(
-                                    title: viewModel.seeAllButtonTitle,
-                                    action: { viewModel.seeAllAction() }
-                                )
-                            )
+                    SectionHeaderLabelView(model: SectionHeaderLabelViewModel(
+                        title: viewModel.title,
+                        button: .init(
+                            localisedTitle: viewModel.seeAllButtonTitle,
+                            action: { viewModel.seeAllAction() }
                         )
+                    ))
                     .padding(.horizontal, 16)
                     GroupedList(
                         content: viewModel.sections
@@ -34,8 +33,8 @@ struct RecentActivityWidgetView: View {
             alignment: .leading,
             spacing: .zero,
             content: {
-                HeaderViewComponent(
-                    model: HeaderViewModel(
+                SectionHeaderLabelView(
+                    model: .init(
                         title: viewModel.title
                     )
                 )

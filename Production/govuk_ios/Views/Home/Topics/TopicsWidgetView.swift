@@ -8,14 +8,13 @@ struct TopicsWidgetView: View {
 
     var body: some View {
         VStack {
-            HeaderViewComponent(
-                model: HeaderViewModel(
+            SectionHeaderLabelView(
+                model: SectionHeaderLabelViewModel(
                     title: viewModel.widgetTitle,
-                    secondaryButton: .init(
-                        title: viewModel.editButtonTitle,
-                        accessibilityLabel: viewModel.editButtonAccessibilityLabel,
-                        action: { showingEditScreen.toggle() }
-                    )
+                    button: .init(
+                        localisedTitle: viewModel.editButtonTitle,
+                        localisedAccessibilityLabel: viewModel.editButtonAccessibilityLabel,
+                        action: { showingEditScreen.toggle() })
                 )
             )
             .opacity(viewModel.fetchTopicsError ? 0 : 1)

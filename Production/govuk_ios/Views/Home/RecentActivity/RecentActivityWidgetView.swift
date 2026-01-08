@@ -1,4 +1,5 @@
 import SwiftUI
+import UIComponents
 import GOVKit
 
 struct RecentActivityWidgetView: View {
@@ -11,12 +12,16 @@ struct RecentActivityWidgetView: View {
                 alignment: .leading,
                 spacing: .zero,
                 content: {
-                    HStack {
-                        titleView
-                        Spacer()
-                        seeAllButton
-                    }
-                    .padding(.horizontal, 16)
+                    SectionHeaderLabelView(
+                        model: SectionHeaderLabelViewModel(
+                        title: viewModel.title,
+                        button: .init(
+                            localisedTitle: viewModel.seeAllButtonTitle,
+                            action: { viewModel.seeAllAction() }
+                        )
+                    )
+                )
+                .padding(.horizontal, 16)
                     GroupedList(
                         content: viewModel.sections
                     )
@@ -25,40 +30,22 @@ struct RecentActivityWidgetView: View {
             )
         }
     }
-
-    private var titleView: some View {
-        Text(viewModel.title)
-            .font(Font.govUK.title3Semibold)
-            .foregroundColor(Color(UIColor.govUK.text.primary))
-            .accessibility(addTraits: .isHeader)
-    }
-
     private var emptyStateView: some View {
         VStack(
             alignment: .leading,
             spacing: .zero,
             content: {
-                titleView
-                    .padding(.horizontal, 16)
+                SectionHeaderLabelView(
+                    model: .init(
+                        title: viewModel.title
+                    )
+                )
+                .padding(.horizontal, 16)
                 NonTappableCardView(
                     text: viewModel.emptyActivityStateTitle
                 )
                 .padding(.horizontal, 16)
                 .padding(.top, 16)
-            }
-        )
-    }
-
-    private var seeAllButton: some View {
-        Button(
-            action: {
-                viewModel.seeAllAction()
-            }, label: {
-                Text(viewModel.seeAllButtonTitle)
-                    .foregroundColor(
-                        Color(UIColor.govUK.text.buttonSecondary)
-                    )
-                    .font(Font.govUK.subheadlineSemibold)
             }
         )
     }

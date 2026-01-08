@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UIComponents
 
 struct StoredLocalAuthorityWidgetView: View {
     private let viewModel: StoredLocalAuthorityWidgetViewModel
@@ -10,24 +11,16 @@ struct StoredLocalAuthorityWidgetView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Text(viewModel.title)
-                    .font(Font.govUK.title3Semibold)
-                    .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
-                    .accessibilityAddTraits(.isHeader)
-                Spacer()
-                Button {
-                    viewModel.openEditViewAction()
-                } label: {
-                    Text(viewModel.editButtonTitle)
-                        .font(.govUK.subheadlineSemibold)
-                        .foregroundColor(
-                            Color(uiColor: UIColor.govUK.text.buttonSecondary
-                                 )
-                        )
-                }
-                .accessibilityLabel(viewModel.editButtonAltText)
-            }
+            SectionHeaderLabelView(
+                model: SectionHeaderLabelViewModel(
+                    title: viewModel.title,
+                    button: .init(
+                        localisedTitle: viewModel.editButtonTitle,
+                        localisedAccessibilityLabel: viewModel.editButtonAltText,
+                        action: { viewModel.openEditViewAction() }
+                    )
+                )
+            )
             .padding(.bottom, 8)
             .padding(.top, 16)
             if viewModel.localAuthorities.count == 1,

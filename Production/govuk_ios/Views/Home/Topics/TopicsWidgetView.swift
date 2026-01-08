@@ -8,8 +8,17 @@ struct TopicsWidgetView: View {
 
     var body: some View {
         VStack {
-            titleView
-                .padding(.top, 16)
+            SectionHeaderLabelView(
+                model: SectionHeaderLabelViewModel(
+                    title: viewModel.widgetTitle,
+                    button: .init(
+                        localisedTitle: viewModel.editButtonTitle,
+                        localisedAccessibilityLabel: viewModel.editButtonAccessibilityLabel,
+                        action: { showingEditScreen.toggle() })
+                )
+            )
+            .opacity(viewModel.fetchTopicsError ? 0 : 1)
+            .padding(.top, 16)
             if viewModel.fetchTopicsError {
                 AppErrorView(viewModel: viewModel.errorViewModel)
                     .padding(.vertical)
@@ -124,29 +133,6 @@ struct TopicsWidgetView: View {
                     )
             }
             .padding(.vertical, 14)
-        }
-    }
-
-    var titleView: some View {
-        HStack {
-            Text(viewModel.widgetTitle)
-                .font(Font.govUK.title3Semibold)
-                .foregroundColor(Color(UIColor.govUK.text.primary))
-                .accessibilityAddTraits(.isHeader)
-            Spacer()
-            Button(
-                action: {
-                    showingEditScreen.toggle()
-                }, label: {
-                    Text(viewModel.editButtonTitle)
-                        .foregroundColor(
-                            Color(UIColor.govUK.text.buttonSecondary)
-                        )
-                        .font(Font.govUK.subheadlineSemibold)
-                        .accessibilityLabel(viewModel.editButtonAccessibilityLabel)
-                }
-            )
-            .opacity(viewModel.fetchTopicsError ? 0 : 1)
         }
     }
 }

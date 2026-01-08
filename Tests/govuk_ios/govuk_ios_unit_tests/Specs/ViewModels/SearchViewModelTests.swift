@@ -7,11 +7,11 @@ import Testing
 struct SearchViewModelTests{
 
     @Test
-    func selected_tracksItem() {
+    func selected_tracksEvent() {
         let mockAnalyticsService = MockAnalyticsService()
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
-            searchService: MockSearchService(), 
+            searchService: MockSearchService(),
             activityService: MockActivityService(),
             urlOpener: MockURLOpener(),
             openAction: { _ in }
@@ -20,12 +20,11 @@ struct SearchViewModelTests{
         let item = SearchItem(
             title: expectedTitle,
             description: UUID().uuidString,
+            contentId: nil,
             link: URL(string: "https://www.gov.uk/random")!
         )
 
-        subject.selected(
-            item: item
-        )
+        subject.selected(item: item)
 
         let events = mockAnalyticsService._trackedEvents
         #expect(events.count == 1)
@@ -33,6 +32,49 @@ struct SearchViewModelTests{
         #expect(events.last?.params?["text"] as! String == expectedTitle)
         #expect(events.last?.params?["url"] as! String == "https://www.gov.uk/random")
         #expect(events.last?.params?["external"] as! Bool)
+    }
+
+    @Test
+    func selected_tracksEcommerceEvent() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let mockSearchService = MockSearchService()
+        let expectedTitle = UUID().uuidString
+        let expectedDescription = UUID().uuidString
+        let expectedContentId = UUID().uuidString
+        let expectedLink = URL(string: "https://www.govuk.com/test")!
+        let searchItem = SearchItem(
+            title: expectedTitle,
+            description: expectedDescription,
+            contentId: expectedContentId,
+            link: expectedLink
+        )
+        mockSearchService._stubbedSearchResult = .success(
+            SearchResult(results: [searchItem])
+        )
+        let subject = SearchViewModel(
+            analyticsService: mockAnalyticsService,
+            searchService: mockSearchService,
+            activityService: MockActivityService(),
+            urlOpener: MockURLOpener(),
+            openAction: { _ in }
+        )
+        let searchTerm = "search term"
+
+        subject.search(text: searchTerm, type: .typed, completion: { })
+        subject.selected(item: searchItem)
+
+        let events = mockAnalyticsService._trackedEvents
+        let selectItemEvent = events.first { $0.name == "select_item" }
+        #expect(selectItemEvent?.name == "select_item")
+        #expect(selectItemEvent?.params?["item_list_name"] as! String == "Search / \(expectedTitle)")
+        #expect(selectItemEvent?.params?["item_list_id"] as! String == expectedTitle)
+        #expect(selectItemEvent?.params?["results"] as! Int == 1)
+        let selectedItem = (events.last?.params?["items"] as? [[String: String]])?.first
+        #expect(selectedItem?["item_name"] == expectedTitle)
+        #expect(selectedItem?["index"] == "1")
+        #expect(selectedItem?["term"] == searchTerm)
+        #expect(selectedItem?["item_location"] == expectedLink.absoluteString)
+        #expect(selectedItem?["item_id"] == expectedContentId)
     }
 
     @Test
@@ -49,20 +91,18 @@ struct SearchViewModelTests{
         let item = SearchItem(
             title: expectedTitle,
             description: UUID().uuidString,
+            contentId: nil,
             link: URL(string: "https://www.google.com/random")!
         )
-        
         let expectedItem = ActivityItemCreateParams(searchItem: item)
         
-        subject.selected(
-            item: item
-        )
+        subject.selected(item: item)
 
         #expect(mockActivityService._receivedSaveActivity == expectedItem)
     }
 
     @Test
-    func search_success_setsResults() {
+    func search_setsResults() {
         let mockAnalyticsService = MockAnalyticsService()
         let mockService = MockSearchService()
         let subject = SearchViewModel(
@@ -72,10 +112,10 @@ struct SearchViewModelTests{
             urlOpener: MockURLOpener(),
             openAction: { _ in }
         )
-        let searchText = "E3 6SY bin collection"
+        let searchTerm = "E3 6SY bin collection"
 
         subject.search(
-            text: searchText,
+            text: searchTerm,
             type: .typed,
             completion: { }
         )
@@ -87,13 +127,75 @@ struct SearchViewModelTests{
             ]
         )
         mockService._searchReceivedCompletion?(.success(stubbedResponse))
-        let events = mockAnalyticsService._trackedEvents
-        let redactedSearchText = "[postcode] bin collection"
-
         #expect(subject.results?.count == stubbedResponse.results.count)
+    }
+
+    @Test
+    func search_tracksEvent() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let mockService = MockSearchService()
+        let subject = SearchViewModel(
+            analyticsService: mockAnalyticsService,
+            searchService: mockService,
+            activityService: MockActivityService(),
+            urlOpener: MockURLOpener(),
+            openAction: { _ in }
+        )
+        let searchTerm = "E3 6SY bin collection"
+
+        subject.search(
+            text: searchTerm,
+            type: .typed,
+            completion: { }
+        )
+
+        let events = mockAnalyticsService._trackedEvents
+        let redactedSearchTerm = "[postcode] bin collection"
         #expect(events.count == 1)
         #expect(events.first?.name == "Search")
-        #expect(events.first?.params?["text"] as! String == redactedSearchText)
+        #expect(events.first?.params?["text"] as! String == redactedSearchTerm)
+    }
+
+    @Test
+    func search_tracksEcommerceEvent() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let mockSearchService = MockSearchService()
+        let expectedTitle = UUID().uuidString
+        let expectedDescription = UUID().uuidString
+        let expectedContentId = UUID().uuidString
+        let expectedLink = URL(string: "https://www.govuk.com/test")!
+        let searchItem = SearchItem(
+            title: expectedTitle,
+            description: expectedDescription,
+            contentId: expectedContentId,
+            link: expectedLink
+        )
+        mockSearchService._stubbedSearchResult = .success(
+            SearchResult(results: [searchItem])
+        )
+        let subject = SearchViewModel(
+            analyticsService: mockAnalyticsService,
+            searchService: mockSearchService,
+            activityService: MockActivityService(),
+            urlOpener: MockURLOpener(),
+            openAction: { _ in }
+        )
+        let searchTerm = "search term"
+
+        subject.search(text: searchTerm, type: .typed, completion: { })
+
+        let events = mockAnalyticsService._trackedEvents
+        let selectItemEvent = events.first { $0.name == "view_item_list" }
+        #expect(selectItemEvent?.name == "view_item_list")
+        #expect(selectItemEvent?.params?["item_list_name"] as! String == "Search")
+        #expect(selectItemEvent?.params?["item_list_id"] as! String == "Search")
+        #expect(selectItemEvent?.params?["results"] as! Int == 1)
+        let selectedItem = (events.last?.params?["items"] as? [[String: String]])?.first
+        #expect(selectedItem?["item_name"] == expectedTitle)
+        #expect(selectedItem?["index"] == "1")
+        #expect(selectedItem?["term"] == searchTerm)
+        #expect(selectedItem?["item_location"] == expectedLink.absoluteString)
+        #expect(selectedItem?["item_id"] == expectedContentId)
     }
 
     @Test
@@ -143,25 +245,6 @@ struct SearchViewModelTests{
         #expect(subject.results == nil)
         #expect(subject.error == .apiUnavailable)
     }
-
-    private let successResponseData = """
-    {"results": [
-        {
-            "title": " Something about passports ",
-            "description": " Something passporty must be taking place here ",
-            "link": "/apply-renew-passport"
-        },
-        {
-            "title": "Driving abroad",
-            "description": "Drrrrrrrrrivving abroad on a magical bus with thunder in the sky",
-            "link": "/driving-abroad"
-        }
-    ]}
-    """.data(using: .utf8)!
-
-    private let emptyJSONResponseData = """
-    {"results": []}
-    """.data(using: .utf8)!
 }
 
 // The synthesized conformance to Equatable fails for tests because Swift Testing seems to think
@@ -173,8 +256,4 @@ extension ActivityItemCreateParams: @retroactive Equatable {
         lhs.title == rhs.title &&
         lhs.url == rhs.url
     }
-}
-
-enum MockNetworkError: Error {
-    case tooManyRequests
 }

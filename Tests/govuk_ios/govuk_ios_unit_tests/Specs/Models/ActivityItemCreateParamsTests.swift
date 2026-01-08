@@ -12,6 +12,7 @@ struct ActivityItemCreateParamsTests {
             searchItem: .init(
                 title: "test_test",
                 description: "test_description",
+                contentId: UUID().uuidString,
                 link: URL(string: "www.test.com")!
             )
         )

@@ -11,14 +11,16 @@ struct StoredLocalAuthorityWidgetView: View {
 
     var body: some View {
         VStack {
-            SectionHeaderLabelView(model: SectionHeaderLabelViewModel(
-                title: viewModel.title,
-                button: .init(
-                    localisedTitle: viewModel.editButtonTitle,
-                    localisedAccessibilityLabel: viewModel.editButtonAltText,
-                    action: { viewModel.openEditViewAction() }
+            SectionHeaderLabelView(
+                model: SectionHeaderLabelViewModel(
+                    title: viewModel.title,
+                    button: .init(
+                        localisedTitle: viewModel.editButtonTitle,
+                        localisedAccessibilityLabel: viewModel.editButtonAltText,
+                        action: { viewModel.openEditViewAction() }
+                    )
                 )
-            ))
+            )
             .padding(.bottom, 8)
             .padding(.top, 16)
             if viewModel.localAuthorities.count == 1,

@@ -12,14 +12,16 @@ struct RecentActivityWidgetView: View {
                 alignment: .leading,
                 spacing: .zero,
                 content: {
-                    SectionHeaderLabelView(model: SectionHeaderLabelViewModel(
+                    SectionHeaderLabelView(
+                        model: SectionHeaderLabelViewModel(
                         title: viewModel.title,
                         button: .init(
                             localisedTitle: viewModel.seeAllButtonTitle,
                             action: { viewModel.seeAllAction() }
                         )
-                    ))
-                    .padding(.horizontal, 16)
+                    )
+                )
+                .padding(.horizontal, 16)
                     GroupedList(
                         content: viewModel.sections
                     )

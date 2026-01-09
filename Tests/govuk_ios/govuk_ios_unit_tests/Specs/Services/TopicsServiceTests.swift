@@ -131,7 +131,7 @@ final class TopicsServiceTests {
     }
 
     @Test
-    func resetOnboaring_resetsPreferences() {
+    func resetOnboarding_resetsPreferences() {
         let mockUserDefaults = MockUserDefaultsService()
         mockUserDefaults._stub(
             value: true,
@@ -154,6 +154,12 @@ final class TopicsServiceTests {
 
         #expect(mockUserDefaults.value(forKey: UserDefaultsKeys.topicsOnboardingSeen) == nil)
         #expect(mockUserDefaults.value(forKey: UserDefaultsKeys.customisedTopics) == nil)
+    }
+
+    @Test
+    func rollBack_rollsBackRepository() {
+        sut.rollback()
+        #expect(mockTopicsRepository._didCallRollback)
     }
 }
 

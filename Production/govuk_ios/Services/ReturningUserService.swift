@@ -9,19 +9,19 @@ protocol ReturningUserServiceInterface {
 
 class ReturningUserService: ReturningUserServiceInterface {
     private let openSecureStoreService: SecureStorable
-    private let coreDataDeletionService: CoreDataDeletionServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
+    private let coreDataDeletionService: () -> CoreDataDeletionServiceInterface
 
     private var storedPersistentUserIdentifier: String? {
         openSecureStoreService.getUserIdentifier()
     }
 
     init(openSecureStoreService: SecureStorable,
-         coreDataDeletionService: CoreDataDeletionServiceInterface,
-         localAuthenticationService: LocalAuthenticationServiceInterface) {
+         localAuthenticationService: LocalAuthenticationServiceInterface,
+         coreDataDeletionService: @escaping () -> CoreDataDeletionServiceInterface) {
         self.openSecureStoreService = openSecureStoreService
-        self.coreDataDeletionService = coreDataDeletionService
         self.localAuthenticationService = localAuthenticationService
+        self.coreDataDeletionService = coreDataDeletionService
     }
 
     func process(idToken: String?) async -> ReturningUserResult {
@@ -68,7 +68,7 @@ class ReturningUserService: ReturningUserServiceInterface {
             return saveResult
         }
         do {
-            try coreDataDeletionService.deleteAllObjects()
+            try coreDataDeletionService().deleteAllObjects()
         } catch {
             return .failure(.coreDataDeletionError)
         }

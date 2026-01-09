@@ -64,4 +64,27 @@ struct Container_ServicesTests {
         let client = container.privacyService.resolve()
         #expect(client != nil)
     }
+
+    @Test
+    func topicsService_returnsExpectedValue() {
+        let container = Container()
+        container.topicsServiceClient.register { MockTopicsServiceClient() }
+        container.analyticsService.register { MockAnalyticsService() }
+        container.userDefaultsService.register { MockUserDefaultsService() }
+        container.topicsRepository.register { MockTopicsRepository() }
+        let sut = container.topicsService.resolve()
+        #expect(sut is TopicsService)
+        _ = sut.fetchAll() // Invokes topicsRepository action for code coverage
+    }
+
+    @Test
+    func returningUserService_returnsExpectedValue() async throws {
+        let container = Container()
+        container.openSecureStoreService.register { MockSecureStoreService() }
+        container.localAuthenticationService.register { MockLocalAuthenticationService() }
+        container.coreDataDeletionService.register { MockCoreDataDeletionService() }
+        let sut = container.returningUserService.resolve()
+        #expect(sut is ReturningUserService)
+    }
+
 }

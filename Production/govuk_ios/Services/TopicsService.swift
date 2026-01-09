@@ -16,20 +16,20 @@ protocol TopicsServiceInterface {
     func resetOnboarding()
 }
 
-struct TopicsService: TopicsServiceInterface {
+class TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
-    private let topicsRepository: TopicsRepositoryInterface
+    private let topicsRepository: () -> TopicsRepositoryInterface
     private let analyticsService: AnalyticsServiceInterface
     private let userDefaultsService: UserDefaultsServiceInterface
 
     init(topicsServiceClient: TopicsServiceClientInterface,
-         topicsRepository: TopicsRepositoryInterface,
          analyticsService: AnalyticsServiceInterface,
-         userDefaultsService: UserDefaultsServiceInterface) {
+         userDefaultsService: UserDefaultsServiceInterface,
+         topicsRepository: @escaping () -> TopicsRepositoryInterface) {
         self.topicsServiceClient = topicsServiceClient
-        self.topicsRepository = topicsRepository
         self.analyticsService = analyticsService
         self.userDefaultsService = userDefaultsService
+        self.topicsRepository = topicsRepository
     }
 
     func fetchRemoteList(completion: @escaping FetchTopicsListCompletion) {
@@ -37,7 +37,7 @@ struct TopicsService: TopicsServiceInterface {
             completion: { result in
                 switch result {
                 case .success(let topics):
-                    topicsRepository.save(topics: topics)
+                    self.topicsRepository().save(topics: topics)
                     completion(.success(topics))
                 case .failure(let error):
                     completion(.failure(error))
@@ -55,19 +55,19 @@ struct TopicsService: TopicsServiceInterface {
     }
 
     func fetchAll() -> [Topic] {
-        topicsRepository.fetchAll()
+        topicsRepository().fetchAll()
     }
 
     func fetchFavourites() -> [Topic] {
-        topicsRepository.fetchFavourites()
+        topicsRepository().fetchFavourites()
     }
 
     func save() {
-        topicsRepository.save()
+        topicsRepository().save()
     }
 
     func rollback() {
-        topicsRepository.rollback()
+        topicsRepository().rollback()
     }
 
     func resetOnboarding() {

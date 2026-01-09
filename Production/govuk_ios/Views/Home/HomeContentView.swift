@@ -20,7 +20,7 @@ struct HomeContentView: View {
                     ForEach(viewModel.widgets) { widget in
                         widget
                     }
-                    OverscrollIndicatorView(scrollViewHeight: geometry.size.height,
+                    ScrollBottomIndicatorView(scrollViewHeight: geometry.size.height,
                                             scrollViewCoordinateSpace: scrollViewCoordinateSpace)
                 }
                 .onChange(of: viewModel.homeContentScrollToTop) { shouldScroll in

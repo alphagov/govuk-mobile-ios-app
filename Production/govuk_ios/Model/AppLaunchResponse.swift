@@ -4,6 +4,7 @@ struct AppLaunchResponse {
     let configResult: FetchAppConfigResult
     let topicResult: FetchTopicsListResult
     let notificationConsentResult: NotificationConsentResult
+    let remoteConfigFetchResult: RemoteConfigFetchResult
     let appVersionProvider: AppVersionProvider
 
     var isAppAvailable: Bool {

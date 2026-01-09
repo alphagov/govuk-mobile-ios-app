@@ -9,6 +9,7 @@ import Firebase
 import FirebaseAnalytics
 import FirebaseCrashlytics
 import FirebaseAppCheck
+import FirebaseRemoteConfig
 import OneSignalFramework
 
 extension Container {
@@ -53,6 +54,16 @@ extension Container {
         }
     }
 
+    var remoteConfig: Factory<RemoteConfigInterface> {
+        Factory(self) {
+            let remoteConfig = RemoteConfig.remoteConfig()
+            let settings = RemoteConfigSettings()
+            settings.fetchTimeout = 10
+            remoteConfig.configSettings = settings
+            return remoteConfig
+        }
+    }
+
     var searchService: Factory<SearchServiceInterface> {
         Factory(self) {
             SearchService(
@@ -76,7 +87,8 @@ extension Container {
             AppLaunchService(
                 configService: self.appConfigService.resolve(),
                 topicService: self.topicsService.resolve(),
-                notificationService: self.notificationService.resolve()
+                notificationService: self.notificationService.resolve(),
+                remoteConfigService: self.remoteConfigService.resolve()
             )
         }.scope(.singleton)
     }
@@ -89,6 +101,16 @@ extension Container {
             )
         }.scope(.singleton)
     }
+
+    var remoteConfigService: Factory<RemoteConfigServiceInterface> {
+        Factory(self) {
+            RemoteConfigService(
+                remoteConfigServiceClient: self.remoteConfigServiceClient.resolve(),
+                analyticsService: self.analyticsService.resolve()
+            )
+        }.scope(.singleton)
+    }
+
     var topicsService: Factory<TopicsServiceInterface> {
         Factory(self) {
             TopicsService(

@@ -269,6 +269,7 @@
 		5DFB489C2DE9F7F600B41CDA /* LaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFB48802DE9F7F600B41CDA /* LaunchCoordinator.swift */; };
 		5DFDEBF12CEE396D00F7A365 /* UserProperty+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFDEBF02CEE396D00F7A365 /* UserProperty+Convenience.swift */; };
 		5DFE5F1E2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFE5F1D2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift */; };
+		8171AE472F1116A00024312B /* OverscrollIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171AE462F11169A0024312B /* OverscrollIndicatorView.swift */; };
 		8181DBFA2EE214B100F47531 /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8181DBF92EE214B100F47531 /* FactoryKit */; };
 		8181DBFC2EE214B100F47531 /* FactoryTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 8181DBFB2EE214B100F47531 /* FactoryTesting */; };
 		B04C2E7E2DA913B100F0F63E /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C2E7D2DA913B100F0F63E /* WebViewController.swift */; };
@@ -693,6 +694,7 @@
 		5DFB488A2DE9F7F600B41CDA /* WelcomeOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOnboardingCoordinator.swift; sourceTree = "<group>"; };
 		5DFDEBF02CEE396D00F7A365 /* UserProperty+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProperty+Convenience.swift"; sourceTree = "<group>"; };
 		5DFE5F1D2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Interface.swift"; sourceTree = "<group>"; };
+		8171AE462F11169A0024312B /* OverscrollIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverscrollIndicatorView.swift; sourceTree = "<group>"; };
 		B04C2E7D2DA913B100F0F63E /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B04C2E7F2DA9141400F0F63E /* WebDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDeeplinkRoute.swift; sourceTree = "<group>"; };
 		B04C2E812DA9339B00F0F63E /* WebViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewCoordinator.swift; sourceTree = "<group>"; };
@@ -1870,6 +1872,7 @@
 				D0ECAB032DCDF9EE00A9707E /* RadioButtonView.swift */,
 				4EAFCE522E437D2B00125755 /* HomepageWidget.swift */,
 				4EE44BAC2E70332C0093D380 /* NonTappableCardView.swift */,
+				8171AE462F11169A0024312B /* OverscrollIndicatorView.swift */,
 			);
 			path = SwiftUIViews;
 			sourceTree = "<group>";
@@ -2677,6 +2680,7 @@
 				16AE517F2E6886D3002BCFD7 /* InfoIconListView.swift in Sources */,
 				4E4089882DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift in Sources */,
 				4E00EEEF2CCB04B0007B61E8 /* TopicsOnboardingViewModel.swift in Sources */,
+				8171AE472F1116A00024312B /* OverscrollIndicatorView.swift in Sources */,
 				168F85532DE9AE4B0040E6AF /* ScrollBounceBehaviourModifier.swift in Sources */,
 				16E912AF2DA72CE000CD2049 /* OIDAuthorizationServiceWrapper.swift in Sources */,
 				164150AF2DE5DB6D00798DF3 /* WelcomeOnboardingViewModel.swift in Sources */,

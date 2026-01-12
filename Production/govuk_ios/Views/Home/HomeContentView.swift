@@ -21,7 +21,7 @@ struct HomeContentView: View {
                         widget
                     }
                     ScrollBottomIndicatorView(scrollViewHeight: geometry.size.height,
-                                            scrollViewCoordinateSpace: scrollViewCoordinateSpace)
+                                              scrollViewCoordinateSpace: scrollViewCoordinateSpace)
                 }
                 .onChange(of: viewModel.homeContentScrollToTop) { shouldScroll in
                     if shouldScroll {

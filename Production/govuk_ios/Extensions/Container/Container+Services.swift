@@ -93,9 +93,11 @@ extension Container {
         Factory(self) {
             TopicsService(
                 topicsServiceClient: self.topicsServiceClient(),
-                topicsRepository: self.topicsRepository(),
                 analyticsService: self.analyticsService(),
-                userDefaultsService: self.userDefaultsService.resolve()
+                userDefaultsService: self.userDefaultsService.resolve(),
+                topicsRepository: {
+                    self.topicsRepository.resolve()
+                }
             )
         }
     }
@@ -156,8 +158,10 @@ extension Container {
         Factory(self) {
             ReturningUserService(
                 openSecureStoreService: self.openSecureStoreService.resolve(),
-                coreDataDeletionService: self.coreDataDeletionService.resolve(),
-                localAuthenticationService: self.localAuthenticationService.resolve()
+                localAuthenticationService: self.localAuthenticationService.resolve(),
+                coreDataDeletionService: {
+                    self.coreDataDeletionService.resolve()
+                }
             )
         }
     }
@@ -178,7 +182,7 @@ extension Container {
         }
     }
 
-    var coreDataDeletionService: Factory<CoreDataDeletionService> {
+    var coreDataDeletionService: Factory<CoreDataDeletionServiceInterface> {
         Factory(self) {
             CoreDataDeletionService(
                 coreDataRepository: self.coreDataRepository.resolve()
